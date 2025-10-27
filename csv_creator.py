@@ -1,6 +1,8 @@
 import json
 import csv
 
+#check if git link is good
+
 # --- Input and output file names ---
 GEOJSON_FILE = "V25B_Buildings_Primary_Building_Dataset.geojson"
 CSV_FILE = "buildings.csv"
