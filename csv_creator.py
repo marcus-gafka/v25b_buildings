@@ -1,11 +1,12 @@
 import json
 import csv
+import os
 
-#check if git link is good
-
-# --- Input and output file names ---
+# --- Input file ---
 GEOJSON_FILE = "V25B_Buildings_Primary_Building_Dataset.geojson"
-CSV_FILE = "buildings.csv"
+
+# --- Automatically create matching CSV name ---
+CSV_FILE = os.path.splitext(GEOJSON_FILE)[0] + ".csv"
 
 # --- Load GeoJSON file ---
 with open(GEOJSON_FILE, "r", encoding="utf-8") as f:

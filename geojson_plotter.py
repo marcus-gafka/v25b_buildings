@@ -3,7 +3,9 @@ import matplotlib.pyplot as plt
 from shapely.geometry import shape
 
 # --- Load GeoJSON file ---
-with open("V25B_Buildings_Primary_Building_Dataset.geojson") as f:
+GEOJSON_FILE = "V25B_Buildings_Primary_Building_Dataset.geojson"
+
+with open(GEOJSON_FILE) as f:
     data = json.load(f)
 
 # --- Extract building geometries ---
