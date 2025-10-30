@@ -9,6 +9,11 @@ RAW_GEOJSON = os.path.join(DATA_DIR, "V25B_Buildings_Primary.geojson")
 POSTALIAS_GEOJSON = os.path.join(DATA_DIR, "V25B_Buildings_Primary_with_alias.geojson")
 POSTALIAS_CSV = os.path.join(DATA_DIR, "V25B_Buildings_Primary_with_alias.csv")
 
+# USER INPUTS ---------------
+filter_to = "SP"
+group_by = "island"
+#----------------------------
+
 def analysis():
     """Load post-alias GeoJSON and plot buildings and snake."""
     if not os.path.exists(POSTALIAS_GEOJSON):
@@ -19,8 +24,8 @@ def analysis():
     dataset.build_hierarchy_with_alias()
 
     plotter = p(dataset.buildings)
-    plotter.filter_buildings_by_alias("SP")
-    plotter.plot_buildings_and_snake(group="island")
+    plotter.filter_buildings_by_alias(filter_to)
+    plotter.plot_buildings_and_snake(group_by)
 
     # Print first 10 building aliases
     for b in dataset.buildings[:10]:
