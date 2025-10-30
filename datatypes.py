@@ -103,6 +103,10 @@ class Building:
     pop_est: Optional[int] = None
     addresses: List[Address] = field(default_factory=list)
 
+    typology: Optional[str] = None
+    height: Optional[float] = None
+    footprint: Optional[float] = None
+
     @property
     def centroid(self):
         poly = Polygon([(c.x, c.y) for c in self.polygon])
@@ -285,11 +289,9 @@ class Dataset:
 
     def build_hierarchy_with_alias(self):
 
-        print("DEBUG: Checking first few feature properties for alias field...")
+        print("Checking first few feature properties for alias field...")
         for i, f in enumerate(self.features[:5]):
             props = f.get("properties", {})
-            print(f"Feature {i}: keys = {list(props.keys())}")
-            print(f"  ALIAS field value: {props.get('ALIAS')}")
    
         """Build hierarchy using existing aliases from the GeoJSON (alias defines grouping)."""
         if not self.features:
@@ -353,7 +355,10 @@ class Dataset:
                 polygon=coords,
                 tract=t,
                 alias=alias,
-                number=int(bldg_num)
+                number=int(bldg_num),
+                typology=str(props.get("Tipologia")),
+                footprint=float(props.get("Superficie")),
+                height=float(props.get("Qu_Gronda"))
             )
 
             t.buildings.append(b)

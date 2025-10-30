@@ -51,8 +51,6 @@ class Plotter:
                 key = alias_parts[0]             # sm
             else:
                 raise ValueError("Invalid group type")
-            
-            #print(f"Building alias: {b.alias}, group key: {key}")
             groups[key].append(b)
 
         self.groups = groups
@@ -67,7 +65,6 @@ class Plotter:
         for i, key in enumerate(sorted(self.groups.keys())):
             color = COLORS[i % color_count]
             self.colors[key] = color
-            print(f"Group '{key}' assigned color {color}")
             for b in self.groups[key]:
                 b.color = color
                 #print(f" --> Building {b.alias} color set to {b.color}")
@@ -95,7 +92,6 @@ class Plotter:
         fig, ax = plt.subplots(figsize=(12, 8))
         print("Plotting buildings...")
         for b in self.filtered_buildings:
-            print(f"Plotting building {b.alias} with color {b.color}")
             if b.polygon:
                 xs = [c.x for c in b.polygon] + [b.polygon[0].x]
                 ys = [c.y for c in b.polygon] + [b.polygon[0].y]
@@ -142,3 +138,36 @@ class Plotter:
         ax.axis('off')
         if show:
             plt.show()
+
+    def plot_population_overlay(self, group="tract", show=True, fontsize=6):
+        """Plot buildings colored by group and overlay estimated population values."""
+        self._prepare_group(group)
+        fig, ax = plt.subplots(figsize=(12, 8))
+        print("Plotting buildings with population overlay...")
+
+        for b in self.filtered_buildings:
+            if b.polygon:
+                xs = [c.x for c in b.polygon] + [b.polygon[0].x]
+                ys = [c.y for c in b.polygon] + [b.polygon[0].y]
+                color = getattr(b, "color", (0.8, 0.8, 0.8))
+                ax.fill(xs, ys, color=color, alpha=0.8, edgecolor='black', linewidth=0.3)
+
+                # --- Draw population label ---
+                if b.pop_est is not None:
+                    ax.text(
+                        b.centroid.x,
+                        b.centroid.y,
+                        str(int(b.pop_est)),
+                        #b.alias + "\n" + str(int(b.pop_est)),
+                        ha="center",
+                        va="center",
+                        fontsize=fontsize,
+                        color="black",
+                        weight="bold"
+                    )
+
+        ax.set_aspect("equal")
+        ax.axis("off")
+        if show:
+            plt.show()
+
