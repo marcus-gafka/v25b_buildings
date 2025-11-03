@@ -159,6 +159,7 @@ class Plotter:
                         b.centroid.y,
                         str(int(b.pop_est)),
                         #b.alias + "\n" + str(int(b.pop_est)),
+                        #b.alias,
                         ha="center",
                         va="center",
                         fontsize=fontsize,

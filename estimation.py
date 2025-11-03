@@ -3,12 +3,12 @@ import math
 from datatypes import Sestiere, Island, Tract, Building  # update to your module path
 
 # --- CONFIGURATION ---
-FLOOR_HEIGHT = 2.5      # meters per floor
+FLOOR_HEIGHT = 3.0       # meters per floor
 MAX_HEIGHT = 50         # cap for building height
 MAX_FOOTPRINT = 5000    # cap for footprint
 
 # --- HELPER FUNCTIONS ---
-def mean_without_outliers(values: List[float], m: float = 2.0) -> float:
+def mean_without_outliers(values: List[float], m: float = 3.0) -> float:
     """Compute mean excluding values > m * median."""
     if not values:
         return 0

@@ -5,8 +5,11 @@ from shapely.geometry import Polygon
 import json
 import os
 from collections import defaultdict
-import random
 from math import hypot
+import csv
+from pathlib import Path
+
+DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
 
 # --- Sestiere enum ---
 class SestiereCode(Enum):
@@ -42,15 +45,6 @@ def index_to_two_letter_code(index: int) -> str:
 class Coord:
     x: float
     y: float
-
-@dataclass
-class Address:
-    ses: str
-    num: int
-
-    @property
-    def addy(self):
-        return f"{self.ses} {self.num}"
 
 @dataclass
 class Sestiere:
@@ -92,6 +86,16 @@ class Tract:
     def generate_alias(self):
         self.alias = f"{self.island.generate_alias()}-{self.code}"
         return self.alias
+
+@dataclass
+class Address:
+    full: str
+    ses: str
+    num: int
+
+    @property
+    def addy(self):
+        return f"{self.ses} {self.num}"
 
 @dataclass
 class Building:
@@ -286,24 +290,47 @@ class Dataset:
         self.sestieres = list(s_dict.values())
         self.buildings = b_list
 
-
     def build_hierarchy_with_alias(self):
-
+        """Build hierarchy using existing aliases from the GeoJSON (alias defines grouping).
+        Also attaches addresses from V25B_Buildings_and_Address.csv."""
+        
         print("Checking first few feature properties for alias field...")
         for i, f in enumerate(self.features[:5]):
             props = f.get("properties", {})
-   
-        """Build hierarchy using existing aliases from the GeoJSON (alias defines grouping)."""
+
         if not self.features:
             self.load_geojson()
 
         print("Building hierarchy using ALIAS-based grouping...")
 
-        s_dict: Dict[str, Sestiere] = {}
-        i_dict: Dict[str, Island] = {}
-        t_dict: Dict[str, Tract] = {}
-        b_list: List[Building] = []
+        # --- Load address CSV ---
+        address_file = Path(DATA_DIR) / "V25B_Buildings_and_Address.csv"
+        alias_to_addresses: dict[str, list[Address]] = {}
 
+        if address_file.exists():
+            print(f"📄 Loading addresses from {address_file.name}...")
+            with open(address_file, newline='', encoding='utf-8') as f:
+                reader = csv.DictReader(f)
+                # Strip headers to avoid hidden spaces
+                reader.fieldnames = [name.strip() for name in reader.fieldnames]
+                for row in reader:
+                    alias = row.get("ALIAS")
+                    full_addr = row.get("Full_sesti")
+                    if not alias or not full_addr:
+                        continue
+                    alias_to_addresses.setdefault(alias.strip(), []).append(
+                        Address(full=full_addr.strip(), ses=full_addr.strip(), num=0)
+                    )
+        else:
+            print("⚠️ Address CSV not found — continuing without address data.")
+
+        # --- Initialize dicts ---
+        s_dict: dict[str, Sestiere] = {}
+        i_dict: dict[str, Island] = {}
+        t_dict: dict[str, Tract] = {}
+        b_list: list[Building] = []
+
+        # --- Build hierarchy ---
         for f in self.features:
             props = f.get("properties", {})
             alias = props.get("ALIAS")
@@ -311,13 +338,12 @@ class Dataset:
                 print("⚠️ Missing alias in one or more features — skipping hierarchy build.")
                 return
 
-            # --- Decode the alias ---
             parts = alias.split("-")
             if len(parts) < 4:
                 print(f"⚠️ Invalid alias format: {alias}")
                 continue
 
-            s_code, island_code, tract_code, bldg_num = parts[0], parts[1], parts[2], parts[3]
+            s_code, island_code, tract_code, bldg_num = parts[:4]
 
             # --- Sestiere ---
             s = s_dict.setdefault(s_code, Sestiere(raw=s_code))
@@ -341,7 +367,7 @@ class Dataset:
 
             # --- Geometry ---
             geom = f.get("geometry", {})
-            coords: List[Coord] = []
+            coords: list[Coord] = []
             if geom.get("type") == "Polygon":
                 for x, y in geom.get("coordinates", [[]])[0]:
                     coords.append(Coord(float(x), float(y)))
@@ -358,7 +384,8 @@ class Dataset:
                 number=int(bldg_num),
                 typology=str(props.get("Tipologia")),
                 footprint=float(props.get("Superficie")),
-                height=float(props.get("Qu_Gronda"))
+                height=float(props.get("Qu_Gronda")),
+                addresses=alias_to_addresses.get(alias, [])
             )
 
             t.buildings.append(b)
@@ -366,6 +393,9 @@ class Dataset:
 
         self.sestieres = list(s_dict.values())
         self.buildings = b_list
+
+        total_addresses = sum(len(v) for v in alias_to_addresses.values())
+        print(f"✅ Hierarchy built with {len(b_list)} buildings, {total_addresses} total addresses linked.")
     
     def to_dict(self):
         """Convert the dataset hierarchy to a serializable dict."""
