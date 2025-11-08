@@ -1,174 +1,75 @@
 import matplotlib.pyplot as plt
-from collections import defaultdict
+import geopandas as gpd
+from shapely.geometry import shape, Point
+from dataset import Dataset
 
-# 50 distinct colors
-COLORS = [
-    (0.894, 0.102, 0.110), (0.215, 0.494, 0.721), (0.302, 0.686, 0.290),
-    (0.596, 0.306, 0.639), (1.000, 0.498, 0.000), (1.000, 1.000, 0.200),
-    (0.651, 0.337, 0.157), (0.969, 0.506, 0.749), (0.600, 0.600, 0.600),
-    (0.745, 0.682, 0.831), (0.9, 0.7, 0.0), (0.0, 0.6, 0.5), (0.8, 0.4, 0.2),
-    (0.3, 0.7, 0.9), (0.9, 0.3, 0.5), (0.5, 0.8, 0.2), (0.6, 0.3, 0.7),
-    (0.2, 0.4, 0.8), (0.7, 0.5, 0.1), (0.4, 0.6, 0.3), (0.8, 0.2, 0.4),
-    (0.1, 0.7, 0.6), (0.6, 0.6, 0.2), (0.3, 0.3, 0.9), (0.9, 0.5, 0.3),
-    (0.5, 0.2, 0.6), (0.2, 0.9, 0.4), (0.7, 0.1, 0.8), (0.4, 0.7, 0.5),
-    (0.8, 0.3, 0.2), (0.6, 0.1, 0.4), (0.3, 0.6, 0.7), (0.9, 0.2, 0.1),
-    (0.1, 0.5, 0.9), (0.2, 0.8, 0.5), (0.7, 0.6, 0.2), (0.4, 0.3, 0.8),
-    (0.8, 0.5, 0.7), (0.3, 0.9, 0.2), (0.6, 0.4, 0.3), (0.5, 0.1, 0.9),
-    (0.2, 0.6, 0.8), (0.7, 0.2, 0.5), (0.1, 0.8, 0.7), (0.9, 0.3, 0.6),
-    (0.4, 0.2, 0.6), (0.6, 0.7, 0.1), (0.3, 0.5, 0.9), (0.8, 0.1, 0.3),
-    (0.2, 0.9, 0.6), (0.5, 0.8, 0.1), (0.9, 0.4, 0.2)
-]
+def plot_island(dataset: Dataset, island_code: str, figsize=(12, 12)):
+    # --- Find the island ---
+    island = None
+    for s in dataset.venice.sestieri:
+        for i in s.islands:
+            if i.code == island_code:
+                island = i
+                break
+        if island:
+            break
 
-class Plotter:
-    def __init__(self, buildings):
-        self.buildings = buildings
-        self.filtered_buildings = buildings
-        self.groups = {}
-        self.colors = {}
+    if not island:
+        raise ValueError(f"Island code '{island_code}' not found.")
 
-    # --- Grouping ---
-    def group_by_tract(self):
-        return self._group("tract")
+    # --- Prepare data for plotting ---
+    rows = []
+    tract_ids = []
 
-    def group_by_island(self):
-        return self._group("island")
-
-    def group_by_sestiere(self):
-        return self._group("sestiere")
-
-    def _group(self, group_type):
-        groups = defaultdict(list)
-        print("Building groups...")
-
-        for b in self.filtered_buildings:
-            alias_parts = b.alias.split("-")
-            
-            if group_type == "tract":
-                key = "-".join(alias_parts[:3])  # sm-xx-xx
-            elif group_type == "island":
-                key = "-".join(alias_parts[:2])  # sm-xx
-            elif group_type == "sestiere":
-                key = alias_parts[0]             # sm
+    for tract in island.tracts:
+        for b in tract.buildings:
+            geom = None
+            # Prefer full geometry, fallback to centroid
+            if b.geometry:
+                geom = b.geometry
+            elif b.centroid:
+                geom = b.centroid if isinstance(b.centroid, Point) else Point(b.centroid.x, b.centroid.y)
             else:
-                raise ValueError("Invalid group type")
-            groups[key].append(b)
+                continue  # skip buildings with no geometry
 
-        self.groups = groups
-        print(f"Total groups formed: {len(groups)}")
-        self.assign_colors()
-        return groups
+            rows.append({
+                "geometry": geom,
+                "short_alias": b.short_alias or "",  # fallback if None
+                "tract_id": tract.id
+            })
+            tract_ids.append(tract.id)
 
-    def assign_colors(self):
-        color_count = len(COLORS)
-        print("Assigning colors to groups...")
-        self.colors = {}
-        for i, key in enumerate(sorted(self.groups.keys())):
-            color = COLORS[i % color_count]
-            self.colors[key] = color
-            for b in self.groups[key]:
-                b.color = color
-                #print(f" --> Building {b.alias} color set to {b.color}")
+    if not rows:
+        print(f"No building geometries found for island {island_code}")
+        return
 
-    # --- Filter ---
-    def filter_buildings_by_alias(self, prefix):
-        self.filtered_buildings = [b for b in self.buildings if b.alias.startswith(prefix)]
-        print(f"Filtered {len(self.filtered_buildings)} buildings with prefix '{prefix}'")
+    gdf = gpd.GeoDataFrame(rows, crs="EPSG:4326")
 
-    # --- Plotting helpers ---
-    def _prepare_group(self, group):
-        print(f"Preparing group: {group}")
-        if group == "tract":
-            self.group_by_tract()
-        elif group == "island":
-            self.group_by_island()
-        elif group == "sestiere":
-            self.group_by_sestiere()
-        else:
-            raise ValueError("group must be 'tract', 'island', or 'sestiere'")
+    # --- Assign colors per tract ---
+    unique_tracts = sorted(list(set(tract_ids)))
+    cmap = plt.cm.get_cmap("tab20", len(unique_tracts))
+    tract_color_map = {tid: cmap(i) for i, tid in enumerate(unique_tracts)}
+    gdf["color"] = gdf["tract_id"].map(tract_color_map)
 
-    # --- Plotting methods ---
-    def plot_buildings(self, group="tract", show=True):
-        self._prepare_group(group)
-        fig, ax = plt.subplots(figsize=(12, 8))
-        print("Plotting buildings...")
-        for b in self.filtered_buildings:
-            if b.polygon:
-                xs = [c.x for c in b.polygon] + [b.polygon[0].x]
-                ys = [c.y for c in b.polygon] + [b.polygon[0].y]
-                ax.fill(xs, ys, color=b.color, alpha=0.8, edgecolor='black', linewidth=0.5)
-        ax.set_aspect('equal')
-        ax.axis('off')
-        if show:
-            plt.show()
+    # --- Plot ---
+    fig, ax = plt.subplots(figsize=figsize)
+    gdf.plot(ax=ax, color=gdf["color"], edgecolor="black", linewidth=0.5)
 
-    def plot_snake(self, group="sestiere", show=True):
-        self._prepare_group(group)
-        fig, ax = plt.subplots(figsize=(12, 8))
-        print("Plotting snakes...")
-        for key, b_list in self.groups.items():
-            print(f"Snake for group '{key}' with {len(b_list)} buildings")
-            sorted_b = sorted(b_list, key=lambda b: b.alias)
-            xs = [b.centroid.x for b in sorted_b]
-            ys = [b.centroid.y for b in sorted_b]
-            ax.plot(xs, ys, linewidth=1.5, color='black')
-        ax.set_aspect('equal')
-        ax.axis('off')
-        if show:
-            plt.show()
+    # --- Add labels ---
+    for idx, row in gdf.iterrows():
+        if row["short_alias"]:  # only label if alias exists
+            centroid = row.geometry.centroid
+            ax.text(
+                centroid.x,
+                centroid.y,
+                row["short_alias"],
+                fontsize=6,
+                ha="center",
+                va="center",
+                color="black"
+            )
 
-    def plot_buildings_and_snake(self, group="sestiere", show=True):
-        self._prepare_group(group)
-        fig, ax = plt.subplots(figsize=(12, 8))
-        print("Plotting buildings and snakes...")
-        # Draw buildings
-        for b in self.filtered_buildings:
-            #print(f"Plotting building {b.alias} with color {b.color}")
-            if b.polygon:
-                xs = [c.x for c in b.polygon] + [b.polygon[0].x]
-                ys = [c.y for c in b.polygon] + [b.polygon[0].y]
-                ax.fill(xs, ys, color=b.color, alpha=0.8, edgecolor='black', linewidth=0.5)
-        # Draw snake
-        for key, b_list in self.groups.items():
-            print(f"Snake for group '{key}' with {len(b_list)} buildings")
-            sorted_b = sorted(b_list, key=lambda b: b.alias)
-            xs = [b.centroid.x for b in sorted_b]
-            ys = [b.centroid.y for b in sorted_b]
-            ax.plot(xs, ys, linewidth=1.5, color='black')
-        ax.set_aspect('equal')
-        ax.axis('off')
-        if show:
-            plt.show()
-
-    def plot_population_overlay(self, group="tract", show=True, fontsize=6):
-        """Plot buildings colored by group and overlay estimated population values."""
-        self._prepare_group(group)
-        fig, ax = plt.subplots(figsize=(12, 8))
-        print("Plotting buildings with population overlay...")
-
-        for b in self.filtered_buildings:
-            if b.polygon:
-                xs = [c.x for c in b.polygon] + [b.polygon[0].x]
-                ys = [c.y for c in b.polygon] + [b.polygon[0].y]
-                color = getattr(b, "color", (0.8, 0.8, 0.8))
-                ax.fill(xs, ys, color=color, alpha=0.8, edgecolor='black', linewidth=0.3)
-
-                # --- Draw population label ---
-                if b.pop_est is not None:
-                    ax.text(
-                        b.centroid.x,
-                        b.centroid.y,
-                        str(int(b.pop_est)),
-                        #b.alias + "\n" + str(int(b.pop_est)),
-                        #b.alias,
-                        ha="center",
-                        va="center",
-                        fontsize=fontsize,
-                        color="black",
-                        weight="bold"
-                    )
-
-        ax.set_aspect("equal")
-        ax.axis("off")
-        if show:
-            plt.show()
-
+    ax.set_title(f"Island {island_code}", fontsize=16)
+    ax.set_axis_off()
+    plt.tight_layout()
+    plt.show()
