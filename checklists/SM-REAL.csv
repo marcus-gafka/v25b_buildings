@@ -1,8 +1,8 @@
-short_alias,list_of_addresses
-REAL-001,none
-REAL-002,none
-REAL-003,none
-REAL-004,none
-REAL-005,none
-REAL-006,none
-REAL-007,none
+short_alias,TP_CLS_ED,Qu_Gronda,Superficie,list_of_addresses,floors_est
+REAL-006,P,7.03,58.41,none,3
+REAL-003,Nd,0.0,104.77,none,1
+REAL-004,Nd,0.0,11.18,none,1
+REAL-005,Nd,4.6,27.82,none,2
+REAL-007,Po,7.64,126.83,none,3
+REAL-002,Nr,5.08,257.32,none,2
+REAL-001,Nr,9999.0,2368.8,none,3333

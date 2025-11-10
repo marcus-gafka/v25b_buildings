@@ -1,29 +1,29 @@
-short_alias,list_of_addresses
-GIOR-001,none
-GIOR-002,none
-GIOR-003,none
-GIOR-004,none
-GIOR-005,none
-GIOR-006,none
-GIOR-007,none
-GIOR-008,none
-GIOR-009,none
-GIOR-010,none
-GIOR-011,none
-GIOR-012,none
-GIOR-013,none
-GIOR-014,none
-GIOR-015,none
-GIOR-016,none
-GIOR-017,none
-GIOR-018,none
-GIOR-019,none
-GIOR-020,none
-GIOR-021,none
-GIOR-022,none
-GIOR-023,none
-GIOR-024,none
-GIOR-025,none
-GIOR-026,none
-GIOR-027,none
-GIOR-028,none
+short_alias,TP_CLS_ED,Qu_Gronda,Superficie,list_of_addresses,floors_est
+GIOR-007,SU,0.0,4.32,none,1
+GIOR-012,SU,0.0,490.1,none,1
+GIOR-006,Nr,9999.0,637.4,none,3333
+GIOR-001,SU,9999.0,1130.72,none,3333
+GIOR-022, ,4.9,26.62,none,2
+GIOR-023, ,5.76,130.19,none,2
+GIOR-024, ,3.92,162.27,none,2
+GIOR-025, ,6.0,213.65,none,2
+GIOR-026, ,6.2,214.27,none,3
+GIOR-027, ,6.0,169.31,none,2
+GIOR-017,Nr,0.0,935.54,none,1
+GIOR-028,,7.73,107.85,none,3
+GIOR-021, ,0.0,47.47,none,1
+GIOR-008,Nr,9999.0,3274.86,none,3333
+GIOR-009,Nr,9999.0,4509.38,none,3333
+GIOR-013,Nr,9999.0,4567.44,none,3333
+GIOR-019,Ne,9999.0,4599.09,none,3333
+GIOR-003,SP,9999.0,4886.97,none,3333
+GIOR-005,SU,15.75,32.99,none,6
+GIOR-011,SM,12.2,619.86,none,5
+GIOR-014,Nr,12.2,563.17,none,5
+GIOR-015,Ne,0.0,27.37,none,1
+GIOR-016,Knt,7.75,249.64,none,3
+GIOR-002,SP,7.15,167.15,none,3
+GIOR-020,Kna,15.78,33.5,none,6
+GIOR-018,Ne,8.23,497.01,none,3
+GIOR-010,SU,8.4,2591.62,none,3
+GIOR-004,SP,8.65,180.52,none,3

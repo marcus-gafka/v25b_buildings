@@ -12,6 +12,11 @@ class Building:
     short_alias: Optional[str] = None
     alias_segment: Optional[int] = None
 
+    height: Optional[float] = None
+
+    floors_est: Optional[float] = None
+    units_est: Optional[int] = None
+
 @dataclass
 class Tract:
     id: str
@@ -19,6 +24,8 @@ class Tract:
 
     full_alias: Optional[str] = None
     alias_segment: Optional[str] = None
+
+    height_avg: Optional[float] = None
 
 @dataclass
 class Island:

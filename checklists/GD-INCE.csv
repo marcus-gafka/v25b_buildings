@@ -1,7 +1,7 @@
-short_alias,list_of_addresses
-INCE-001,none
-INCE-002,none
-INCE-003,none
-INCE-004,none
-INCE-005,none
-INCE-006,none
+short_alias,TP_CLS_ED,Qu_Gronda,Superficie,list_of_addresses,floors_est
+INCE-004,Nd,6.98,49.98,none,3
+INCE-006,Nr,0.0,471.97,none,1
+INCE-001,Nr,9999.0,3259.02,none,3333
+INCE-005,Nd,5.0,46.49,none,2
+INCE-002,Nr,7.57,146.11,none,3
+INCE-003,Nr,15.0,271.03,none,5

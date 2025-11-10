@@ -6,4 +6,4 @@ from plotter import plot_island
 ds_alias = Dataset(ALIAS_GEOJSON)
 
 #ds_alias.sestieri["SM"].islands[0].verbose()
-plot_island(ds_alias, "FRAR")
+plot_island(ds_alias, "FORM")
