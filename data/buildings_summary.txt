@@ -1,0 +1,146 @@
+🏘️  Sestiere: Cannaregio	33 islands	3731 buildings
+
+	🏝️  2POZ:	🏠 16	🏷️ A1, B, Bg, C, Ne, pt
+	🏝️  ALVI:	🏠 75	🏷️ A, A1, B, Bg, C, Kna, Knt, Koa, Nd, Ne, Nr, O, Po, SMo, SU, fa, pt
+	🏝️  ANDR:	🏠 40	🏷️ A, B, B1, Bg, C, Kna, Nd, Ne, Nr, fa
+	🏝️  APOS:	🏠 387	🏷️ A, A1, B, B1, Bg, C, D, Kna, Knt, Kt, Nd, Ne, Nr, O, Or, SU, SUn, fa, pt
+	🏝️  BIRI:	🏠 244	🏷️ A, A1, B, B1, Bg, C, D, Ka, Kna, Knt, Kt, Nd, Ne, Nr, Or, SU, fa, pt
+	🏝️  BRAZ:	🏠 46	🏷️ A, B1, Bg, C, Kna, Koa, Kt, N, Ne, Nr, O, Or, fa, pt
+	🏝️  CANC:	🏠 129	🏷️ A, A1, B, B1, Bg, C, D, Ne, Nr, Or, fa, pt
+	🏝️  CHIO:	🏠 69	🏷️ A, A1, B, Bg, C, Kna, Nd, Nr, Or, SM, SU, fa, pt
+	🏝️  CORR:	🏠 49	🏷️ A, A1, B, B1, Bg, C, D, Ne, Or
+	🏝️  FELI:	🏠 47	🏷️ A, B, Bg, C, Nd, Ne, Or, fa, pt
+	🏝️  FOSC:	🏠 43	🏷️ A, B, Bg, C, Ka, Kt, Nd, Or, SU, fa
+	🏝️  GERE:	🏠 412	🏷️ A, A1, B, B1, Bg, C, D, Ka, Kna, Knt, Kot, Kt, N, Nd, Ne, Nr, O, Or, SM, SMo, SU, fa, pt
+	🏝️  GESU:	🏠 105	🏷️ A1, B, B1, C, Ka, Knt, Kot, Nd, Ne, Nr, SM, SP, SU, fa, pt
+	🏝️  GHET:	🏠 26	🏷️ B, B/SU, C, Kna, Nd, Ne, SU, fa
+	🏝️  GIOB:	🏠 47	🏷️ A1, B1, D, Kna, Knt, Ne, Nr, O, SM, SU, fa
+	🏝️  GIRO:	🏠 125	🏷️ A, B, B1, Bg, C, Ka, Knt, Kt, Nd, Ne, Nr, O, Or, SU, fa, pt
+	🏝️  GRIS:	🏠 73	🏷️ A, A1, B, B1, Bg, C, Ka, Ne, Or, SUo, fa, pt
+	🏝️  LEON:	🏠 633	🏷️ A, A1, B, B1, Bg, C, D, Ka, Ka/pt, Kna, Knt, Kot, Kt, N, Nd, Ne, Nr, O, Or, P, SM, SU, fa, pt
+	🏝️  MACE:	🏠 165	🏷️ A, A1, B, B1, C, Ka, Kna, Kt, Nd, Ne, Nr, O, Or, Po, fa, pt
+	🏝️  MADD:	🏠 106	🏷️ A, A1, B, B1, Bg, C, D, Ka, Nd, Ne, Nr, O, Or, SU, fa, pt
+	🏝️  MARZ:	🏠 38	🏷️ A, A1, B, B1, Bg, C, Kna, Knt, Ne, Or, SU, fa, pt
+	🏝️  MIRA:	🏠 18	🏷️ A1, B, C, Kt, Nd, Or, SU, fa, pt
+	🏝️  MISE:	🏠 113	🏷️ A, A1, B, B1, Bg, C, D, Kna, Knt, Kt, Nd, Ne, Nr, Or, Po, SU, fa, pt
+	🏝️  MORI:	🏠 71	🏷️ A, A1, B, Bg, C, Ka, Ka/Ne, Ka/pt, Kna, Nd, Ne, O, Or, fa, pt
+	🏝️  ORME:	🏠 118	🏷️ A, B, B1, Bg, C, D, Knt, Nd, Ne, Nr, O, Or, fa, pt
+	🏝️  ORTO:	🏠 111	🏷️ A, A1, B, B1, C, Ka, Kna, Knt, Kt, Nd, Ne, Nr, SM, SU, fa, pt
+	🏝️  PANA:	🏠 157	🏷️ A, A1, B, B1, Bg, C, D, Ka, Ka/A, Ka/Or, Kn, Kna, Kna/Ne, Knt, Kt, Nd, Ne, Nr, O, Or, fa, pt
+	🏝️  RACC:	🏠 38	🏷️ A, B, B1, Bg, C, Ne, Nr, Or, fa, pt
+	🏝️  SART:	🏠 25	🏷️ A, B, B1, Bg, C, D, Ka, Kna, Ne, Nr, Or, fa, pt
+	🏝️  SENS:	🏠 103	🏷️ A, A1, B, B1, Bg, C, Ka, Kna, Knt, Koa, Kot, Kt, Ne, Nr, O, Or, fa
+	🏝️  SERV:	🏠 22	🏷️ C, Knt, Nd, Ne, Nr, SM, pt
+	🏝️  VALV:	🏠 48	🏷️ C, Ka, Kna, Kna/Ne, Knt, Kt, Nd, Ne, Nr, SM, SU, pt
+	🏝️  VEND:	🏠 32	🏷️ A, A1, B, Bg, C, D, Ka, Ne, Nr, fa, pt
+
+🏘️  Sestiere: Castello	24 islands	3765 buildings
+
+	🏝️  ANA-:	🏠 677	🏷️ A, A1, B, B1, Bg, C, D, Kna, Knt, Kt, Kt/B, Nd, Ne, Nr, Or, Po, SM, SU, fa, pt
+	🏝️  ARSE:	🏠 104	🏷️ A1, D, Ka, Knt, Koa, Kt, Nd, Ne, Nr, O, Or, P, Po, SM, SU, SUo, fa
+	🏝️  BACI:	🏠 147	🏷️ Ka, Kna, Knt, Kot, Nd, Ne, Nr, P, SUo
+	🏝️  BORG:	🏠 23	🏷️ A, B, Bg, C, Nr, Or, fa, pt
+	🏝️  BRAG:	🏠 446	🏷️ A, A1, B, B1, Bg, C, D, Ka, Knt, Kot, Kt, Nd, Ne, Nr, O, Or, SM, SU, fa, pt
+	🏝️  DANI:	🏠 79	🏷️ A, A1, B, B1, Bg, C, Kna, Koa/O, Nd, Ne, Nr, Or, SM, fa, pt
+	🏝️  ELEN:	🏠 270	🏷️ Kna, Knt, Nd, Ne, Nr
+	🏝️  FAVA:	🏠 229	🏷️ A, A1, B, B1, Bg, C, D, Ka/D, N, Nd, Ne, Nr, Or, fa, pt
+	🏝️  FILI:	🏠 177	🏷️ A, A1, B, B1, Bg, C, D, Knt, Kt, Nd, Ne, Nr, Or, P, SM, SU, fa, pt
+	🏝️  FORM:	🏠 117	🏷️ A, A1, B, B1, Bg, C, D, Ka, Knt, Nd, Nr, O, Or, SU, fa, pt
+	🏝️  ISEP:	🏠 96	🏷️ A, A1, B, Kna, Knt, N, Nd, Ne, Nr, SU, fa, pt
+	🏝️  LATE:	🏠 15	🏷️ A, B, C, O, SM, fa
+	🏝️  LORE:	🏠 134	🏷️ A, A1, B, Bg, C, D, Kna, Knt, Kt, Nd, Ne, Nr, Or, SM, SU, fa, pt
+	🏝️  MARI:	🏠 70	🏷️ A, A1, B, B1, Bg, C, D, Ka, Ka/Or, Nd, Ne, Or, fa
+	🏝️  MRTN:	🏠 87	🏷️ A, A1, B, C, D, Ne, Or, P, SU, fa, pt
+	🏝️  PIER:	🏠 111	🏷️ A, A1, B, B1, Bg, C, D, Kna, Kt, Nd, Ne, Nr, SM, SU, fa, pt
+	🏝️  QUER:	🏠 126	🏷️ A, A1, B, B1, Bg, C, Ka, Nd, Ne, Nr, Or, fa, pt
+	🏝️  RUGA:	🏠 141	🏷️ A, A1, B, B1, Bg, C, Ka/B, Kna, Koa/Or, Nd, Ne, Nr, Or, SM, fa, pt
+	🏝️  SEVE:	🏠 105	🏷️ A, A1, B, B1, Bg, C, Knt, Kt, Nd, Ne, Or, SMo, fa, pt
+	🏝️  STAD:	🏠 28	🏷️ Kna, Nd, Nr, SU
+	🏝️  TERN:	🏠 138	🏷️ A, A1, B, B1, Bg, C, D, Knt, Koa, Koa/B, Ne, Nr, Or, SM, fa, pt
+	🏝️  VIGN:	🏠 142	🏷️ A, A1, B, B1, Bg, C, D, Ka, Kna, Knt, Kot, Kt, Nd, Ne, Nr, Or, SM, SP, SU, fa, pt
+	🏝️  ZACC:	🏠 75	🏷️ A, A1, B, C, Nd, Ne, Nr, Or, SM, SU, fa, pt
+	🏝️  ZANI:	🏠 228	🏷️ A, A1, B, B1, Bg, C, D, Ka, Kna/Ne, Knt, Koa, Kot/Or, Kt, Nd, Ne, Nr, Or, SM, SU, SUo, fa, pt
+
+🏘️  Sestiere: Dorsoduro	17 islands	2358 buildings
+
+	🏝️  ACCA:	🏠 195	🏷️ A, A1, B, B1, Bg, C, D, Knt, Kt, Kt/pt, Nd, Ne, Nr, Or, SM, SP, SU, fa, pt
+	🏝️  BARN:	🏠 172	🏷️ A, A1, B, B1, Bg, C, D, Kna, Knt, N, Nd, Ne, Nr, O, Or, SU, fa, pt
+	🏝️  CARM:	🏠 525	🏷️ A, A1, B, B1, Bg, C, D, Ka, Kna, Knt, Knt/Ne, Koa, Kot, Kt, Nd, Ne, Nr, O, Or, SM, SU, SU/Nr, fa, pt
+	🏝️  CERC:	🏠 47	🏷️ A, B, Bg, C, D, Knt, Nd, Ne, Nr, Or, pt
+	🏝️  CERE:	🏠 70	🏷️ A, A1, B, Bg, C, Knt, Nd, Ne, Nr, Or
+	🏝️  GREG:	🏠 136	🏷️ A, A1, B, B1, Bg, C, D, Ka, Knt, Kt, N, Nd, Ne, Nr, Or, SM, SU, fa, pt
+	🏝️  MALC:	🏠 56	🏷️ A, A1, B, B1, Bg, C, Kna, N, Nd, Ne, Nr, O, Or, pt
+	🏝️  MART:	🏠 193	🏷️ A, A1, B, B1, Kna, Knt, Koa, Kot, Nd, Ne, Nr, Or, Po, SU, fa
+	🏝️  NICO:	🏠 200	🏷️ A, A1, B, B1, Bg, C, D, Ka, Kna, Knt, Koa, Kot, Nd, Ne, Nr, O, Or, SU, fa, pt
+	🏝️  PANT:	🏠 117	🏷️ A, A1, B, Bg, C, D, Ka, Kna, Nd, Ne, Nr, Or, SU, fa, pt
+	🏝️  RAGU:	🏠 79	🏷️ A, B, B1, Bg, C, Knt, Kt, Nd, Ne, Nr, O, Or, fa, pt
+	🏝️  ROMI:	🏠 55	🏷️ A, A1, B, C, D, Nd, Ne, Nr, Or, SM, SU, pt
+	🏝️  SALU:	🏠 15	🏷️ Ka, N, Nd, SM, SU
+	🏝️  SEBA:	🏠 107	🏷️ A, A1, B, B1, Bg, C, D, Kna, Knt, Kot, Kt, Nd, Ne, Nr, O, Or, SM, SU, fa, pt
+	🏝️  SPIR:	🏠 166	🏷️ A, A1, B, B1, Bg, C, D, Knt, Knt/A1, Knt/Ne, Kt, N, Nd, Ne, Nr, O, Or, SM, SU, fa, pt
+	🏝️  SVIO:	🏠 117	🏷️ A, A1, B, B1, Bg, C, D, Ka, Kna, Kna/Ne, Knt, Kt, Nd, Ne, Nr, O, Or, SUo, fa, pt
+	🏝️  TROV:	🏠 108	🏷️ A, A1, B, B1, Bg, C, D, Ka, Ka/A1, Ka/B, Kna, Nd, Ne, Nr, O, Or, SU, fa, pt
+
+🏘️  Sestiere: Giudecca	16 islands	1005 buildings
+
+	🏝️  AMAV:	🏠 34	🏷️ Kna, Knt, Nd, Nr
+	🏝️  BIAG:	🏠 73	🏷️ B, B1, Bg, C, Ka, Kna, Knt, Kot, Nd, Ne, Nr, Pn, pt
+	🏝️  CONV:	🏠 86	🏷️ A, A1, B, B1, C, D, Kna, Kot, Nd, Ne, Nr, Or, SP, SU, fa, pt
+	🏝️  DGIO:	🏠 2	🏷️ SUo
+	🏝️  EUFE:	🏠 204	🏷️ A, A1, B, B1, Bg, C, Ka, Kna, Knt, Kt, N, Nd, Ne, Nr, Or, SM, fa, pt
+	🏝️  FISO:	🏠 66	🏷️ Nd, Ne, Nr
+	🏝️  GIOR:	🏠 28	🏷️ Kna, Knt, Ne, Nr, SM, SP, SU
+	🏝️  INCE:	🏠 6	🏷️ Nd, Nr
+	🏝️  JUNG:	🏠 17	🏷️ A, A1, Nd, Ne, Nr
+	🏝️  PALA:	🏠 84	🏷️ A1, B, B1, Bg, C, Kna, Knt, Nd, Ne, Nr, O, Or, fa, pt
+	🏝️  PISC:	🏠 1	🏷️ Nr
+	🏝️  REDE:	🏠 163	🏷️ A, A1, B, Bg, C, D, Ka, Kna, Knt, Kot, Kt, Nd, Ne, Nr, SM, SU, fa, pt
+	🏝️  SACB:	🏠 15	🏷️ Kna, Nd
+	🏝️  SCRZ:	🏠 3	🏷️ Nr
+	🏝️  STUC:	🏠 48	🏷️ Nd, Ne, Nr, Po, pt
+	🏝️  ZITT:	🏠 175	🏷️ A, B, B1, C, D, Ka, Kna, Knt, Koa, N, Nd, Ne, Nr, O, Or, P, SM, SP, SU, fa, pt
+
+🏘️  Sestiere: San Marco	14 islands	1869 buildings
+
+	🏝️  ANZO:	🏠 178	🏷️ A, A1, B, B1, Bg, C, D, Kna, Knt, Kt, Ne, Nr, Or, SU, fa, pt
+	🏝️  BORT:	🏠 212	🏷️ A, A1, B, B1, Bg, C, D, Nd, Ne, Nr, Or, P, SM, SU, fa, pt
+	🏝️  DUCA:	🏠 46	🏷️ A, A1, B, Bg, C, Ne, fa
+	🏝️  DUOD:	🏠 26	🏷️ A, A1, B1, C, fa, pt
+	🏝️  FANT:	🏠 76	🏷️ A, A1, B, Bg, C, Nd, Nr, Or, SU, SUo, fa, pt
+	🏝️  GALL:	🏠 115	🏷️ A, A1, B, B1, Bg, C, D, Nd, Ne, Nr, O, Or, SMo, SU, fa, pt
+	🏝️  GARZ:	🏠 34	🏷️ A, A1, B, Bg, C, D, Knt, Ne, fa, pt
+	🏝️  LUCA:	🏠 230	🏷️ A, A1, B, B1, Bg, C, D, Nd, Ne, Nr, O, Or, SMo, SU, fa, pt
+	🏝️  MARC:	🏠 395	🏷️ A, A1, B, B1, Bg, C, D, Kt, N, Nd, Ne, Nr, O, Or, SM, SMo, SU, fa, pt
+	🏝️  MAUR:	🏠 67	🏷️ A, A1, B, B1, Bg, C, Kt, Nd, Ne, Or, SU, SUo, fa, pt
+	🏝️  MOIS:	🏠 123	🏷️ A, A1, B, B1, Bg, C, Knt, Kt, N, Nd, Ne, Nr, Or, SMo, fa, pt
+	🏝️  REAL:	🏠 7	🏷️ Nd, Nr, P, Po
+	🏝️  STEF:	🏠 312	🏷️ A, A1, B, B1, Bg, C, D, Ka, Kt/pt, N, Ne, Nr, O, Or, SM, SU, fa, pt
+	🏝️  ZOBE:	🏠 48	🏷️ B, B1, Bg, C, Kt, Or, SU, fa, pt
+
+🏘️  Sestiere: San Polo	7 islands	1185 buildings
+
+	🏝️  BOLD:	🏠 74	🏷️ A, A1, B, Bg, C, D, Ka/pt, Nd, Ne, Or, SU, fa, pt
+	🏝️  CASS:	🏠 174	🏷️ A, A1, B, B1, Bg, C, D, Ka/A1, Ne, Nr, Or, fa, pt
+	🏝️  FRAR:	🏠 319	🏷️ A, A1, B, B1, Bg, C, D, Ka/Or, Kna, Knt, Koa, Kot, Kot/Or, Nd, Ne, Nr, Or, SM, SU, fa, pt
+	🏝️  MELO:	🏠 48	🏷️ A, A1, B, Bg, C, D, Nd, Ne, fa, pt
+	🏝️  NOMB:	🏠 114	🏷️ A, A1, B, Bg, C, D, Ka, Knt, Kt, Nd, Nr, Or, fa, pt
+	🏝️  POLO:	🏠 100	🏷️ A1, B, B1, Bg, C, D, Ka, Kna, Nd, Ne, Or, SU, fa, pt
+	🏝️  SILV:	🏠 356	🏷️ A, A1, B, B1, Bg, C, D, Knt, Kt/Or, N, Nd, Ne, Nr, Or, P, SM, SP, SU, fa, pt
+
+🏘️  Sestiere: Santa Croce	14 islands	1566 buildings
+
+	🏝️  2TOR:	🏠 82	🏷️ A, B, B1, Bg, C, D, Ka, Kt, Nd, Ne, Or, fa, pt
+	🏝️  MAGG:	🏠 96	🏷️ A, A1, B, B1, Bg, C, Knt, Nd, Ne, Nr, Po, SU, fa
+	🏝️  MATE:	🏠 76	🏷️ A, A1, B, B1, Bg, C, D, Nd, Ne, Nr, Or, SU, fa, pt
+	🏝️  MEGI:	🏠 23	🏷️ B, B1, Bg, C, Nd, fa, pt
+	🏝️  MOCE:	🏠 53	🏷️ A, A1, B, B1, Bg, C, Ka, Kna, Ne, Nr, pt
+	🏝️  ORIO:	🏠 169	🏷️ A, A1, B, B1, Bg, C, D, Ka, Knt, Nd, Ne, Nr, O, Or, SU, fa, pt
+	🏝️  PAPA:	🏠 17	🏷️ A, C, Ne, Nr, Or, fa
+	🏝️  PORT:	🏠 114	🏷️ Ka, Kna, Knt, Koa, Nd, Ne, Nr, SM, fa
+	🏝️  RIZZ:	🏠 23	🏷️ A1, B, C, Koa, Nd, Ne, Nr, pt
+	🏝️  ROMA:	🏠 120	🏷️ A, B1, Bg, C, Ka, Kna, Knt, Koa, N, Nd, Ne, Nr, O, Po, SUo, fa
+	🏝️  STAE:	🏠 109	🏷️ A, A1, B, B1, Bg, C, D, Knt, Nd, Ne, Or, SU, fa, pt
+	🏝️  TOLE:	🏠 360	🏷️ A, A1, B, B1, Bg, C, D, Kna, Knt, Kt, Nd, Ne, Nr, O, Or, SP, SU, fa, pt
+	🏝️  TRON:	🏠 1	🏷️ Nr
+	🏝️  ZAND:	🏠 323	🏷️ A, A1, B, B1, Bg, C, D, Kna, Kna/Ne, Knt, Kot, Nd, Ne, Nr, O, Or, SU, fa, pt
+

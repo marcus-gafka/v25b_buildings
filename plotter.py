@@ -53,7 +53,8 @@ def plot_island(dataset: Dataset, island_code: str, figsize=(12, 12)):
 
     # --- Plot ---
     fig, ax = plt.subplots(figsize=figsize)
-    gdf.plot(ax=ax, color=gdf["color"], edgecolor="black", linewidth=0.5)
+    #gdf.plot(ax=ax, color=gdf["color"], edgecolor="black", linewidth=0.5)
+    gdf.plot(ax=ax, color="white", edgecolor="black", linewidth=0.5)
 
     # --- Add labels ---
     for idx, row in gdf.iterrows():
@@ -62,8 +63,8 @@ def plot_island(dataset: Dataset, island_code: str, figsize=(12, 12)):
             ax.text(
                 centroid.x,
                 centroid.y,
-                row["short_alias"],
-                fontsize=6,
+                row["short_alias"][-3:],
+                fontsize=10,
                 ha="center",
                 va="center",
                 color="black"

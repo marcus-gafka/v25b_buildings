@@ -1,3 +1,3 @@
-short_alias,TP_CLS_ED,Qu_Gronda,Superficie,list_of_addresses,floors_est
-TRON-001,Nr,0.0,14736.8,none,1
-TRON~NO_BUILDING,,,,"SC21, SC22, SC22A, SC23, SC23A, SC24, SC24A, SC25, SC25A, SC25B, SC25C, SC26, SC26A, SC26B, SC27, SC28, SC29, SC30, SC31, SC32",
+short_alias,TP_CLS_ED,Qu_Gronda,Qu_Terra,Superficie
+TRON-001,Nr,0.0,0.0,14736.8
+TRON~NO_BUILDING,,,,

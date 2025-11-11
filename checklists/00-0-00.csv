@@ -1,7 +1,7 @@
-short_alias,TP_CLS_ED,Qu_Gronda,Superficie,list_of_addresses,floors_est
-0-002,Kna,3.65,188.04,none,2
-0-001,Nr,0.0,123.17,none,1
-0-003,Kna,0.0,132.79,none,1
-0-004,Kna,0.0,197.19,none,1
-0-005,,0.0,0.0,none,1
-0-006,,0.0,0.0,none,1
+short_alias,TP_CLS_ED,Qu_Gronda,Qu_Terra,Superficie
+0-002,Kna,3.65,1.1,188.04
+0-001,Nr,0.0,3.25,123.17
+0-003,Kna,0.0,0.0,132.79
+0-004,Kna,0.0,0.0,197.19
+0-005,,0.0,0.0,0.0
+0-006,,0.0,0.0,0.0
