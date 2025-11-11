@@ -1,5 +1,4 @@
 import pandas as pd
-from pathlib import Path
 from constants import ALIAS_CSV
 
 # Emoji definitions

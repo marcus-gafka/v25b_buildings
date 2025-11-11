@@ -3,8 +3,6 @@ import geopandas as gpd
 from shapely.geometry import shape, Point
 from dataset import Dataset
 from constants import FILTERED_GEOJSON, ALIAS_GEOJSON, ALIAS_CSV, BUILDING_FIELD
-from file_utils import save_geojson
-from dataclasses import asdict
 
 # === Helpers ===
 def generate_letter_codes():

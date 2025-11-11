@@ -1,5 +1,4 @@
 import pandas as pd
-from pathlib import Path
 from constants import ALIAS_CSV, FILTERED_ADDRESS_CSV, CHECKLISTS_DIR, TOTAL_CHECKLIST_CSV
 
 def main():

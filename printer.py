@@ -1,6 +1,3 @@
-# printer.py
-from typing import Union
-
 def verbose(obj):
     """Pretty summary of the full hierarchy — works for Dataset, Sestiere, Island, or Tract."""
     from dataset import Dataset, Sestiere, Island, Tract, Building

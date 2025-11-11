@@ -1,5 +1,4 @@
 from dataset import Dataset
-from file_utils import geojson_to_csv
 from constants import RAW_GEOJSON, FILTERED_GEOJSON, FILTERED_CSV, BUILDING_FIELD
 import pandas as pd
 from copy import deepcopy

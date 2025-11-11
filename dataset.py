@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
 from pathlib import Path
-from shapely.geometry import shape, Point
+from shapely.geometry import shape
 from typing import List, Optional
 from constants import BUILDING_FIELD, TRACT_FIELD, ISLAND_FIELD, SESTIERE_FIELD
 from datatypes import Building, Tract, Island, Sestiere, Venice

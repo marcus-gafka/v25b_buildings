@@ -1,9 +1,8 @@
 import pandas as pd
 import numpy as np
 from sklearn.linear_model import LinearRegression
-from pathlib import Path
 import re
-from constants import ROOT_DIR, FIELDWORK_DIR, TOTAL_FIELDWORK_CSV, LIN_REG_CSV
+from constants import FIELDWORK_DIR, TOTAL_FIELDWORK_CSV, LIN_REG_CSV
 import matplotlib.pyplot as plt
 
 # === LOAD ALL FIELDWORK FILES ===

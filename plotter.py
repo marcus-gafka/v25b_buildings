@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import geopandas as gpd
-from shapely.geometry import shape, Point
+from shapely.geometry import Point
 from dataset import Dataset
 
 def plot_island(dataset: Dataset, island_code: str, figsize=(12, 12)):
