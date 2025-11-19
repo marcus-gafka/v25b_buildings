@@ -1,4 +1,7 @@
 from dataset import Dataset
+import sys
+from pathlib import Path
+sys.path.append(str(Path(__file__).parent.parent))
 from constants import RAW_GEOJSON, FILTERED_GEOJSON, FILTERED_CSV, BUILDING_FIELD
 import pandas as pd
 from copy import deepcopy

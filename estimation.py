@@ -1,8 +1,7 @@
 import pandas as pd
 from dataset import Dataset
-from datatypes import Building
 from constants import FILTERED_WATER_CSV, FILTERED_ADDRESS_CSV, ALIAS_GEOJSON
-from plotter import plot_island_by_tpcls
+from plotter import plot_island_by_tpcls, plot_island_by_tpcls_filtered
 
 # --- Load CSVs ---
 print("📂 Loading filtered water consumption CSV...")
@@ -39,13 +38,17 @@ for sest in ds.venice.sestieri:
                 b_id = getattr(b, "id", None)
                 if b_id in meters_per_building:
                     b.units_est = int(meters_per_building[b_id])
-                    print(f"  Building {b.short_alias} ({b_id}) → units_est = {b.units_est}")
+                    #print(f"  Building {b.short_alias} ({b_id}) → units_est = {b.units_est}")
                 else:
                     b.units_est = 0
-                    print(f"  Building {b.short_alias} ({b_id}) → units_est = 0 (no meters found)")
+                    #print(f"  Building {b.short_alias} ({b_id}) → units_est = 0 (no meters found)")
 
 # --- Plot one island as example ---
-print("📊 Plotting buildings for island MELO...")
-plot_island_by_tpcls(ds, "BOLD")
+print("📊 Plotting buildings for island...")
+plot_island_by_tpcls_filtered(ds, "CASS")
+plot_island_by_tpcls_filtered(ds, "FRAR")
+plot_island_by_tpcls_filtered(ds, "NOMB")
+plot_island_by_tpcls_filtered(ds, "POLO")
+plot_island_by_tpcls_filtered(ds, "SILV")
 
 print("✅ Units estimation complete.")

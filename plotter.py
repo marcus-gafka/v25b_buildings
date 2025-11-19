@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+from matplotlib.patches import Patch
 import geopandas as gpd
 from shapely.geometry import Point, LineString
 from dataset import Dataset
@@ -331,6 +332,105 @@ def plot_island_by_tpcls(dataset: Dataset, island_code: str, figsize=(12, 12)):
             )
 
     ax.set_title(f"Island {island_code} — Colored by TP_CLS_ED", fontsize=16)
+    ax.set_axis_off()
+    plt.tight_layout()
+    plt.show()
+
+def plot_island_by_tpcls_filtered(dataset: Dataset, island_code: str, figsize=(12, 12)):
+    # --- Load CSV/GeoJSON safely ---
+    try:
+        df = pd.read_csv(dataset.source, dtype=str)
+    except pd.errors.ParserError:
+        df = gpd.read_file(dataset.source)
+
+    if "short_alias" not in df.columns or "TP_CLS_ED" not in df.columns:
+        raise ValueError("File must have 'short_alias' and 'TP_CLS_ED' columns.")
+
+    df = df[["short_alias", "TP_CLS_ED"]].drop_duplicates().set_index("short_alias")
+
+    # --- Codes that get colors ---
+    colored_codes = [
+        "A", "A1", "Bg", "D",
+        "Nd", "Ne", "Or", "SU", "fa", "pt"
+    ]
+
+    # --- Assign one fixed color per code ---
+    fixed_cmap = plt.cm.tab20  # good distinct colors
+    tp_color_map = {code: fixed_cmap(i / len(colored_codes)) for i, code in enumerate(colored_codes)}
+    WHITE = (1, 1, 1, 1)
+
+    # --- Find the island ---
+    island = None
+    for s in dataset.venice.sestieri:
+        for i in s.islands:
+            if i.code == island_code:
+                island = i
+                break
+        if island:
+            break
+
+    if not island:
+        raise ValueError(f"Island code '{island_code}' not found.")
+
+    # --- Prepare building rows ---
+    rows = []
+    for tract in island.tracts:
+        for b in tract.buildings:
+            geom = b.geometry or b.centroid
+            if geom is None:
+                continue
+
+            alias = b.short_alias or ""
+            tp = df.loc[alias, "TP_CLS_ED"] if alias in df.index else "Unknown"
+
+            rows.append({
+                "geometry": geom,
+                "tp": tp,
+                "short_alias": alias,
+                "units_est": b.units_est or 0
+            })
+
+    if not rows:
+        print(f"No building geometries found for island {island_code}")
+        return
+
+    gdf = gpd.GeoDataFrame(rows, geometry="geometry", crs="EPSG:4326")
+
+    # --- Apply fixed colors (others = white) ---
+    gdf["color"] = gdf["tp"].apply(lambda tp: tp_color_map.get(tp, WHITE))
+
+    # --- Plot ---
+    fig, ax = plt.subplots(figsize=figsize)
+    gdf.plot(ax=ax, color=gdf["color"], edgecolor="black", linewidth=0.5)
+
+    # --- Label units ---
+    for _, row in gdf.iterrows():
+        if row["short_alias"]:
+            c = row.geometry.centroid
+            ax.text(
+                c.x,
+                c.y,
+                row["short_alias"][-3:],
+                fontsize=5,
+                ha="center",
+                va="center",
+                color="black"
+            )
+
+    # --- Legend ---
+    legend_elements = [
+        Patch(facecolor=tp_color_map[tp], edgecolor="black", label=tp)
+        for tp in colored_codes
+    ]
+
+    ax.legend(
+        handles=legend_elements,
+        title="TP_CLS_ED",
+        loc="upper right",
+        frameon=True
+    )
+
+    ax.set_title(f"Island {island_code} — Filtered TP_CLS_ED Colors", fontsize=16)
     ax.set_axis_off()
     plt.tight_layout()
     plt.show()

@@ -1,4 +1,7 @@
 import pandas as pd
+import sys
+from pathlib import Path
+sys.path.append(str(Path(__file__).parent.parent))
 from constants import ADDRESS_CSV, FILTERED_ADDRESS_CSV
 
 KEEP_FIELDS = [

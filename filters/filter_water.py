@@ -1,5 +1,7 @@
 import pandas as pd
+import sys
 from pathlib import Path
+sys.path.append(str(Path(__file__).parent.parent))
 from constants import WATER_CONSUMPTION_CSV, FILTERED_WATER_CSV
 
 # Columns to keep

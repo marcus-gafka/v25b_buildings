@@ -6,12 +6,11 @@ from constants import ALIAS_CSV
 import pandas as pd
 
 # Emoji definitions
-EMOJI_SESTIERE = "🏘️"  # for sestiere
-EMOJI_ISLAND = "🏝️"    # for island
-EMOJI_BUILDING = "🏠"   # for building
-EMOJI_TYPE = "🏷️"      # for building type
+EMOJI_SESTIERE = "🏘️"
+EMOJI_ISLAND = "🏝️"
+EMOJI_BUILDING = "🏠"
+EMOJI_TYPE = "🏷️"
 
-# Output file
 OUTPUT_FILE = "data/buildings_summary.txt"
 
 def main():
@@ -19,45 +18,50 @@ def main():
     df = pd.read_csv(ALIAS_CSV)
     print(f"✅ Loaded {len(df)} total rows\n")
 
-    # Ensure necessary columns exist
     required_cols = {"Nome_Sesti", "short_alias", "TP_CLS_ED"}
     if not required_cols.issubset(df.columns):
         missing = required_cols - set(df.columns)
         raise ValueError(f"Missing required columns: {missing}")
 
-    # Extract island codes (first 4 chars of short_alias)
     df["island_code"] = df["short_alias"].str[:4]
-
-    # Clean building types for display (remove blanks only for types, not rows)
     df["TP_CLS_ED_clean"] = df["TP_CLS_ED"].fillna("").str.strip()
 
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-        # Group by sestiere
+
+        # -------- PER-SESTIERE SECTION --------
         for sestiere, group in df.groupby("Nome_Sesti"):
+
             islands = sorted(group["island_code"].dropna().unique())
             total_buildings = len(group)
-            
-            # Sestiere header
+
+            # Header
             f.write(f"{EMOJI_SESTIERE}  Sestiere: {sestiere}\t{len(islands)} islands\t{total_buildings} buildings\n\n")
-            
-            # Island-level info
+
+            # --- Island list ---
             for island in islands:
                 df_island = group[group["island_code"] == island]
-                # get unique non-empty types
                 unique_types = sorted(t for t in df_island["TP_CLS_ED_clean"].unique() if t)
-                f.write(f"\t{EMOJI_ISLAND}  {island}:\t{EMOJI_BUILDING} {len(df_island)}\t{EMOJI_TYPE} {', '.join(unique_types) if unique_types else 'none'}\n")
-            
-            f.write("\n")  # blank line between sestiere sections
 
-        # --- TOTAL per building type (alphabetical, aligned) ---
-        f.write("🏷️ Total buildings per type:\n")
-        type_counts = df["TP_CLS_ED_clean"].value_counts()
-        type_list = sorted([t for t in type_counts.index if t])  # skip empty
-        max_len = max(len(t) for t in type_list)  # longest type string
+                f.write(
+                    f"\t{EMOJI_ISLAND}  {island}:\t"
+                    f"{EMOJI_BUILDING} {len(df_island)}\t"
+                    f"{EMOJI_TYPE} {', '.join(unique_types) if unique_types else 'none'}\n"
+                )
 
-        for t in type_list:
-            padded_type = t + ":" + " " * (max_len - len(t))  # colon immediately, then spaces
-            f.write(f"  {EMOJI_TYPE} {padded_type}  {EMOJI_BUILDING} {type_counts[t]}\n")
+            f.write("\n")
+
+            # --- PER-SESTIERE TYPE TOTALS ---
+            f.write(f"🏷️ Total building types in {sestiere}:\n")
+
+            type_counts = group["TP_CLS_ED_clean"].value_counts()
+            type_list = sorted([t for t in type_counts.index if t])
+            max_len = max(len(t) for t in type_list) if type_list else 0
+
+            for t in type_list:
+                padded_type = t + ":" + " " * (max_len - len(t))  # colon before padding
+                f.write(f"  {EMOJI_TYPE} {padded_type}  {EMOJI_BUILDING} {type_counts[t]}\n")
+
+            f.write("\n\n")  # end of sestiere
 
     print(f"✅ Summary complete. Output saved to {OUTPUT_FILE}")
 
