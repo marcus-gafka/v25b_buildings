@@ -4,6 +4,7 @@ ROOT_DIR = Path(__file__).parent
 DATA_DIR = ROOT_DIR / "data"
 CHECKLISTS_DIR = ROOT_DIR / "checklists"
 FIELDWORK_DIR = ROOT_DIR / "fieldwork"
+HOTELS_STRS_DIR = ROOT_DIR / "hotels_and_strs"
 
 RAW_GEOJSON = DATA_DIR / "VPC_Buildings_Total_1.geojson"
 
@@ -15,6 +16,9 @@ ALIAS_CSV = DATA_DIR / "VPC_Buildings_With_Aliases.csv"
 
 WATER_CONSUMPTION_CSV = DATA_DIR / "VPC_Water_Consumption.csv"
 FILTERED_WATER_CSV = DATA_DIR / "VPC_Water_Consumption_Filtered.csv"
+
+TOTAL_HOTEL_CSV = DATA_DIR / "VPC_Hotels.csv"
+TOTAL_STR_CSV = DATA_DIR / "VPC_STRs.csv"
 
 TOTAL_CHECKLIST_CSV = CHECKLISTS_DIR / "!TOTAL.csv"
 TOTAL_ADDRESS_CSV = CHECKLISTS_DIR / "!TOTAL-A.csv"
