@@ -1,8 +1,11 @@
+import sys
 from pathlib import Path
+sys.path.append(str(Path(__file__).parent.parent))
+from constants import FIELDWORK_DIR, DATA_DIR
+
 import matplotlib.pyplot as plt
 from dataset import Dataset
 from plotter import plot_island_bw
-from constants import FIELDWORK_DIR, DATA_DIR
 
 def generate_bw_maps():
     geojson_path = DATA_DIR / "VPC_Buildings_With_Aliases.geojson"

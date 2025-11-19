@@ -164,8 +164,29 @@ if __name__ == "__main__":
     print("📈 Training split linear regression models...")
     models_df = train_linear_models(clean_df)
 
-    #LIN_REG_CSV.parent.mkdir(parents=True, exist_ok=True)
+    total_row = {
+        "TP_CLS_ED": "Total:",
+        "m_qu": "",
+        "b_qu": "",
+        "r2_qu": "",
+        "1/m_qu": "",
+        "blank": "",
+        "qu_count": f"=SUM(G2:G{len(models_df)+1})",  # Excel formula for column G
+        "m_f": "",
+        "b_f": "",
+        "r2_f": "",
+        "1/m_f": "",
+        "f_count": f"=SUM(L2:L{len(models_df)+1})"   # Excel formula for column L
+    }
+
+    models_df = pd.concat([models_df, pd.DataFrame([total_row])], ignore_index=True)
+
+    ## COMMENT OUT THIS LINE TO SKIP OVERWRITING LIN_REG_MODELS ---------------------------------------------------
+
     #models_df.to_csv(LIN_REG_CSV, index=False)
+
+    ## ------------------------------------------------------------------------------------------------------------
+
     print(f"✅ Models saved to {LIN_REG_CSV}")
 
     print("📊 Plotting regression results...")

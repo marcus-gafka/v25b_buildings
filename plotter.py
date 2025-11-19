@@ -2,8 +2,9 @@ import matplotlib.pyplot as plt
 import geopandas as gpd
 from shapely.geometry import Point, LineString
 from dataset import Dataset
+import pandas as pd
 
-def plot_island(dataset: Dataset, island_code: str, figsize=(12, 12)):
+def plot_island_by_tract(dataset: Dataset, island_code: str, figsize=(12, 12)):
     # --- Find the island ---
     island = None
     for s in dataset.venice.sestieri:
@@ -138,14 +139,7 @@ def plot_island_bw(dataset: Dataset, island_code: str, figsize=(12, 12), show=Tr
 
     return fig, ax
 
-def plot_islands_with_snakes(dataset: Dataset, island_code: str, alias_field="short_alias"):
-    """
-    Plots all buildings for a given island in a Dataset and draws a 'snake' line
-    through centroids ordered by the numeric suffix of their alias.
-
-    Example:
-        plot_islands_with_snakes(ds_alias, "BORG")
-    """
+def plot_island_with_snake(dataset: Dataset, island_code: str, alias_field="short_alias"):
     # === Extract buildings for this island ===
     rows = []
     for s in dataset.venice.sestieri:
@@ -191,4 +185,152 @@ def plot_islands_with_snakes(dataset: Dataset, island_code: str, alias_field="sh
 
     ax.set_title(f"Island '{island_code}' Snake Path")
     ax.axis("equal")
+    plt.show()
+
+def plot_island_building_info(dataset: Dataset, island_code: str, figsize=(12, 12)):
+    # --- Find the island ---
+    island = None
+    for s in dataset.venice.sestieri:
+        for i in s.islands:
+            if i.code == island_code:
+                island = i
+                break
+        if island:
+            break
+
+    if not island:
+        raise ValueError(f"Island code '{island_code}' not found.")
+
+    # --- Prepare data ---
+    rows = []
+    tract_ids = []
+
+    for tract in island.tracts:
+        for b in tract.buildings:
+            geom = b.geometry or b.centroid
+            if geom is None:
+                continue
+
+            rows.append({
+                "geometry": geom,
+                "tract_id": tract.id,
+                #"label": f"{b.floors_est},{b.units_est},{b.pop_est}"
+                "label": f"{b.units_est}"
+            })
+            tract_ids.append(tract.id)
+
+    if not rows:
+        print(f"No building geometries found for island {island_code}")
+        return
+
+    gdf = gpd.GeoDataFrame(rows, geometry="geometry", crs="EPSG:4326")
+
+    # --- Assign colors per tract ---
+    unique_tracts = sorted(set(tract_ids))
+    cmap = plt.cm.get_cmap("tab20", len(unique_tracts))
+    tract_color_map = {tid: cmap(i) for i, tid in enumerate(unique_tracts)}
+    gdf["color"] = gdf["tract_id"].map(tract_color_map)
+
+    # --- Plot ---
+    fig, ax = plt.subplots(figsize=figsize)
+    gdf.plot(ax=ax, color=gdf["color"], edgecolor="black", linewidth=0.5)
+
+    # --- Add labels ---
+    for _, row in gdf.iterrows():
+        centroid = row.geometry.centroid
+        ax.text(
+            centroid.x,
+            centroid.y,
+            row["label"],
+            fontsize=8,
+            ha="center",
+            va="center",
+            color="black"
+        )
+
+    ax.set_title(f"Island {island_code} Buildings (Floors,Units,Pop)", fontsize=16)
+    ax.set_axis_off()
+    plt.tight_layout()
+    plt.show()
+
+def plot_island_by_tpcls(dataset: Dataset, island_code: str, figsize=(12, 12)):
+    # --- Load CSV/GeoJSON safely ---
+    try:
+        df = pd.read_csv(dataset.source, dtype=str)
+    except pd.errors.ParserError:
+        df = gpd.read_file(dataset.source)
+
+    if "short_alias" not in df.columns or "TP_CLS_ED" not in df.columns:
+        raise ValueError("File must have 'short_alias' and 'TP_CLS_ED' columns.")
+
+    # Map short_alias → TP_CLS_ED
+    df = df[["short_alias", "TP_CLS_ED"]].drop_duplicates().set_index("short_alias")
+
+    # --- Find the island ---
+    island = None
+    for s in dataset.venice.sestieri:
+        for i in s.islands:
+            if i.code == island_code:
+                island = i
+                break
+        if island:
+            break
+
+    if not island:
+        raise ValueError(f"Island code '{island_code}' not found.")
+
+    # --- Prepare building data ---
+    rows = []
+    tpvals = []
+
+    for tract in island.tracts:
+        for b in tract.buildings:
+            geom = b.geometry or b.centroid
+            if geom is None:
+                continue
+
+            alias = b.short_alias or ""
+            tp = df.loc[alias, "TP_CLS_ED"] if alias in df.index else "Unknown"
+
+            rows.append({
+                "geometry": geom,
+                "tp": tp,
+                "short_alias": alias,
+                "units_est": b.units_est or 0
+            })
+            tpvals.append(tp)
+
+    if not rows:
+        print(f"No building geometries found for island {island_code}")
+        return
+
+    gdf = gpd.GeoDataFrame(rows, geometry="geometry", crs="EPSG:4326")
+
+    # --- Assign colors based on TP_CLS_ED ---
+    unique_tp = sorted(set(tpvals))
+    cmap = plt.cm.get_cmap("tab20", len(unique_tp))
+    tp_color_map = {tp: cmap(i) for i, tp in enumerate(unique_tp)}
+    gdf["color"] = gdf["tp"].map(tp_color_map)
+
+    # --- Plot ---
+    fig, ax = plt.subplots(figsize=figsize)
+    gdf.plot(ax=ax, color=gdf["color"], edgecolor="black", linewidth=0.5)
+
+    # --- Add labels (units_est) ---
+    for _, row in gdf.iterrows():
+        if row["short_alias"]:
+            c = row.geometry.centroid
+            ax.text(
+                c.x,
+                c.y,
+                f"{row['units_est']}",
+                fontsize=9,
+                ha="center",
+                va="center",
+                color="black"
+            )
+
+    ax.set_title(f"Island {island_code} — Colored by TP_CLS_ED", fontsize=16)
+    ax.set_axis_off()
+    plt.tight_layout()
     plt.show()

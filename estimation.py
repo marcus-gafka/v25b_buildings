@@ -1,52 +1,51 @@
-import math
+import pandas as pd
+from dataset import Dataset
+from datatypes import Building
+from constants import FILTERED_WATER_CSV, FILTERED_ADDRESS_CSV, ALIAS_GEOJSON
+from plotter import plot_island_by_tpcls
 
-# === Architectural code mappings based on your table ===
-ARCH_CODE_UNITS = {
-    # Monocellular
-    "A": 1,
-    "A1": 1,
-    "Ka/A": 1,
-    "Ka/A1": 1,
-    "Knt/A1": 1,
-    # Bicellular
-    "B": 2,
-    "B/SU": 2,
-    "B1": 2,
-    "Bg": 2,
-    "Ka/B": 2,
-    "Koa/B": 2,
-    "Kt/B": 2,
-    # Tricellular
-    "C": 3,
-    "C/knt": 3,
-    "C/Nd": 3
-}
+# --- Load CSVs ---
+print("📂 Loading filtered water consumption CSV...")
+water_df = pd.read_csv(FILTERED_WATER_CSV)
+print(f"  Loaded {len(water_df)} water meter entries.")
 
-# Floor height estimate in meters
-FLOOR_HEIGHT = 3.0
+print("📂 Loading filtered addresses CSV...")
+address_df = pd.read_csv(FILTERED_ADDRESS_CSV)
+print(f"  Loaded {len(address_df)} address entries.")
 
-# Average unit area for fallback
-AVERAGE_UNIT_AREA = 50  # square meters, adjust as needed
+# --- Standardize addresses ---
+water_df["ProcessedAddress"] = water_df["ProcessedAddress"].astype(str).str.strip().str.upper()
+address_df["Full_sesti"] = address_df["Full_sesti"].astype(str).str.strip().str.upper()
 
-def estimate_floors(row) -> int:
-    try:
-        qu_gronda = float(row.get("Qu_Gronda", 0))
-        floors = math.ceil(qu_gronda / FLOOR_HEIGHT)
-        return max(1, floors)
-    except Exception:
-        return 1  # fallback default
+# --- Count meters per address ---
+meters_per_address = water_df.groupby("ProcessedAddress").size().to_dict()
+print(f"  Found {len(meters_per_address)} unique addresses with meters.")
 
-def estimate_units(row) -> int:
-    floors = row.get("floors_est", 1)
-    tp_cls = str(row.get("TP_CLS_ED", "")).upper()
-    footprint = float(row.get("Superficie", 0))
+# --- Map addresses to building IDs ---
+address_df["meters"] = address_df["Full_sesti"].map(meters_per_address).fillna(0).astype(int)
+meters_per_building = address_df.groupby("TARGET_FID_12_13")["meters"].sum().to_dict()
+print(f"  Computed meters per building for {len(meters_per_building)} buildings.")
 
-    usable_floors = max(0, floors - 1)
+# --- Load dataset ---
+print(f"📂 Loading building GeoJSON: {ALIAS_GEOJSON.name}")
+ds = Dataset(str(ALIAS_GEOJSON))
 
-    # Check architectural code mapping
-    units_per_floor = ARCH_CODE_UNITS.get(tp_cls)
-    if units_per_floor is None:
-        # fallback: footprint / average unit area
-        units_per_floor = max(1, round(footprint / AVERAGE_UNIT_AREA)) if footprint > 0 else 1
+# --- Update units_est for each building ---
+print("📊 Updating units_est from CSV data...")
+for sest in ds.venice.sestieri:
+    for isl in sest.islands:
+        for tract in isl.tracts:
+            for b in tract.buildings:
+                b_id = getattr(b, "id", None)
+                if b_id in meters_per_building:
+                    b.units_est = int(meters_per_building[b_id])
+                    print(f"  Building {b.short_alias} ({b_id}) → units_est = {b.units_est}")
+                else:
+                    b.units_est = 0
+                    print(f"  Building {b.short_alias} ({b_id}) → units_est = 0 (no meters found)")
 
-    return usable_floors * units_per_floor
+# --- Plot one island as example ---
+print("📊 Plotting buildings for island MELO...")
+plot_island_by_tpcls(ds, "BOLD")
+
+print("✅ Units estimation complete.")

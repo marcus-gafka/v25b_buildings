@@ -35,7 +35,6 @@ class Dataset:
             s = s[1:-1].strip()
         return s
 
-    # === Hierarchy Construction ===
     def _build_hierarchy(self) -> Venice:
         sestiere_map = {}
 
@@ -74,6 +73,14 @@ class Dataset:
             if tract is None:
                 tract = Tract(id=tract_key)
                 island.tracts.append(tract)
+
+            # --- Fill tract.pop21 from any building row that contains it ---
+            pop = props.get("POP21")
+            if pop is not None and tract.pop21 is None:
+                try:
+                    tract.pop21 = int(pop)
+                except (TypeError, ValueError):
+                    pass
 
             # --- Building ---
             building = Building(

@@ -1,8 +1,10 @@
+import sys
+from pathlib import Path
+sys.path.append(str(Path(__file__).parent.parent))
+from constants import FILTERED_CSV
+
 import pandas as pd
 from pathlib import Path
-
-DATA_DIR = Path("data")
-FILTERED_CSV = DATA_DIR / "VPC_Buildings_Filtered.csv"
 
 def main():
     print("📂 Loading filtered CSV...")

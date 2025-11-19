@@ -17,11 +17,6 @@ def generate_letter_codes():
     return codes
 
 def greedy_tsp(buildings):
-    """
-    Greedy TSP that starts at NW corner and selects next building
-    based on a weighted combination of northwestness and distance.
-    `buildings` is a list of tuples (building_obj, tract_obj)
-    """
     if not buildings:
         return []
 

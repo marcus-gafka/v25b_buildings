@@ -1,5 +1,9 @@
-import pandas as pd
+import sys
+from pathlib import Path
+sys.path.append(str(Path(__file__).parent.parent))
 from constants import ALIAS_CSV, FILTERED_ADDRESS_CSV, CHECKLISTS_DIR, TOTAL_CHECKLIST_CSV
+
+import pandas as pd
 
 def main():
     print(f"📁 Output directory: {CHECKLISTS_DIR}")
