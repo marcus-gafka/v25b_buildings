@@ -45,13 +45,15 @@ def main():
     # === Drop rows with no island code (optional) ===
     merged = merged.dropna(subset=["island_code"])
 
-    # === Group and save per island ===
+    # -----------------------------
+    # Save per-island CSVs
+    # -----------------------------
     all_islands = []
     for island_code, group in merged.groupby("island_code"):
         sestiere_code = group["sestiere_code"].dropna().iloc[0]
         output_csv = CHECKLISTS_DIR / f"{sestiere_code}-{island_code}-A.csv"
 
-        # === Sort by Full_sesti ===
+        # Sort by Full_sesti
         group = group.sort_values("Full_sesti", key=lambda x: x.map(sort_key))
 
         # Save only Full_sesti and short_alias
@@ -59,14 +61,25 @@ def main():
         all_islands.append(group)
         print(f"💾 Saved island CSV: {output_csv}")
 
-    # === Save combined total ===
+    # -----------------------------
+    # Save combined total
+    # -----------------------------
     if all_islands:
         total_df = pd.concat(all_islands, ignore_index=True)
         total_df = total_df.sort_values("Full_sesti", key=lambda x: x.map(sort_key))
         total_df[["Full_sesti", "short_alias"]].to_csv(TOTAL_ADDRESS_CSV, index=False)
         print(f"\n💾 Saved total address CSV: {TOTAL_ADDRESS_CSV}")
 
-    print("\n✅ All islands processed successfully!")
+    # -----------------------------
+    # Save per-sestiere CSVs
+    # -----------------------------
+    for sestiere_code, group in merged.groupby("sestiere_code"):
+        output_csv = CHECKLISTS_DIR / f"{sestiere_code}-A.csv"
+        group_sorted = group.sort_values("Full_sesti", key=lambda x: x.map(sort_key))
+        group_sorted[["Full_sesti", "short_alias"]].to_csv(output_csv, index=False)
+        print(f"💾 Saved sestiere CSV: {output_csv}")
+
+    print("\n✅ All islands and sestiere address lists processed successfully!")
 
 if __name__ == "__main__":
     main()
