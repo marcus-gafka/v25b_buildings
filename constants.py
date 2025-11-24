@@ -1,12 +1,14 @@
 from pathlib import Path
 
+#DIRS
 ROOT_DIR = Path(__file__).parent
 DATA_DIR = ROOT_DIR / "data"
 CHECKLISTS_DIR = ROOT_DIR / "checklists"
 FIELDWORK_DIR = ROOT_DIR / "fieldwork"
+SUMMARY_DIR = ROOT_DIR / "summaries"
 
+#Input
 RAW_GEOJSON = DATA_DIR / "VPC_Buildings_Total_1.geojson"
-
 FILTERED_GEOJSON = DATA_DIR / "VPC_Buildings_Filtered.geojson"
 FILTERED_CSV = DATA_DIR / "VPC_Buildings_Filtered.csv"
 
@@ -19,7 +21,14 @@ FILTERED_WATER_CSV = DATA_DIR / "VPC_Water_Consumption_Filtered.csv"
 ADDRESS_CSV = DATA_DIR / "VPC_Addresses_Total.csv"
 FILTERED_ADDRESS_CSV = DATA_DIR / "VPC_Addresses_Filtered.csv"
 
-TOTAL_GEOIDS_CSV = DATA_DIR / "VPC_Geoids.csv"
+TOTAL_HOTEL_CSV = DATA_DIR / "VPC_Hotels.csv"
+TOTAL_HOTELS_EXTRA_CSV = DATA_DIR / "VPC_Hotels_Extra.csv"
+TOTAL_STR_CSV = DATA_DIR / "VPC_STR.csv"
+
+FILTERED_HOTEL_CSV = DATA_DIR / "VPC_Hotels_Filtered.csv"
+FILTERED_HOTELS_EXTRA_CSV = DATA_DIR / "VPC_Hotels_Extra_Filtered.csv"
+FILTERED_STR_CSV = DATA_DIR / "VPC_STR_Filtered.csv"
+
 TOTAL_CHECKLIST_CSV = CHECKLISTS_DIR / "!TOTAL.csv"
 TOTAL_ADDRESS_CSV = CHECKLISTS_DIR / "!TOTAL-A.csv"
 TOTAL_FIELDWORK_CSV = FIELDWORK_DIR / "!TOTAL-F.csv"

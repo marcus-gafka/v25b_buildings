@@ -1,0 +1,414 @@
+🏘️  Sestiere: Castello	24 islands	3765 buildings
+
+🏝️  ANA-:	🏠 677	🏷️ A, A1, B, B1, Bg, C, D, Kna, Knt, Kt, Kt/B, Nd, Ne, Nr, Or, Po, SM, SU, fa, pt
+🏝️  ARSE:	🏠 104	🏷️ A1, D, Ka, Knt, Koa, Kt, Nd, Ne, Nr, O, Or, P, Po, SM, SU, SUo, fa
+🏝️  BACI:	🏠 147	🏷️ Ka, Kna, Knt, Kot, Nd, Ne, Nr, P, SUo
+🏝️  BORG:	🏠 23	🏷️ A, B, Bg, C, Nr, Or, fa, pt
+🏝️  BRAG:	🏠 446	🏷️ A, A1, B, B1, Bg, C, D, Ka, Knt, Kot, Kt, Nd, Ne, Nr, O, Or, SM, SU, fa, pt
+🏝️  DANI:	🏠 79	🏷️ A, A1, B, B1, Bg, C, Kna, Koa/O, Nd, Ne, Nr, Or, SM, fa, pt
+🏝️  ELEN:	🏠 270	🏷️ Kna, Knt, Nd, Ne, Nr
+🏝️  FAVA:	🏠 229	🏷️ A, A1, B, B1, Bg, C, D, Ka/D, N, Nd, Ne, Nr, Or, fa, pt
+🏝️  FILI:	🏠 177	🏷️ A, A1, B, B1, Bg, C, D, Knt, Kt, Nd, Ne, Nr, Or, P, SM, SU, fa, pt
+🏝️  FORM:	🏠 117	🏷️ A, A1, B, B1, Bg, C, D, Ka, Knt, Nd, Nr, O, Or, SU, fa, pt
+🏝️  ISEP:	🏠 96	🏷️ A, A1, B, Kna, Knt, N, Nd, Ne, Nr, SU, fa, pt
+🏝️  LATE:	🏠 15	🏷️ A, B, C, O, SM, fa
+🏝️  LORE:	🏠 134	🏷️ A, A1, B, Bg, C, D, Kna, Knt, Kt, Nd, Ne, Nr, Or, SM, SU, fa, pt
+🏝️  MARI:	🏠 70	🏷️ A, A1, B, B1, Bg, C, D, Ka, Ka/Or, Nd, Ne, Or, fa
+🏝️  MRTN:	🏠 87	🏷️ A, A1, B, C, D, Ne, Or, P, SU, fa, pt
+🏝️  PIER:	🏠 111	🏷️ A, A1, B, B1, Bg, C, D, Kna, Kt, Nd, Ne, Nr, SM, SU, fa, pt
+🏝️  QUER:	🏠 126	🏷️ A, A1, B, B1, Bg, C, Ka, Nd, Ne, Nr, Or, fa, pt
+🏝️  RUGA:	🏠 141	🏷️ A, A1, B, B1, Bg, C, Ka/B, Kna, Koa/Or, Nd, Ne, Nr, Or, SM, fa, pt
+🏝️  SEVE:	🏠 105	🏷️ A, A1, B, B1, Bg, C, Knt, Kt, Nd, Ne, Or, SMo, fa, pt
+🏝️  STAD:	🏠 28	🏷️ Kna, Nd, Nr, SU
+🏝️  TERN:	🏠 138	🏷️ A, A1, B, B1, Bg, C, D, Knt, Koa, Koa/B, Ne, Nr, Or, SM, fa, pt
+🏝️  VIGN:	🏠 142	🏷️ A, A1, B, B1, Bg, C, D, Ka, Kna, Knt, Kot, Kt, Nd, Ne, Nr, Or, SM, SP, SU, fa, pt
+🏝️  ZACC:	🏠 75	🏷️ A, A1, B, C, Nd, Ne, Nr, Or, SM, SU, fa, pt
+🏝️  ZANI:	🏠 228	🏷️ A, A1, B, B1, Bg, C, D, Ka, Kna/Ne, Knt, Koa, Kot/Or, Kt, Nd, Ne, Nr, Or, SM, SU, SUo, fa, pt
+
+
+🏷️ Building type totals per island:
+
+🏝️ ANA- — 677 buildings
+   🏷️ A:     🏠 112
+   🏷️ A1:    🏠 47
+   🏷️ B:     🏠 80
+   🏷️ B1:    🏠 25
+   🏷️ Bg:    🏠 61
+   🏷️ C:     🏠 39
+   🏷️ D:     🏠 11
+   🏷️ Kna:   🏠 4
+   🏷️ Knt:   🏠 16
+   🏷️ Kt:    🏠 8
+   🏷️ Kt/B:  🏠 2
+   🏷️ Nd:    🏠 34
+   🏷️ Ne:    🏠 30
+   🏷️ Nr:    🏠 52
+   🏷️ Or:    🏠 21
+   🏷️ Po:    🏠 2
+   🏷️ SM:    🏠 2
+   🏷️ SU:    🏠 2
+   🏷️ fa:    🏠 61
+   🏷️ pt:    🏠 56
+
+🏝️ ARSE — 104 buildings
+   🏷️ A1:   🏠 3
+   🏷️ D:    🏠 3
+   🏷️ Ka:   🏠 30
+   🏷️ Knt:  🏠 1
+   🏷️ Koa:  🏠 1
+   🏷️ Kt:   🏠 3
+   🏷️ Nd:   🏠 8
+   🏷️ Ne:   🏠 4
+   🏷️ Nr:   🏠 14
+   🏷️ O:    🏠 1
+   🏷️ Or:   🏠 6
+   🏷️ P:    🏠 1
+   🏷️ Po:   🏠 1
+   🏷️ SM:   🏠 5
+   🏷️ SU:   🏠 9
+   🏷️ SUo:  🏠 2
+   🏷️ fa:   🏠 7
+
+🏝️ BACI — 147 buildings
+   🏷️ Ka:   🏠 28
+   🏷️ Kna:  🏠 4
+   🏷️ Knt:  🏠 19
+   🏷️ Kot:  🏠 5
+   🏷️ Nd:   🏠 61
+   🏷️ Ne:   🏠 2
+   🏷️ Nr:   🏠 10
+   🏷️ P:    🏠 2
+   🏷️ SUo:  🏠 4
+
+🏝️ BORG — 23 buildings
+   🏷️ A:   🏠 2
+   🏷️ B:   🏠 1
+   🏷️ Bg:  🏠 2
+   🏷️ C:   🏠 9
+   🏷️ Nr:  🏠 2
+   🏷️ Or:  🏠 2
+   🏷️ fa:  🏠 3
+   🏷️ pt:  🏠 2
+
+🏝️ BRAG — 446 buildings
+   🏷️ A:    🏠 47
+   🏷️ A1:   🏠 42
+   🏷️ B:    🏠 63
+   🏷️ B1:   🏠 18
+   🏷️ Bg:   🏠 57
+   🏷️ C:    🏠 49
+   🏷️ D:    🏠 18
+   🏷️ Ka:   🏠 3
+   🏷️ Knt:  🏠 2
+   🏷️ Kot:  🏠 2
+   🏷️ Kt:   🏠 5
+   🏷️ Nd:   🏠 5
+   🏷️ Ne:   🏠 24
+   🏷️ Nr:   🏠 14
+   🏷️ O:    🏠 2
+   🏷️ Or:   🏠 22
+   🏷️ SM:   🏠 3
+   🏷️ SU:   🏠 3
+   🏷️ fa:   🏠 27
+   🏷️ pt:   🏠 17
+
+🏝️ DANI — 79 buildings
+   🏷️ A:      🏠 7
+   🏷️ A1:     🏠 7
+   🏷️ B:      🏠 9
+   🏷️ B1:     🏠 2
+   🏷️ Bg:     🏠 4
+   🏷️ C:      🏠 8
+   🏷️ Kna:    🏠 6
+   🏷️ Koa/O:  🏠 1
+   🏷️ Nd:     🏠 7
+   🏷️ Ne:     🏠 1
+   🏷️ Nr:     🏠 4
+   🏷️ Or:     🏠 1
+   🏷️ SM:     🏠 6
+   🏷️ fa:     🏠 5
+   🏷️ pt:     🏠 4
+
+🏝️ ELEN — 270 buildings
+   🏷️ Kna:  🏠 12
+   🏷️ Knt:  🏠 17
+   🏷️ Nd:   🏠 32
+   🏷️ Ne:   🏠 148
+   🏷️ Nr:   🏠 58
+
+🏝️ FAVA — 229 buildings
+   🏷️ A:     🏠 26
+   🏷️ A1:    🏠 58
+   🏷️ B:     🏠 36
+   🏷️ B1:    🏠 1
+   🏷️ Bg:    🏠 17
+   🏷️ C:     🏠 22
+   🏷️ D:     🏠 6
+   🏷️ Ka/D:  🏠 3
+   🏷️ N:     🏠 1
+   🏷️ Nd:    🏠 10
+   🏷️ Ne:    🏠 9
+   🏷️ Nr:    🏠 2
+   🏷️ Or:    🏠 3
+   🏷️ fa:    🏠 17
+   🏷️ pt:    🏠 12
+
+🏝️ FILI — 177 buildings
+   🏷️ A:    🏠 9
+   🏷️ A1:   🏠 29
+   🏷️ B:    🏠 22
+   🏷️ B1:   🏠 6
+   🏷️ Bg:   🏠 16
+   🏷️ C:    🏠 10
+   🏷️ D:    🏠 4
+   🏷️ Knt:  🏠 6
+   🏷️ Kt:   🏠 2
+   🏷️ Nd:   🏠 11
+   🏷️ Ne:   🏠 2
+   🏷️ Nr:   🏠 2
+   🏷️ Or:   🏠 4
+   🏷️ P:    🏠 1
+   🏷️ SM:   🏠 3
+   🏷️ SU:   🏠 2
+   🏷️ fa:   🏠 16
+   🏷️ pt:   🏠 13
+
+🏝️ FORM — 117 buildings
+   🏷️ A:    🏠 16
+   🏷️ A1:   🏠 15
+   🏷️ B:    🏠 9
+   🏷️ B1:   🏠 4
+   🏷️ Bg:   🏠 9
+   🏷️ C:    🏠 18
+   🏷️ D:    🏠 1
+   🏷️ Ka:   🏠 1
+   🏷️ Knt:  🏠 2
+   🏷️ Nd:   🏠 1
+   🏷️ Nr:   🏠 2
+   🏷️ O:    🏠 3
+   🏷️ Or:   🏠 4
+   🏷️ SU:   🏠 4
+   🏷️ fa:   🏠 13
+   🏷️ pt:   🏠 3
+
+🏝️ ISEP — 96 buildings
+   🏷️ A:    🏠 16
+   🏷️ A1:   🏠 7
+   🏷️ B:    🏠 4
+   🏷️ Kna:  🏠 1
+   🏷️ Knt:  🏠 3
+   🏷️ N:    🏠 2
+   🏷️ Nd:   🏠 12
+   🏷️ Ne:   🏠 6
+   🏷️ Nr:   🏠 30
+   🏷️ SU:   🏠 1
+   🏷️ fa:   🏠 10
+   🏷️ pt:   🏠 4
+
+🏝️ LATE — 15 buildings
+   🏷️ A:   🏠 1
+   🏷️ B:   🏠 3
+   🏷️ C:   🏠 6
+   🏷️ O:   🏠 2
+   🏷️ SM:  🏠 2
+   🏷️ fa:  🏠 1
+
+🏝️ LORE — 134 buildings
+   🏷️ A:    🏠 15
+   🏷️ A1:   🏠 12
+   🏷️ B:    🏠 14
+   🏷️ Bg:   🏠 14
+   🏷️ C:    🏠 12
+   🏷️ D:    🏠 8
+   🏷️ Kna:  🏠 4
+   🏷️ Knt:  🏠 1
+   🏷️ Kt:   🏠 6
+   🏷️ Nd:   🏠 2
+   🏷️ Ne:   🏠 14
+   🏷️ Nr:   🏠 2
+   🏷️ Or:   🏠 6
+   🏷️ SM:   🏠 1
+   🏷️ SU:   🏠 8
+   🏷️ fa:   🏠 5
+   🏷️ pt:   🏠 9
+
+🏝️ MARI — 70 buildings
+   🏷️ A:      🏠 2
+   🏷️ A1:     🏠 4
+   🏷️ B:      🏠 5
+   🏷️ B1:     🏠 2
+   🏷️ Bg:     🏠 8
+   🏷️ C:      🏠 18
+   🏷️ D:      🏠 5
+   🏷️ Ka:     🏠 1
+   🏷️ Ka/Or:  🏠 3
+   🏷️ Nd:     🏠 1
+   🏷️ Ne:     🏠 3
+   🏷️ Or:     🏠 4
+   🏷️ fa:     🏠 11
+
+🏝️ MRTN — 87 buildings
+   🏷️ A:   🏠 25
+   🏷️ A1:  🏠 8
+   🏷️ B:   🏠 19
+   🏷️ C:   🏠 4
+   🏷️ D:   🏠 6
+   🏷️ Ne:  🏠 1
+   🏷️ Or:  🏠 4
+   🏷️ P:   🏠 1
+   🏷️ SU:  🏠 3
+   🏷️ fa:  🏠 8
+   🏷️ pt:  🏠 5
+
+🏝️ PIER — 111 buildings
+   🏷️ A:    🏠 7
+   🏷️ A1:   🏠 4
+   🏷️ B:    🏠 2
+   🏷️ B1:   🏠 3
+   🏷️ Bg:   🏠 1
+   🏷️ C:    🏠 3
+   🏷️ D:    🏠 4
+   🏷️ Kna:  🏠 12
+   🏷️ Kt:   🏠 4
+   🏷️ Nd:   🏠 25
+   🏷️ Ne:   🏠 12
+   🏷️ Nr:   🏠 21
+   🏷️ SM:   🏠 2
+   🏷️ SU:   🏠 4
+   🏷️ fa:   🏠 4
+   🏷️ pt:   🏠 3
+
+🏝️ QUER — 126 buildings
+   🏷️ A:   🏠 12
+   🏷️ A1:  🏠 8
+   🏷️ B:   🏠 26
+   🏷️ B1:  🏠 5
+   🏷️ Bg:  🏠 15
+   🏷️ C:   🏠 25
+   🏷️ Ka:  🏠 1
+   🏷️ Nd:  🏠 3
+   🏷️ Ne:  🏠 3
+   🏷️ Nr:  🏠 3
+   🏷️ Or:  🏠 2
+   🏷️ fa:  🏠 17
+   🏷️ pt:  🏠 1
+
+🏝️ RUGA — 141 buildings
+   🏷️ A:       🏠 13
+   🏷️ A1:      🏠 7
+   🏷️ B:       🏠 25
+   🏷️ B1:      🏠 3
+   🏷️ Bg:      🏠 31
+   🏷️ C:       🏠 6
+   🏷️ Ka/B:    🏠 1
+   🏷️ Kna:     🏠 8
+   🏷️ Koa/Or:  🏠 2
+   🏷️ Nd:      🏠 4
+   🏷️ Ne:      🏠 4
+   🏷️ Nr:      🏠 6
+   🏷️ Or:      🏠 4
+   🏷️ SM:      🏠 1
+   🏷️ fa:      🏠 8
+   🏷️ pt:      🏠 13
+
+🏝️ SEVE — 105 buildings
+   🏷️ A:    🏠 1
+   🏷️ A1:   🏠 2
+   🏷️ B:    🏠 13
+   🏷️ B1:   🏠 3
+   🏷️ Bg:   🏠 27
+   🏷️ C:    🏠 23
+   🏷️ Knt:  🏠 1
+   🏷️ Kt:   🏠 1
+   🏷️ Nd:   🏠 2
+   🏷️ Ne:   🏠 1
+   🏷️ Or:   🏠 4
+   🏷️ SMo:  🏠 2
+   🏷️ fa:   🏠 8
+   🏷️ pt:   🏠 4
+
+🏝️ STAD — 28 buildings
+   🏷️ Kna:  🏠 1
+   🏷️ Nd:   🏠 9
+   🏷️ Nr:   🏠 8
+   🏷️ SU:   🏠 3
+
+🏝️ TERN — 138 buildings
+   🏷️ A:      🏠 22
+   🏷️ A1:     🏠 10
+   🏷️ B:      🏠 23
+   🏷️ B1:     🏠 4
+   🏷️ Bg:     🏠 19
+   🏷️ C:      🏠 14
+   🏷️ D:      🏠 10
+   🏷️ Knt:    🏠 1
+   🏷️ Koa:    🏠 1
+   🏷️ Koa/B:  🏠 2
+   🏷️ Ne:     🏠 3
+   🏷️ Nr:     🏠 7
+   🏷️ Or:     🏠 1
+   🏷️ SM:     🏠 1
+   🏷️ fa:     🏠 11
+   🏷️ pt:     🏠 9
+
+🏝️ VIGN — 142 buildings
+   🏷️ A:    🏠 4
+   🏷️ A1:   🏠 2
+   🏷️ B:    🏠 3
+   🏷️ B1:   🏠 1
+   🏷️ Bg:   🏠 3
+   🏷️ C:    🏠 10
+   🏷️ D:    🏠 3
+   🏷️ Ka:   🏠 15
+   🏷️ Kna:  🏠 1
+   🏷️ Knt:  🏠 6
+   🏷️ Kot:  🏠 6
+   🏷️ Kt:   🏠 3
+   🏷️ Nd:   🏠 12
+   🏷️ Ne:   🏠 12
+   🏷️ Nr:   🏠 18
+   🏷️ Or:   🏠 7
+   🏷️ SM:   🏠 4
+   🏷️ SP:   🏠 3
+   🏷️ SU:   🏠 14
+   🏷️ fa:   🏠 2
+   🏷️ pt:   🏠 5
+
+🏝️ ZACC — 75 buildings
+   🏷️ A:   🏠 2
+   🏷️ A1:  🏠 5
+   🏷️ B:   🏠 10
+   🏷️ C:   🏠 8
+   🏷️ Nd:  🏠 1
+   🏷️ Ne:  🏠 5
+   🏷️ Nr:  🏠 12
+   🏷️ Or:  🏠 7
+   🏷️ SM:  🏠 3
+   🏷️ SU:  🏠 3
+   🏷️ fa:  🏠 4
+   🏷️ pt:  🏠 6
+
+🏝️ ZANI — 228 buildings
+   🏷️ A:       🏠 17
+   🏷️ A1:      🏠 4
+   🏷️ B:       🏠 14
+   🏷️ B1:      🏠 3
+   🏷️ Bg:      🏠 14
+   🏷️ C:       🏠 21
+   🏷️ D:       🏠 2
+   🏷️ Ka:      🏠 1
+   🏷️ Kna/Ne:  🏠 1
+   🏷️ Knt:     🏠 6
+   🏷️ Koa:     🏠 6
+   🏷️ Kot/Or:  🏠 2
+   🏷️ Kt:      🏠 1
+   🏷️ Nd:      🏠 21
+   🏷️ Ne:      🏠 7
+   🏷️ Nr:      🏠 43
+   🏷️ Or:      🏠 3
+   🏷️ SM:      🏠 6
+   🏷️ SU:      🏠 10
+   🏷️ SUo:     🏠 1
+   🏷️ fa:      🏠 23
+   🏷️ pt:      🏠 15
+

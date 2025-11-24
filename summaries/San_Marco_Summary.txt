@@ -1,0 +1,227 @@
+🏘️  Sestiere: San Marco	14 islands	1869 buildings
+
+🏝️  ANZO:	🏠 178	🏷️ A, A1, B, B1, Bg, C, D, Kna, Knt, Kt, Ne, Nr, Or, SU, fa, pt
+🏝️  BORT:	🏠 212	🏷️ A, A1, B, B1, Bg, C, D, Nd, Ne, Nr, Or, P, SM, SU, fa, pt
+🏝️  DUCA:	🏠 46	🏷️ A, A1, B, Bg, C, Ne, fa
+🏝️  DUOD:	🏠 26	🏷️ A, A1, B1, C, fa, pt
+🏝️  FANT:	🏠 76	🏷️ A, A1, B, Bg, C, Nd, Nr, Or, SU, SUo, fa, pt
+🏝️  GALL:	🏠 115	🏷️ A, A1, B, B1, Bg, C, D, Nd, Ne, Nr, O, Or, SMo, SU, fa, pt
+🏝️  GARZ:	🏠 34	🏷️ A, A1, B, Bg, C, D, Knt, Ne, fa, pt
+🏝️  LUCA:	🏠 230	🏷️ A, A1, B, B1, Bg, C, D, Nd, Ne, Nr, O, Or, SMo, SU, fa, pt
+🏝️  MARC:	🏠 395	🏷️ A, A1, B, B1, Bg, C, D, Kt, N, Nd, Ne, Nr, O, Or, SM, SMo, SU, fa, pt
+🏝️  MAUR:	🏠 67	🏷️ A, A1, B, B1, Bg, C, Kt, Nd, Ne, Or, SU, SUo, fa, pt
+🏝️  MOIS:	🏠 123	🏷️ A, A1, B, B1, Bg, C, Knt, Kt, N, Nd, Ne, Nr, Or, SMo, fa, pt
+🏝️  REAL:	🏠 7	🏷️ Nd, Nr, P, Po
+🏝️  STEF:	🏠 312	🏷️ A, A1, B, B1, Bg, C, D, Ka, Kt/pt, N, Ne, Nr, O, Or, SM, SU, fa, pt
+🏝️  ZOBE:	🏠 48	🏷️ B, B1, Bg, C, Kt, Or, SU, fa, pt
+
+
+🏷️ Building type totals per island:
+
+🏝️ ANZO — 178 buildings
+   🏷️ A:    🏠 27
+   🏷️ A1:   🏠 4
+   🏷️ B:    🏠 16
+   🏷️ B1:   🏠 1
+   🏷️ Bg:   🏠 29
+   🏷️ C:    🏠 38
+   🏷️ D:    🏠 5
+   🏷️ Kna:  🏠 2
+   🏷️ Knt:  🏠 4
+   🏷️ Kt:   🏠 3
+   🏷️ Ne:   🏠 3
+   🏷️ Nr:   🏠 1
+   🏷️ Or:   🏠 6
+   🏷️ SU:   🏠 4
+   🏷️ fa:   🏠 16
+   🏷️ pt:   🏠 9
+
+🏝️ BORT — 212 buildings
+   🏷️ A:   🏠 30
+   🏷️ A1:  🏠 28
+   🏷️ B:   🏠 28
+   🏷️ B1:  🏠 8
+   🏷️ Bg:  🏠 15
+   🏷️ C:   🏠 28
+   🏷️ D:   🏠 5
+   🏷️ Nd:  🏠 3
+   🏷️ Ne:  🏠 3
+   🏷️ Nr:  🏠 9
+   🏷️ Or:  🏠 17
+   🏷️ P:   🏠 2
+   🏷️ SM:  🏠 4
+   🏷️ SU:  🏠 2
+   🏷️ fa:  🏠 10
+   🏷️ pt:  🏠 6
+
+🏝️ DUCA — 46 buildings
+   🏷️ A:   🏠 8
+   🏷️ A1:  🏠 1
+   🏷️ B:   🏠 7
+   🏷️ Bg:  🏠 9
+   🏷️ C:   🏠 13
+   🏷️ Ne:  🏠 2
+   🏷️ fa:  🏠 6
+
+🏝️ DUOD — 26 buildings
+   🏷️ A:   🏠 4
+   🏷️ A1:  🏠 3
+   🏷️ B1:  🏠 1
+   🏷️ C:   🏠 7
+   🏷️ fa:  🏠 1
+   🏷️ pt:  🏠 9
+
+🏝️ FANT — 76 buildings
+   🏷️ A:    🏠 8
+   🏷️ A1:   🏠 5
+   🏷️ B:    🏠 11
+   🏷️ Bg:   🏠 7
+   🏷️ C:    🏠 10
+   🏷️ Nd:   🏠 5
+   🏷️ Nr:   🏠 1
+   🏷️ Or:   🏠 5
+   🏷️ SU:   🏠 1
+   🏷️ SUo:  🏠 8
+   🏷️ fa:   🏠 9
+   🏷️ pt:   🏠 5
+
+🏝️ GALL — 115 buildings
+   🏷️ A:    🏠 5
+   🏷️ A1:   🏠 7
+   🏷️ B:    🏠 17
+   🏷️ B1:   🏠 5
+   🏷️ Bg:   🏠 12
+   🏷️ C:    🏠 17
+   🏷️ D:    🏠 7
+   🏷️ Nd:   🏠 5
+   🏷️ Ne:   🏠 3
+   🏷️ Nr:   🏠 3
+   🏷️ O:    🏠 2
+   🏷️ Or:   🏠 3
+   🏷️ SMo:  🏠 3
+   🏷️ SU:   🏠 4
+   🏷️ fa:   🏠 7
+   🏷️ pt:   🏠 10
+
+🏝️ GARZ — 34 buildings
+   🏷️ A:    🏠 3
+   🏷️ A1:   🏠 4
+   🏷️ B:    🏠 2
+   🏷️ Bg:   🏠 3
+   🏷️ C:    🏠 10
+   🏷️ D:    🏠 3
+   🏷️ Knt:  🏠 2
+   🏷️ Ne:   🏠 2
+   🏷️ fa:   🏠 3
+   🏷️ pt:   🏠 1
+
+🏝️ LUCA — 230 buildings
+   🏷️ A:    🏠 32
+   🏷️ A1:   🏠 12
+   🏷️ B:    🏠 37
+   🏷️ B1:   🏠 3
+   🏷️ Bg:   🏠 21
+   🏷️ C:    🏠 33
+   🏷️ D:    🏠 2
+   🏷️ Nd:   🏠 9
+   🏷️ Ne:   🏠 18
+   🏷️ Nr:   🏠 7
+   🏷️ O:    🏠 4
+   🏷️ Or:   🏠 15
+   🏷️ SMo:  🏠 1
+   🏷️ SU:   🏠 3
+   🏷️ fa:   🏠 15
+   🏷️ pt:   🏠 15
+
+🏝️ MARC — 395 buildings
+   🏷️ A:    🏠 60
+   🏷️ A1:   🏠 36
+   🏷️ B:    🏠 69
+   🏷️ B1:   🏠 2
+   🏷️ Bg:   🏠 34
+   🏷️ C:    🏠 36
+   🏷️ D:    🏠 5
+   🏷️ Kt:   🏠 2
+   🏷️ N:    🏠 3
+   🏷️ Nd:   🏠 7
+   🏷️ Ne:   🏠 6
+   🏷️ Nr:   🏠 11
+   🏷️ O:    🏠 4
+   🏷️ Or:   🏠 41
+   🏷️ SM:   🏠 7
+   🏷️ SMo:  🏠 4
+   🏷️ SU:   🏠 11
+   🏷️ fa:   🏠 28
+   🏷️ pt:   🏠 16
+
+🏝️ MAUR — 67 buildings
+   🏷️ A:    🏠 4
+   🏷️ A1:   🏠 2
+   🏷️ B:    🏠 4
+   🏷️ B1:   🏠 2
+   🏷️ Bg:   🏠 4
+   🏷️ C:    🏠 15
+   🏷️ Kt:   🏠 2
+   🏷️ Nd:   🏠 1
+   🏷️ Ne:   🏠 2
+   🏷️ Or:   🏠 6
+   🏷️ SU:   🏠 2
+   🏷️ SUo:  🏠 2
+   🏷️ fa:   🏠 15
+   🏷️ pt:   🏠 4
+
+🏝️ MOIS — 123 buildings
+   🏷️ A:    🏠 17
+   🏷️ A1:   🏠 3
+   🏷️ B:    🏠 9
+   🏷️ B1:   🏠 2
+   🏷️ Bg:   🏠 15
+   🏷️ C:    🏠 19
+   🏷️ Knt:  🏠 4
+   🏷️ Kt:   🏠 2
+   🏷️ N:    🏠 5
+   🏷️ Nd:   🏠 2
+   🏷️ Ne:   🏠 3
+   🏷️ Nr:   🏠 2
+   🏷️ Or:   🏠 20
+   🏷️ SMo:  🏠 5
+   🏷️ fa:   🏠 6
+   🏷️ pt:   🏠 8
+
+🏝️ REAL — 7 buildings
+   🏷️ Nd:  🏠 3
+   🏷️ Nr:  🏠 2
+   🏷️ P:   🏠 1
+   🏷️ Po:  🏠 1
+
+🏝️ STEF — 312 buildings
+   🏷️ A:      🏠 58
+   🏷️ A1:     🏠 36
+   🏷️ B:      🏠 22
+   🏷️ B1:     🏠 5
+   🏷️ Bg:     🏠 26
+   🏷️ C:      🏠 69
+   🏷️ D:      🏠 7
+   🏷️ Ka:     🏠 2
+   🏷️ Kt/pt:  🏠 1
+   🏷️ N:      🏠 1
+   🏷️ Ne:     🏠 11
+   🏷️ Nr:     🏠 2
+   🏷️ O:      🏠 1
+   🏷️ Or:     🏠 13
+   🏷️ SM:     🏠 2
+   🏷️ SU:     🏠 15
+   🏷️ fa:     🏠 23
+   🏷️ pt:     🏠 14
+
+🏝️ ZOBE — 48 buildings
+   🏷️ B:   🏠 13
+   🏷️ B1:  🏠 3
+   🏷️ Bg:  🏠 6
+   🏷️ C:   🏠 8
+   🏷️ Kt:  🏠 1
+   🏷️ Or:  🏠 1
+   🏷️ SU:  🏠 1
+   🏷️ fa:  🏠 9
+   🏷️ pt:  🏠 6
+

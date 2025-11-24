@@ -1,8 +1,8 @@
 import pandas as pd
 
 # === CONFIG ===
-CSV_PATH = "data/addresses_all_joined.csv"
-FIELD = "TARGET_FID_12_13"
+CSV_PATH = "data/VPC_Water_Consumption.csv"
+FIELD = "FID"
 
 # === LOAD CSV ===
 print(f"📂 Loading {CSV_PATH}...")

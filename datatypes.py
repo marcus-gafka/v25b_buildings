@@ -3,10 +3,23 @@ from shapely.geometry import Point, shape
 from typing import List, Optional
 
 @dataclass
+class Meter:
+    id: int
+
+@dataclass
+class Address:
+    address: str
+    meters: List[Meter] = field(default_factory=list)
+    strs: List[int] = field(default_factory=list)
+    hotels: List[int] = field(default_factory=list)
+    hotels_extras: List[int] = field(default_factory=list)
+
+@dataclass
 class Building:
     id: int
     centroid: Point
     geometry: shape
+    addresses: List[Address] = field(default_factory=list)
 
     full_alias: Optional[str] = None
     short_alias: Optional[str] = None

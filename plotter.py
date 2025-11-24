@@ -4,6 +4,7 @@ import geopandas as gpd
 from shapely.geometry import Point, LineString
 from dataset import Dataset
 import pandas as pd
+import matplotlib.colors as mcolors
 
 def plot_island_by_tract(dataset: Dataset, island_code: str, figsize=(12, 12)):
     # --- Find the island ---
@@ -348,15 +349,14 @@ def plot_island_by_tpcls_filtered(dataset: Dataset, island_code: str, figsize=(1
 
     df = df[["short_alias", "TP_CLS_ED"]].drop_duplicates().set_index("short_alias")
 
-    # --- Codes that get colors ---
     colored_codes = [
-        "A", "A1", "Bg", "D",
-        "Nd", "Ne", "Or", "SU", "fa", "pt"
+        "Nr","B1","Kna","SM","Ka","Knt","Kot","P","SP",
+        "Nd","Ne","Or","SU","fa"
     ]
 
-    # --- Assign one fixed color per code ---
-    fixed_cmap = plt.cm.tab20  # good distinct colors
-    tp_color_map = {code: fixed_cmap(i / len(colored_codes)) for i, code in enumerate(colored_codes)}
+    cmap = plt.cm.get_cmap("tab20", len(colored_codes))
+    tp_color_map = {code: cmap(i) for i, code in enumerate(colored_codes)}
+
     WHITE = (1, 1, 1, 1)
 
     # --- Find the island ---
@@ -417,16 +417,22 @@ def plot_island_by_tpcls_filtered(dataset: Dataset, island_code: str, figsize=(1
                 color="black"
             )
 
-    # --- Legend ---
+    # --- Legend (placed outside the plot area) ---
     legend_elements = [
-        Patch(facecolor=tp_color_map[tp], edgecolor="black", label=tp)
+        Patch(
+            facecolor=tp_color_map[tp],
+            edgecolor="black",
+            label=f"{tp}: {mcolors.to_hex((tp_color_map[tp]))}"
+        )
         for tp in colored_codes
     ]
 
+    # Place legend to the right of the plot
     ax.legend(
         handles=legend_elements,
         title="TP_CLS_ED",
-        loc="upper right",
+        loc="center left",
+        bbox_to_anchor=(1.02, 0.5),
         frameon=True
     )
 

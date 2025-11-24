@@ -20,7 +20,8 @@ KEEP_COLS = [
     "Consumo_medio_2021",
     "Consumo_medio_2022",
     "Consumo_medio_2023",
-    "Consumo_medio_2024"
+    "Consumo_medio_2024",
+    "FID"
 ]
 
 # Load CSV
