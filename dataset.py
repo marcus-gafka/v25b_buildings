@@ -108,9 +108,6 @@ class Dataset:
                 short_alias=props.get("short_alias"),
                 alias_segment=props.get("alias_segment"),
                 height=props.get("height"),
-                floors_est=props.get("floors_est"),
-                units_est=props.get("units_est"),
-                pop_est=props.get("pop_est"),
             )
             tract.buildings.append(building)
             building_map[b_id] = building

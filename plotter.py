@@ -26,19 +26,18 @@ def plot_island_by_tract(dataset: Dataset, island_code: str, figsize=(12, 12)):
 
     for tract in island.tracts:
         for b in tract.buildings:
-            geom = None
-            # Prefer full geometry, fallback to centroid
-            if b.geometry:
-                geom = b.geometry
-            elif b.centroid:
-                geom = b.centroid if isinstance(b.centroid, Point) else Point(b.centroid.x, b.centroid.y)
-            else:
+            geom = b.geometry or (b.centroid if isinstance(b.centroid, Point) else None)
+            if geom is None:
                 continue  # skip buildings with no geometry
 
             rows.append({
                 "geometry": geom,
-                "short_alias": b.short_alias or "",  # fallback if None
-                "tract_id": tract.id
+                "short_alias": b.short_alias or "",
+                "tract_id": tract.id,
+                "floors_est": b.floors_est,
+                "units_est_meters": b.units_est_meters,
+                "units_est_volume": b.units_est_volume,
+                "pop_est": b.pop_est,
             })
             tract_ids.append(tract.id)
 
@@ -56,18 +55,18 @@ def plot_island_by_tract(dataset: Dataset, island_code: str, figsize=(12, 12)):
 
     # --- Plot ---
     fig, ax = plt.subplots(figsize=figsize)
-    #gdf.plot(ax=ax, color=gdf["color"], edgecolor="black", linewidth=0.5)
     gdf.plot(ax=ax, color=gdf["color"], edgecolor="black", linewidth=0.5)
 
-    # --- Add labels ---
+    # --- Add labels with floors, units (meters), units (volume), pop ---
     for idx, row in gdf.iterrows():
-        if row["short_alias"]:  # only label if alias exists
+        if row["short_alias"]:
             centroid = row.geometry.centroid
+            label = f"{row['floors_est']},{row['units_est_meters']},{row['units_est_volume']},{row['pop_est']}"
             ax.text(
                 centroid.x,
                 centroid.y,
-                row["short_alias"][-3:],
-                fontsize=10,
+                label,
+                fontsize=8,
                 ha="center",
                 va="center",
                 color="black"

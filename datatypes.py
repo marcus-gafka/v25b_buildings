@@ -28,7 +28,8 @@ class Building:
     height: Optional[float] = None
 
     floors_est: Optional[int] = None
-    units_est: Optional[int] = None
+    units_est_meters: Optional[int] = None
+    units_est_volume: Optional[int] = None
     pop_est: Optional[int] = None
 
 @dataclass

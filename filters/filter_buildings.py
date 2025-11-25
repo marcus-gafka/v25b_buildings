@@ -1,8 +1,8 @@
-from dataset import Dataset
 import sys
 from pathlib import Path
 sys.path.append(str(Path(__file__).parent.parent))
 
+from dataset import Dataset
 from constants import RAW_GEOJSON, FILTERED_CSV, BUILDING_FIELD
 import pandas as pd
 from copy import deepcopy
@@ -14,6 +14,7 @@ KEEP_FIELDS = [
     "SEZ21",
     "POP21",
     "TP_CLS_ED",
+    "Superficie",
     BUILDING_FIELD,
 ]
 
