@@ -183,7 +183,7 @@ if __name__ == "__main__":
 
     ## COMMENT OUT THIS LINE TO SKIP OVERWRITING LIN_REG_MODELS ---------------------------------------------------
 
-    #models_df.to_csv(LIN_REG_CSV, index=False)
+    models_df.to_csv(LIN_REG_CSV, index=False)
 
     ## ------------------------------------------------------------------------------------------------------------
 

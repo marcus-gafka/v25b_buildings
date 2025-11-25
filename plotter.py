@@ -440,3 +440,87 @@ def plot_island_by_tpcls_filtered(dataset: Dataset, island_code: str, figsize=(1
     ax.set_axis_off()
     plt.tight_layout()
     plt.show()
+
+def plot_sestiere_w_str(dataset: Dataset, sestiere_code: str, figsize=(14, 14)):
+    # --- Find sestiere ---
+    sestiere = None
+    for s in dataset.venice.sestieri:
+        if s.code.upper() == sestiere_code.upper():
+            sestiere = s
+            break
+
+    if not sestiere:
+        raise ValueError(f"Sestiere '{sestiere_code}' not found.")
+
+    # --- Prepare all buildings ---
+    rows = []
+    total_strs = 0
+    total_hotels = 0
+    total_hotels_extras = 0
+
+    for isl in sestiere.islands:
+        for tract in isl.tracts:
+            for b in tract.buildings:
+                geom = b.geometry or b.centroid
+                if geom is None:
+                    continue
+
+                building_strs = 0
+                building_hotels = 0
+                building_hotels_extras = 0
+
+                for addr in b.addresses:
+                    if getattr(addr, "strs", None):
+                        building_strs += len(addr.strs)
+                    if getattr(addr, "hotels", None):
+                        building_hotels += len(addr.hotels)
+                    if getattr(addr, "hotels_extras", None):
+                        building_hotels_extras += len(addr.hotels_extras)
+
+                total_strs += building_strs
+                total_hotels += building_hotels
+                total_hotels_extras += building_hotels_extras
+
+                rows.append({
+                    "geometry": geom,
+                    "short_alias": b.short_alias or "",
+                    "str_count": building_strs
+                })
+
+    print(f"📊 Sestiere {sestiere_code} totals — STRs: {total_strs}, Hotels: {total_hotels}, Hotels Extras: {total_hotels_extras}")
+
+    if not rows:
+        print(f"No buildings found for sestiere {sestiere_code}")
+        return
+
+    gdf = gpd.GeoDataFrame(rows, geometry="geometry", crs="EPSG:4326")
+
+    # --- Colors ---
+    WHITE = (1, 1, 1, 1)
+    STR_COLOR = (1.0, 0.2, 0.2, 1.0)  # bright red
+
+    gdf["color"] = gdf["str_count"].apply(lambda n: STR_COLOR if n >= 1 else WHITE)
+
+    # --- Plot ---
+    fig, ax = plt.subplots(figsize=figsize)
+    gdf.plot(ax=ax, color=gdf["color"], edgecolor="black", linewidth=0.4)
+
+    # --- Add STR labels only to highlighted buildings ---
+    for _, row in gdf.iterrows():
+        if row["str_count"] >= 1:
+            c = row.geometry.centroid
+            ax.text(
+                c.x,
+                c.y,
+                str(row["str_count"]),
+                fontsize=8,
+                ha="center",
+                va="center",
+                color="black",
+                fontweight="bold"
+            )
+
+    ax.set_title(f"Sestiere {sestiere_code} — STR Distribution", fontsize=18)
+    ax.set_axis_off()
+    plt.tight_layout()
+    plt.show()

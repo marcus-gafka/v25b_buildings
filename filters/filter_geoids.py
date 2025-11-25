@@ -35,7 +35,7 @@ KEEP_STR_COLS = [
 SESTIERE_MAP = {
     "SAN MARCO": "SM",
     "SAN POLO": "SP",
-    "CASTELLO": "CA",
+    "CASTELLO": "CS",
     "CANNAREGIO": "CN",
     "DORSODURO": "DD",
     "SANTA CROCE": "SC",
