@@ -6,6 +6,7 @@ DATA_DIR = ROOT_DIR / "data"
 CHECKLISTS_DIR = ROOT_DIR / "checklists"
 FIELDWORK_DIR = ROOT_DIR / "fieldwork"
 SUMMARY_DIR = ROOT_DIR / "summaries"
+ESTIMATES_DIR = ROOT_DIR / "estimates"
 
 #Input
 RAW_GEOJSON = DATA_DIR / "VPC_Buildings_Total_1.geojson"

@@ -1,36 +1,46 @@
-# estimation_v0.py
-from dataclasses import field
-from typing import List
 import pandas as pd
-from constants import ALIAS_GEOJSON, FILTERED_CSV, FILTERED_STR_CSV, DATA_DIR
+from constants import ALIAS_GEOJSON, FILTERED_CSV, DATA_DIR, ESTIMATES_DIR
 from dataset import Dataset
 from plotter import plot_island_by_tract
+from file_utils import load_csv
 
-# --- Estimation constants ---
-HEIGHT_PER_FLOOR = 3.2  # meters per floor
-SQUARE_FOOTAGE_PER_UNIT = 50.0  # m² per unit
+"""
+Estimation Model V0 — Field Calculation Overview
 
-def load_filtered_csv():
-    df = pd.read_csv(FILTERED_CSV)
-    df.columns = df.columns.str.strip()  # normalize columns
-    required_cols = ["TARGET_FID_12_13", "Qu_Terra", "Qu_Gronda", "POP21", "Superficie", "SEZ21"]
-    for col in required_cols:
-        if col not in df.columns:
-            raise ValueError(f"❌ CSV must include '{col}' field.")
-    return df
+floors_est:
+    Estimated number of floors based on height difference:
+        floors_est = round( (Qu_Gronda - Qu_Terra) / HEIGHT_PER_FLOOR )
+    • Qu_Gronda = roof elevation
+    • Qu_Terra = ground elevation
+    • HEIGHT_PER_FLOOR = 3.2 meters per floor (assumed)
+    • Minimum value is clamped to 1 floor
 
-def load_strs():
-    df = pd.read_csv(FILTERED_STR_CSV)
-    df["ADDRESS"] = df["ADDRESS"].astype(str).str.strip().str.upper()
-    return df
+units_est_meters:
+    Approximate unit count based on electrical meters associated with the building:
+        units_est_meters = total number of linked meter records
+    • Derived from address → meter relationships in the dataset
+    • Assumes each meter corresponds to one unit
+
+units_est_volume:
+    Volume-based estimate using footprint area and floors:
+        units_est_volume = round( (floors_est * Superficie) / SQUARE_FOOTAGE_PER_UNIT )
+    • Superficie = building footprint area in m²
+    • SQUARE_FOOTAGE_PER_UNIT = 50 m² per residential unit (assumed average)
+    • Essentially: total habitable area / avg unit size
+
+pop_est:
+    Population estimated from tract-level census value (POP21):
+        pop_est = round( POP21_for_tract / number_of_buildings_in_tract )
+    • Even split across all buildings within the same SEZ21 tract
+    • Buildings missing POP21 default to zero
+"""
+
+HEIGHT_PER_FLOOR = 3.2
+SQUARE_FOOTAGE_PER_UNIT = 80.0
 
 def estimation_v0():
     ds = Dataset(str(ALIAS_GEOJSON))
-    bcsv = load_filtered_csv()
-    str_df = load_strs()
-
-    # Build address -> list of STR FIDs mapping
-    strs_map = str_df.groupby("ADDRESS")["FID"].apply(list).to_dict()
+    bcsv = load_csv(FILTERED_CSV)
 
     # Track number of buildings per tract for population splitting
     tract_building_counts = bcsv.groupby("SEZ21")["TARGET_FID_12_13"].count().to_dict()
@@ -81,20 +91,14 @@ def estimation_v0():
             "pop_est": building.pop_est
         })
 
-    # --- Save CSV ---
     out_df = pd.DataFrame(estimates)
-
-    # --- Sort alphabetically by short_alias ---
     out_df = out_df.sort_values(by="short_alias", na_position="last")
 
-    out_path = DATA_DIR / "VPC_Estimates_V0.csv"
+    out_path = ESTIMATES_DIR / "VPC_Estimates_V0.csv"
     out_df.to_csv(out_path, index=False, encoding="utf-8-sig")
 
     plot_island_by_tract(ds, "MELO")
 
-def main():
+if __name__ == "__main__":
     estimation_v0()
     print(f"✅ Estimation complete. CSV saved to {DATA_DIR / 'VPC_Estimates_V0.csv'}")
-
-if __name__ == "__main__":
-    main()

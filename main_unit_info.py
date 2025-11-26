@@ -1,5 +1,5 @@
 from dataset import Dataset
-from constants import ALIAS_GEOJSON, FILTERED_WATER_CSV
+from constants import ALIAS_GEOJSON, FILTERED_WATER_CSV, DATA_DIR
 import pandas as pd
 import os
 
@@ -78,7 +78,7 @@ print("📄 Generating CSV...")
 out_df = pd.DataFrame(rows)
 
 # Output in this directory
-out_path = os.path.join(os.path.dirname(__file__), "unit_info.csv")
+out_path = DATA_DIR / "Unit_Info.csv"
 
 # Write CSV
 out_df.to_csv(out_path, index=False, encoding="utf-8-sig")
