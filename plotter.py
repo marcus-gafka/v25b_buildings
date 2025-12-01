@@ -348,12 +348,9 @@ def plot_island_by_tpcls_filtered(dataset: Dataset, island_code: str, figsize=(1
 
     df = df[["short_alias", "TP_CLS_ED"]].drop_duplicates().set_index("short_alias")
 
-    colored_codes = [
-        "Nr","B1","Kna","SM","Ka","Knt","Kot","P","SP",
-        "Nd","Ne","Or","SU","fa"
-    ]
+    colored_codes = ["Ne", "Or", "B1", "Nd", "Nr", "Knt"]
 
-    cmap = plt.cm.get_cmap("tab20", len(colored_codes))
+    cmap = plt.cm.get_cmap("tab10_r", len(colored_codes))
     tp_color_map = {code: cmap(i) for i, code in enumerate(colored_codes)}
 
     WHITE = (1, 1, 1, 1)
@@ -386,7 +383,6 @@ def plot_island_by_tpcls_filtered(dataset: Dataset, island_code: str, figsize=(1
                 "geometry": geom,
                 "tp": tp,
                 "short_alias": alias,
-                "units_est": b.units_est or 0
             })
 
     if not rows:

@@ -11,26 +11,34 @@ water_df = pd.read_csv(FILTERED_WATER_CSV)
 water_df["FID"] = water_df["FID"].astype(int)
 water_df["Componenti"] = pd.to_numeric(water_df["Componenti"], errors='coerce').fillna(1)
 
-# --- Build address -> list[(FID, Componenti)] mapping ---
+# Add consumption column as numeric
+water_df["Consumo_medio_2024"] = pd.to_numeric(
+    water_df["Consumo_medio_2024"], errors="coerce"
+).fillna(0)
+
+# --- Build mappings ---
 address_meters_map = (
     water_df.groupby("ProcessedAddress")[["FID", "Componenti"]]
     .apply(lambda df: [(int(fid), int(comp)) for fid, comp in df.values])
     .to_dict()
 )
 
+# FID -> Consumo_medio_2024 map
+fid_consumption_map = dict(zip(water_df["FID"], water_df["Consumo_medio_2024"]))
+
 print("📊 Computing units_est for ALL buildings...")
 
 rows = []
 
-# --- Loop through every building in Venice ---
+# --- Loop through every building ---
 for s in ds.venice.sestieri:
     for isl in s.islands:
         for tract in isl.tracts:
             for b in tract.buildings:
 
                 total_units = 0
+                zero_consumption_count = 0
 
-                # Fill meters + calculate units
                 for addr in b.addresses:
                     addr_units = 0
                     new_meters = []
@@ -40,18 +48,21 @@ for s in ds.venice.sestieri:
                             addr_units += comp
                             new_meters.append(fid)
 
+                            # Count low-consumption meters
+                            consumo = fid_consumption_map.get(fid, 0)
+                            if consumo < 0.5:
+                                zero_consumption_count += 1
+
                     addr.meters = new_meters
                     total_units += addr_units
 
                 b.units_est = total_units
 
-                # --- Format helper ---
                 def join_list(x):
                     if isinstance(x, list):
                         return ";".join(str(i) for i in x)
                     return ""
 
-                # --- Build CSV row ---
                 rows.append({
                     "short_alias": b.short_alias,
                     "building_id": b.id,
@@ -61,6 +72,8 @@ for s in ds.venice.sestieri:
 
                     "num_meters": sum(len(a.meters) for a in b.addresses),
                     "meters": ";".join(join_list(a.meters) for a in b.addresses),
+
+                    "num_zero_consumption_meters": zero_consumption_count,
 
                     "num_hotels": sum(len(a.hotels) for a in b.addresses),
                     "hotels": ";".join(join_list(a.hotels) for a in b.addresses),
@@ -74,14 +87,14 @@ for s in ds.venice.sestieri:
 
 print("📄 Generating CSV...")
 
-# Convert to DataFrame
 out_df = pd.DataFrame(rows)
 
-# Output in this directory
-out_path = DATA_DIR / "Unit_Info.csv"
+# 🔠 Sort alphabetically by short_alias
+out_df = out_df.sort_values("short_alias")
 
-# Write CSV
+out_path = DATA_DIR / "Unit_Info.csv"
 out_df.to_csv(out_path, index=False, encoding="utf-8-sig")
 
 print(f"✅ CSV written to: {out_path}")
 print("🎉 Done!")
+

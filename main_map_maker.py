@@ -7,7 +7,7 @@ print(f"📂 Loading building GeoJSON: {ALIAS_GEOJSON.name}")
 ds = Dataset(str(ALIAS_GEOJSON))
 
 # --- List of islands to plot ---
-my_islands = ["FRAR"]
+my_islands = ["TOLE","ROMA"]
 
 # --- Plot each island using the helper ---
 for island_code in my_islands:

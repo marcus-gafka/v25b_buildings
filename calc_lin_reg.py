@@ -21,13 +21,16 @@ def load_fieldwork_files():
 # === REBUILD TOTAL FIELDWORK CSV ===
 def rebuild_total_fieldwork_csv(dfs):
     """Rebuild !TOTAL-F.csv from all fieldwork CSVs."""
-    columns = ["short_alias", "TP_CLS_ED", "Qu_Gronda", "Qu_Terra", "Superficie", "Measured Height", "Floors"]
-    total_df = pd.DataFrame(columns=columns)
-
-    for df in dfs:
-        df = df[columns]
-        total_df = pd.concat([total_df, df], ignore_index=True)
-
+    columns = [
+        "short_alias",
+        "TP_CLS_ED",
+        "Qu_Gronda",
+        "Qu_Terra",
+        "Superficie",
+        "Measured Height",
+        "Floors"
+    ]
+    total_df = pd.concat([df[columns] for df in dfs], ignore_index=True)
     total_df.to_csv(TOTAL_FIELDWORK_CSV, sep=",", index=False)
     return total_df
 
@@ -44,6 +47,14 @@ def clean_data(df):
 def train_linear_models(df):
     results = []
 
+    valid_for_tp = df.dropna(subset=["TP_CLS_ED"])
+    valid_qu_misc = valid_for_tp.dropna(subset=["Qu_Gronda", "Qu_Terra", "Floors"])
+    valid_qu_misc = valid_qu_misc[(valid_qu_misc["Qu_Gronda"] != 0) &
+                                  (valid_qu_misc["Qu_Gronda"] != 9999)]
+
+    valid_f_misc = valid_for_tp.dropna(subset=["Measured Height", "Floors"])
+
+    # === TP-SPECIFIC MODELS ===
     for tp_class, group in df.groupby("TP_CLS_ED"):
         entry = {
             "TP_CLS_ED": tp_class,
@@ -60,11 +71,13 @@ def train_linear_models(df):
             "f_count": 0
         }
 
-        # --- ΔQu = Qu_Gronda - Qu_Terra vs Floors ---
+        # ΔQu model
         qu_data = group.dropna(subset=["Qu_Gronda", "Qu_Terra", "Floors"])
-        qu_data = qu_data[(qu_data["Qu_Gronda"] != 0) & (qu_data["Qu_Gronda"] != 9999)]  # filter invalid
+        qu_data = qu_data[(qu_data["Qu_Gronda"] != 0) & (qu_data["Qu_Gronda"] != 9999)]
         entry["qu_count"] = len(qu_data)
+
         if len(qu_data) >= 2:
+            qu_data = qu_data.copy()
             qu_data["Delta_Qu"] = qu_data["Qu_Gronda"] - qu_data["Qu_Terra"]
             X_qu = qu_data[["Delta_Qu"]].values
             y_qu = qu_data["Floors"].values
@@ -75,9 +88,10 @@ def train_linear_models(df):
             if entry["m_qu"] != 0:
                 entry["1/m_qu"] = 1 / entry["m_qu"]
 
-        # --- Measured Height vs Floors ---
+        # Measured Height model
         f_data = group.dropna(subset=["Measured Height", "Floors"])
         entry["f_count"] = len(f_data)
+
         if len(f_data) >= 2:
             X_f = f_data[["Measured Height"]].values
             y_f = f_data["Floors"].values
@@ -92,10 +106,42 @@ def train_linear_models(df):
 
     result_df = pd.DataFrame(results)
 
+    # === GLOBAL "MISC" MODEL ===
+    misc_entry = {"TP_CLS_ED": "misc", "blank": ""}
+
+    if len(valid_qu_misc) >= 2:
+        valid_qu_misc = valid_qu_misc.copy()
+        valid_qu_misc["Delta_Qu"] = valid_qu_misc["Qu_Gronda"] - valid_qu_misc["Qu_Terra"]
+        X_qu = valid_qu_misc[["Delta_Qu"]].values
+        y_qu = valid_qu_misc["Floors"].values
+        model_qu = LinearRegression().fit(X_qu, y_qu)
+        misc_entry["m_qu"] = float(model_qu.coef_[0])
+        misc_entry["b_qu"] = float(model_qu.intercept_)
+        misc_entry["r2_qu"] = float(model_qu.score(X_qu, y_qu))
+        misc_entry["1/m_qu"] = 1 / misc_entry["m_qu"]
+        misc_entry["qu_count"] = len(valid_qu_misc)
+    else:
+        misc_entry["m_qu"] = misc_entry["b_qu"] = misc_entry["r2_qu"] = misc_entry["1/m_qu"] = np.nan
+        misc_entry["qu_count"] = 0
+
+    if len(valid_f_misc) >= 2:
+        X_f = valid_f_misc[["Measured Height"]].values
+        y_f = valid_f_misc["Floors"].values
+        model_f = LinearRegression().fit(X_f, y_f)
+        misc_entry["m_f"] = float(model_f.coef_[0])
+        misc_entry["b_f"] = float(model_f.intercept_)
+        misc_entry["r2_f"] = float(model_f.score(X_f, y_f))
+        misc_entry["1/m_f"] = 1 / misc_entry["m_f"]
+        misc_entry["f_count"] = len(valid_f_misc)
+    else:
+        misc_entry["m_f"] = misc_entry["b_f"] = misc_entry["r2_f"] = misc_entry["1/m_f"] = np.nan
+        misc_entry["f_count"] = 0
+
+    result_df = pd.concat([result_df, pd.DataFrame([misc_entry])], ignore_index=True)
+
     numeric_cols = ["m_qu", "b_qu", "r2_qu", "1/m_qu", "m_f", "b_f", "r2_f", "1/m_f"]
     for col in numeric_cols:
-        if col in result_df.columns:
-            result_df[col] = result_df[col].round(3)
+        result_df[col] = result_df[col].astype(float).round(3)
 
     return result_df
 
@@ -109,40 +155,79 @@ def plot_regression_side_by_side(df):
 
     # --- ΔQu vs Floors ---
     for i, tp_class in enumerate(tp_types):
-        group = df[df["TP_CLS_ED"] == tp_class].dropna(subset=["Qu_Gronda", "Qu_Terra", "Floors"])
+        group = df[df["TP_CLS_ED"] == tp_class].dropna(subset=["Qu_Gronda", "Qu_Terra", "Floors"]).copy()
         group = group[(group["Qu_Gronda"] != 0) & (group["Qu_Gronda"] != 9999)]
         if len(group) == 0:
             continue
+
         group["Delta_Qu"] = group["Qu_Gronda"] - group["Qu_Terra"]
-        ax_qu.scatter(group["Delta_Qu"], group["Floors"], color=colors[i%10], label=f"{tp_class} points")
+
+        # POINTS — visible in legend
+        ax_qu.scatter(
+            group["Delta_Qu"],
+            group["Floors"],
+            color=colors[i % 10],
+            label=f"{tp_class}"
+        )
+
         if len(group) >= 2:
             X = group[["Delta_Qu"]].values
             y = group["Floors"].values
             model = LinearRegression().fit(X, y)
-            x_range = np.linspace(np.nanmin(X), np.nanmax(X), 100)
-            y_pred = model.predict(x_range.reshape(-1,1))
-            ax_qu.plot(x_range, y_pred, color=colors[i%10], linestyle="--", label=f"{tp_class} fit")
+            x_range = np.linspace(0, 30, 100)
+            y_pred = model.predict(x_range.reshape(-1, 1))
+
+            # LINES — NO LEGEND ENTRY
+            ax_qu.plot(
+                x_range,
+                y_pred,
+                color=colors[i % 10],
+                linestyle="--",
+                label="_nolegend_"
+            )
 
     ax_qu.set_xlabel("Qu_Gronda - Qu_Terra")
     ax_qu.set_ylabel("Floors")
     ax_qu.set_title("Floors vs ΔQu by TP_CLS_ED")
+    ax_qu.set_xlim(0, 30)
+    ax_qu.set_ylim(0, 8)
     ax_qu.legend()
 
-    # --- Measured Height vs Floors (same as before) ---
+    # --- Measured Height vs Floors ---
     for i, tp_class in enumerate(tp_types):
-        group = df[df["TP_CLS_ED"] == tp_class].dropna(subset=["Measured Height", "Floors"])
-        ax_f.scatter(group["Measured Height"], group["Floors"], color=colors[i%10], label=f"{tp_class} points")
+        group = df[df["TP_CLS_ED"] == tp_class].dropna(subset=["Measured Height", "Floors"]).copy()
+        if len(group) == 0:
+            continue
+
+        # POINTS — visible in legend
+        ax_f.scatter(
+            group["Measured Height"],
+            group["Floors"],
+            color=colors[i % 10],
+            label=f"{tp_class}"
+        )
+
         if len(group) >= 2:
             X = group[["Measured Height"]].values
             y = group["Floors"].values
             model = LinearRegression().fit(X, y)
-            x_range = np.linspace(np.nanmin(X), np.nanmax(X), 100)
-            y_pred = model.predict(x_range.reshape(-1,1))
-            ax_f.plot(x_range, y_pred, color=colors[i%10], linestyle="--", label=f"{tp_class} fit")
+            x_range = np.linspace(0, 30, 100)
+            y_pred = model.predict(x_range.reshape(-1, 1))
+
+            # LINES — NO LEGEND ENTRY
+            ax_f.plot(
+                x_range,
+                y_pred,
+                color=colors[i % 10],
+                linestyle="--",
+                label="_nolegend_"
+            )
 
     ax_f.set_xlabel("Measured Height")
     ax_f.set_ylabel("Floors")
     ax_f.set_title("Floors vs Measured Height by TP_CLS_ED")
+    ax_f.set_xlim(0, 30)
+    ax_f.set_ylim(0, 8)
     ax_f.legend()
 
     plt.tight_layout()
@@ -150,44 +235,12 @@ def plot_regression_side_by_side(df):
 
 # === MAIN SCRIPT ===
 if __name__ == "__main__":
-    print("📂 Loading fieldwork CSVs...")
     dfs = load_fieldwork_files()
-    print(f"✅ Loaded {len(dfs)} fieldwork files")
-
-    print("🔄 Rebuilding !TOTAL-F.csv...")
     total_df = rebuild_total_fieldwork_csv(dfs)
-    print(f"✅ !TOTAL-F.csv rebuilt with {len(total_df)} rows.")
-
-    print("🧹 Cleaning data...")
     clean_df = clean_data(total_df)
-
-    print("📈 Training split linear regression models...")
     models_df = train_linear_models(clean_df)
 
-    total_row = {
-        "TP_CLS_ED": "Total:",
-        "m_qu": "",
-        "b_qu": "",
-        "r2_qu": "",
-        "1/m_qu": "",
-        "blank": "",
-        "qu_count": f"=SUM(G2:G{len(models_df)+1})",  # Excel formula for column G
-        "m_f": "",
-        "b_f": "",
-        "r2_f": "",
-        "1/m_f": "",
-        "f_count": f"=SUM(L2:L{len(models_df)+1})"   # Excel formula for column L
-    }
-
-    models_df = pd.concat([models_df, pd.DataFrame([total_row])], ignore_index=True)
-
-    ## COMMENT OUT THIS LINE TO SKIP OVERWRITING LIN_REG_MODELS ---------------------------------------------------
-
     models_df.to_csv(LIN_REG_CSV, index=False)
-
-    ## ------------------------------------------------------------------------------------------------------------
-
-    print(f"✅ Models saved to {LIN_REG_CSV}")
-
-    print("📊 Plotting regression results...")
     plot_regression_side_by_side(clean_df)
+
+    print("✅ Saved regression models to:", LIN_REG_CSV)

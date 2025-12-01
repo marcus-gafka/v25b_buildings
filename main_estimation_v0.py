@@ -98,7 +98,7 @@ def estimation_v0():
     out_df.to_csv(out_path, index=False, encoding="utf-8-sig")
 
     plot_island_by_tract(ds, "MELO")
+    print(f"✅ Estimation complete. CSV saved to {DATA_DIR / 'VPC_Estimates_V0.csv'}")
 
 if __name__ == "__main__":
     estimation_v0()
-    print(f"✅ Estimation complete. CSV saved to {DATA_DIR / 'VPC_Estimates_V0.csv'}")

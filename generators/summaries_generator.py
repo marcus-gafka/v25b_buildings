@@ -112,8 +112,27 @@ def write_master_summary(df):
 
             f.write("\n\n")
 
-    print(f"  ✔️ Master summary written → {MASTER_OUTPUT_FILE}")
+        # --- GLOBAL TOTALS ACROSS ALL SESTIERI ---
+        f.write("=============================================\n")
+        f.write("🏛️ TOTAL BUILDING TYPES ACROSS ALL SESTIERI\n")
+        f.write("=============================================\n\n")
 
+        global_counts = (
+            df["TP_CLS_ED_clean"]
+            .value_counts()
+            .drop(labels=[""], errors="ignore")  # remove empty types
+            .sort_values(ascending=False)
+        )
+
+        max_len_global = max((len(t) for t in global_counts.index), default=0)
+
+        for t, count in global_counts.items():
+            padded = t + ":" + " " * (max_len_global - len(t))
+            f.write(f"  {EMOJI_TYPE} {padded}  {EMOJI_BUILDING} {count}\n")
+
+        f.write("\n\n")
+
+    print(f"  ✔️ Master summary written → {MASTER_OUTPUT_FILE}")
 
 def main():
     print("📂 Loading building data...")
