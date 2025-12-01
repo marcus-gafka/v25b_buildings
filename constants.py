@@ -34,6 +34,9 @@ TOTAL_CHECKLIST_CSV = CHECKLISTS_DIR / "!TOTAL.csv"
 TOTAL_ADDRESS_CSV = CHECKLISTS_DIR / "!TOTAL-A.csv"
 TOTAL_FIELDWORK_CSV = FIELDWORK_DIR / "!TOTAL-F.csv"
 
+SURVEY_CSV = DATA_DIR / "V25B_Survey_Data.csv"
+FILTERED_SURVEY_CSV = DATA_DIR / "V25B_Survey_Data_Filtered.csv"
+
 LIN_REG_CSV = DATA_DIR / "LinReg_Models.csv"
 
 BUILDING_FIELD = "TARGET_FID_12_13"         # unique buidling identifier

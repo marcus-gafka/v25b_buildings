@@ -1,0 +1,114 @@
+﻿ObjectID,GlobalID,CreationDate,Creator,EditDate,Editor,Date and Time,Number of Doorbells,Number of Floors,Additional Notes,Building Alias,Island Code,Floor 0,Floor 1,Floor 2,Floor 3,Floor 4,Floor 5,Floor 6,Floor 7,Other - Island Code,x,y
+1,d26dfe9c-6727-4744-a847-d5fbd4c8e56f,11/18/2025 13:51,v25b.build_serendpt,11/18/2025 13:51,v25b.build_serendpt,11/18/2025 13:45,5,5,"all doorbells have names on them
+
+ 
+",24,GHET,None,Open,Open,Open,Closed (Good),,,,,12.32715593,45.4453231
+2,60e2973a-df76-4a47-a2b9-e53bbafa025a,11/18/2025 13:52,v25b.build_serendpt,11/18/2025 13:57,v25b.build_serendpt,11/18/2025 13:49,5,5,,22,GHET,None,Open,Open,Closed (Good),Open,,,,,12.32729561,45.44535968
+3,64ba876a-4d82-4f61-b0fb-3cb5dbd005fe,11/18/2025 13:53,v25b.build_serendpt,11/18/2025 13:53,v25b.build_serendpt,11/18/2025 13:52,0,4,,22,GHET,None,Open,Open,Closed (Good),Open,,,,,12.3272636,45.44535445
+4,ac62ce3e-ba66-4458-8daa-eeefa0a90811,11/18/2025 18:57,v25b.build_serendpt,11/18/2025 18:57,v25b.build_serendpt,11/18/2025 13:44,1,7,,19,GHET,Closed (Good),Closed (Good),Open,Open,Open,Open,Open,,,12.3271231,45.44527502
+5,55683563-16de-4e0f-8006-19d43e73d500,11/18/2025 18:59,v25b.build_serendpt,11/18/2025 18:59,v25b.build_serendpt,11/18/2025 13:52,8,4,,20,GHET,None,Closed (Good),Open,Closed (Good),,,,,,12.32708622,45.44519942
+6,d3748f6c-ac46-4f46-96d2-5b3550d9226a,11/18/2025 18:59,v25b.build_serendpt,11/18/2025 18:59,v25b.build_serendpt,11/18/2025 13:54,11,6,,18,GHET,Closed (Good),Closed (Mid),Open,Open,Open,Open,,,,12.32705215,45.44517587
+7,c3b8fa34-7af9-4e21-83a8-f389438c58eb,11/25/2025 8:51,v25b.build_serendpt,11/25/2025 8:51,v25b.build_serendpt,11/18/2025 13:47,0,1,Casa israelitica,25,GHET,None,Open,Open,,,,,,,12.32696937,45.44532367
+8,12d704e7-9dda-4b16-9c92-622e3c140475,11/25/2025 8:52,v25b.build_serendpt,11/25/2025 8:52,v25b.build_serendpt,11/18/2025 13:53,8,5,,7,GHET,None,Closed (Good),Closed (Good),Closed (Good),Open,,,,,12.32667466,45.44535728
+9,181b1859-237d-42a0-b767-5f84230868f5,11/25/2025 9:48,v25b.build_serendpt,11/25/2025 9:48,v25b.build_serendpt,11/25/2025 8:59,8,4,,1,MELO,None,Open,Open,Closed (Mid),,,,,,12.33116301,45.43767375
+10,de464d25-9978-4da7-8d80-1ff3622e1f68,11/25/2025 9:48,v25b.build_serendpt,11/25/2025 9:48,v25b.build_serendpt,11/25/2025 9:02,3,3,LT,29,MELO,None,None,None,,,,,,,12.33114328,45.43762588
+11,cfcaf477-f082-45d0-9fa1-530f481b69af,11/25/2025 9:48,v25b.build_serendpt,11/25/2025 9:48,v25b.build_serendpt,11/25/2025 9:06,19,5,LT,27,MELO,None,Open,Open,Open,Open,,,,,12.33108599,45.43748262
+12,a2193997-b15c-4825-bef8-45d3a30e4747,11/25/2025 9:49,v25b.build_serendpt,11/25/2025 9:49,v25b.build_serendpt,11/25/2025 9:08,3,4,,5,MELO,None,Closed (Mid),Open,Open,,,,,,12.33122486,45.43737775
+13,42dfd9a4-2c4f-472c-861b-ae9794844e36,11/25/2025 9:49,v25b.build_serendpt,11/25/2025 9:49,v25b.build_serendpt,11/25/2025 9:09,2,4,,31,MELO,None,Open,Closed (Good),Closed (Good),,,,,,12.33134012,45.43738478
+14,608a2ba0-c947-4147-b95d-b6a0de33f8ff,11/25/2025 9:50,v25b.build_serendpt,11/25/2025 9:50,v25b.build_serendpt,11/25/2025 9:10,3,4,,32,MELO,None,Open,Open,Open,,,,,,12.33131217,45.43746289
+15,4cf568e0-870d-4b6d-af67-670eb9c9c296,11/25/2025 9:50,v25b.build_serendpt,11/25/2025 9:50,v25b.build_serendpt,11/25/2025 9:12,3,4,,33,MELO,None,Closed (Mid),Open,Open,,,,,,12.33147502,45.43751257
+16,616b5c7a-9630-43f8-aa6b-671fdee14a8c,11/25/2025 9:50,v25b.build_serendpt,11/25/2025 9:50,v25b.build_serendpt,11/25/2025 9:13,,4,,47,MELO,None,Open,Open,Closed (Good),,,,,,12.33158086,45.43754481
+17,41dc7df9-8f4d-4d4a-a53e-e43c3e560779,11/25/2025 9:50,v25b.build_serendpt,11/25/2025 9:50,v25b.build_serendpt,11/25/2025 9:15,1,4,4 names on the 1 doorbell,34,MELO,None,Open,Open,Open,,,,,,12.33158772,45.43742384
+18,29a9c4c4-0c3e-4b23-8e10-a6812f0ac643,11/25/2025 9:50,v25b.build_serendpt,11/25/2025 9:50,v25b.build_serendpt,11/25/2025 9:18,8,5,LT,43,MELO,None,None,Open,Open,Open,,,,,12.33152487,45.43743169
+19,a7369232-5980-4f75-a5fe-6024f69d5c02,11/25/2025 9:50,v25b.build_serendpt,11/25/2025 9:50,v25b.build_serendpt,11/25/2025 9:21,4,5,"2 missing names on doorbell, 2 floors of closed shutters",37,MELO,None,Closed (Good),Closed (Good),Open,Open,,,,,12.33150904,45.4370746
+20,ca6325ae-ee31-4035-b256-c0fdb5a53f3c,11/25/2025 9:51,v25b.build_serendpt,11/25/2025 9:51,v25b.build_serendpt,11/25/2025 9:23,3,4,1407 is luggage storage,39,MELO,None,Closed (Good),Open,Closed (Mid),,,,,,12.33149175,45.43719772
+21,d180c352-d2cd-4ed3-bfd8-76ab9cbd27b6,11/25/2025 9:51,v25b.build_serendpt,11/25/2025 9:51,v25b.build_serendpt,11/25/2025 9:25,6,4,,41,MELO,None,Closed (Mid),Open,Closed (Mid),,,,,,12.3314868,45.43725332
+22,da2d3376-1dd4-40ad-9843-a489e7a66dc2,11/25/2025 9:51,v25b.build_serendpt,11/25/2025 9:51,v25b.build_serendpt,11/25/2025 9:27,3,4,,21,MELO,None,Closed (Good),Open,Closed (Good),,,,,,12.33125081,45.43726681
+23,f878b450-4acc-4b31-bb3e-9456a6950a92,11/25/2025 9:51,v25b.build_serendpt,11/25/2025 9:51,v25b.build_serendpt,11/25/2025 9:29,2,2,,19,MELO,None,Closed (Good),,,,,,,,12.331285,45.43711676
+24,8c83afd4-6190-4166-a240-5f7293cb10d3,11/25/2025 9:52,v25b.build_serendpt,11/25/2025 9:52,v25b.build_serendpt,11/25/2025 9:30,0,4,,22,MELO,None,Closed (Mid),Open,Closed (Good),,,,,,12.33124285,45.43704811
+25,a595381c-17cb-4b2a-b617-4d696eda4216,11/25/2025 9:52,v25b.build_serendpt,11/25/2025 9:52,v25b.build_serendpt,11/25/2025 9:32,1,4,"LT, bnb sticker",25,MELO,None,Closed (Good),Closed (Good),Closed (Good),,,,,,12.33094738,45.43725338
+26,03f0f60f-3535-4078-b599-45a233ba8c53,11/25/2025 9:52,v25b.build_serendpt,11/25/2025 9:52,v25b.build_serendpt,11/25/2025 9:35,27,6,"LT, 1 bell for “art space”",24,MELO,None,Open,Open,Open,Open,Open,,,,12.33116336,45.43688882
+27,c09e2608-fd22-4731-88af-04a11211276f,11/25/2025 9:52,v25b.build_serendpt,11/25/2025 9:52,v25b.build_serendpt,11/25/2025 9:39,13,4,,18,MELO,Closed (Bad),Open,Open,Open,,,,,,12.33131561,45.43679735
+28,8fda284c-6245-41fe-a77c-d8a5b5f25440,11/25/2025 9:52,v25b.build_serendpt,11/25/2025 9:52,v25b.build_serendpt,11/25/2025 9:43,5,4,,14,MELO,None,Closed (Good),Open,Closed (Good),,,,,,12.33139059,45.43670467
+29,95908fcf-a8c4-4657-b046-e61b5952a5c2,11/25/2025 11:43,v25b.build_serendpt,11/25/2025 11:43,v25b.build_serendpt,11/25/2025 8:59,4,3,,2,MELO,None,Open,Open,,,,,,,12.33112553,45.43762224
+30,10a3a2ee-ca93-4286-973e-79e0e63ec1bd,11/25/2025 11:43,v25b.build_serendpt,11/25/2025 11:43,v25b.build_serendpt,11/25/2025 9:02,3,4,,3,MELO,None,Open,Open,Open,,,,,,12.33106026,45.43762699
+31,5d024bce-4ff2-4a37-a895-e009f360949d,11/25/2025 11:43,v25b.build_serendpt,11/25/2025 11:43,v25b.build_serendpt,11/25/2025 9:03,9,3,LT,28,MELO,None,Closed (Mid),Closed (Mid),,,,,,,12.33103483,45.43759668
+32,ba77bf11-022c-4c9a-9a89-a35cb5b4e475,11/25/2025 11:43,v25b.build_serendpt,11/25/2025 11:43,v25b.build_serendpt,11/25/2025 9:05,2,3,,4,MELO,None,Open,Open,Open,,,,,,12.33123854,45.43749001
+33,d7a22eb0-b198-4ca0-b032-73e3cfe4c7d3,11/25/2025 11:43,v25b.build_serendpt,11/25/2025 11:43,v25b.build_serendpt,11/25/2025 9:07,4,4,2x LT at 1471,6,MELO,None,Open,Open,Open,,,,,,12.33115871,45.43728384
+34,436052a3-d6a4-4a92-a992-5635d493b941,11/25/2025 11:43,v25b.build_serendpt,11/25/2025 11:43,v25b.build_serendpt,11/25/2025 9:11,8,3,,46,MELO,None,Open,Open,,,,,,,12.3313976,45.43752451
+35,1c3d69df-5761-49f6-83b7-791a88ded3e3,11/25/2025 11:44,v25b.build_serendpt,11/25/2025 11:44,v25b.build_serendpt,11/25/2025 9:13,1,3,,30,MELO,None,Closed (Mid),Open,,,,,,,12.33137555,45.4375423
+36,9164ff86-2ba3-440d-9378-e14cf55a54a8,11/25/2025 11:44,v25b.build_serendpt,11/25/2025 11:44,v25b.build_serendpt,11/25/2025 9:15,,5,,42,MELO,None,Closed (Good),Closed (Good),Closed (Good),Closed (Good),,,,,12.33155998,45.43744732
+37,7de21de1-8d71-4866-a724-725b707f8602,11/25/2025 11:44,v25b.build_serendpt,11/25/2025 11:44,v25b.build_serendpt,11/25/2025 9:20,0,4,,36,MELO,None,Closed (Good),Closed (Good),Closed (Good),,,,,,12.33162554,45.43725111
+38,7d9898b5-ad0e-4a3b-865d-f4fd87f8f608,11/25/2025 11:44,v25b.build_serendpt,11/25/2025 11:44,v25b.build_serendpt,11/25/2025 9:22,4,4,,35,MELO,None,Open,Closed (Good),Open,,,,,,12.33143823,45.43721648
+39,5dab8ef9-5ca9-4430-a150-cb8f6119a66b,11/25/2025 11:44,v25b.build_serendpt,11/25/2025 11:44,v25b.build_serendpt,11/25/2025 9:23,3,4,,40,MELO,None,Closed (Good),Open,Open,,,,,,12.33150677,45.43725285
+40,829ed31f-2a14-4ee2-9005-0c3459047f9f,11/25/2025 11:44,v25b.build_serendpt,11/25/2025 11:44,v25b.build_serendpt,11/25/2025 9:24,3,4,,38,MELO,None,Open,Closed (Good),Closed (Good),,,,,,12.33151515,45.437107
+41,bf12cd43-b15d-47f2-b1b5-198628e0aee8,11/25/2025 11:44,v25b.build_serendpt,11/25/2025 11:44,v25b.build_serendpt,11/25/2025 9:27,3,3,1x LT,20,MELO,None,Closed (Good),Closed (Good),,,,,,,12.33115786,45.43714621
+42,6f80048c-5371-43bd-bbaf-1e838685879d,11/25/2025 11:44,v25b.build_serendpt,11/25/2025 11:44,v25b.build_serendpt,11/25/2025 9:29,4,5,,23,MELO,None,Closed (Good),Open,Open,Open,,,,,12.3312278,45.43705274
+43,00e31581-bc42-44e7-a637-d1e199adce38,11/25/2025 11:44,v25b.build_serendpt,11/25/2025 11:44,v25b.build_serendpt,11/25/2025 9:31,6,4,1x LT,7,MELO,None,Closed (Good),Closed (Good),Closed (Good),,,,,,12.33119677,45.4371135
+44,937d5dfb-c05a-4d76-b128-f69725df1c4b,11/25/2025 11:44,v25b.build_serendpt,11/25/2025 11:44,v25b.build_serendpt,11/25/2025 9:33,6,4,,26,MELO,None,Open,Open,Open,,,,,,12.33093578,45.43726083
+45,a3fc111d-2662-4f0a-a90c-84348ca19f81,11/25/2025 11:44,v25b.build_serendpt,11/25/2025 11:44,v25b.build_serendpt,11/25/2025 9:36,3,5,,12,MELO,None,Open,Open,Open,Open,,,,,12.33105531,45.43687369
+46,a4331cac-416b-4427-a398-c9eed0caffb1,11/25/2025 11:44,v25b.build_serendpt,11/25/2025 11:44,v25b.build_serendpt,11/25/2025 9:40,17,5,,17,MELO,None,Open,Open,Open,Open,,,,,12.3312733,45.43674345
+47,2c11fab6-0a65-447b-86ef-e0cb641e1bed,11/25/2025 11:44,v25b.build_serendpt,11/25/2025 11:44,v25b.build_serendpt,11/25/2025 9:42,2,4,1x LT,16,MELO,None,Open,Open,Open,,,,,,12.331412,45.43660065
+48,52217684-96cf-4c1a-a2a9-3b3e8c8b5ba9,11/25/2025 11:44,v25b.build_serendpt,11/25/2025 11:44,v25b.build_serendpt,11/25/2025 9:43,7,4,,15,MELO,None,None,Open,Open,,,,,,12.33141353,45.43655937
+49,07c35077-e19d-4c7b-9a6d-83b242d2fc6f,11/25/2025 11:44,v25b.build_serendpt,11/25/2025 11:44,v25b.build_serendpt,11/25/2025 9:44,1,4,hotel,13,MELO,None,Open,Open,Open,,,,,,12.331222,45.43667673
+50,a20d4e35-9d14-45bf-bb9b-6f35cff4f00e,12/1/2025 8:40,v25b.build_serendpt,12/1/2025 8:40,v25b.build_serendpt,11/18/2025 13:51,5,6,,23,GHET,None,Open,Open,Closed (Good),Closed (Good),Open,,,,12.32737011,45.4454275
+51,8073a8ed-40c6-4e47-9de2-50185639411d,12/1/2025 8:50,v25b.build_serendpt,12/1/2025 8:52,v25b.build_serendpt,12/1/2025 8:48,9,5,,73,ZACC,None,None,None,Open,None,,,,,12.34382893,45.43395589
+52,5dbbc8f8-d2ef-4646-be7e-4eab8ffc5fdd,12/1/2025 9:48,v25b.build_serendpt,12/1/2025 9:48,v25b.build_serendpt,12/1/2025 8:46,0,5,Hotel,72,ZACC,None,Open,Open,Open,Open,,,,,12.3441536,45.43406288
+53,270365f3-33de-4bc4-ae8f-a5673312c964,12/1/2025 9:48,v25b.build_serendpt,12/1/2025 9:48,v25b.build_serendpt,12/1/2025 8:49,0,5,Hotel,11,ZACC,None,Open,Open,Open,Open,,,,,12.34362415,45.43401235
+54,192dcd2b-4f1b-42c2-b790-3ae600007e81,12/1/2025 9:49,v25b.build_serendpt,12/1/2025 9:49,v25b.build_serendpt,12/1/2025 8:53,1,4,"1 bell prob for doc office, everything above had matching shutters and curtains for hotel",13,ZACC,None,Open,Open,Open,,,,,,12.34314454,45.43399576
+55,ad4ce408-76ee-4f90-9dcb-61fb815bdb67,12/1/2025 9:49,v25b.build_serendpt,12/1/2025 9:49,v25b.build_serendpt,12/1/2025 8:56,0,3,,14,ZACC,None,Open,Open,,,,,,,12.34293185,45.43405636
+56,873726c6-c696-44eb-a543-32e395a0f0fa,12/1/2025 9:50,v25b.build_serendpt,12/1/2025 9:50,v25b.build_serendpt,12/1/2025 8:58,1,3,1 bell for hotel,20,ZACC,None,Open,Open,,,,,,,12.34290857,45.43401893
+57,ac897b40-989c-400c-8b01-2a12383ba49c,12/1/2025 9:50,v25b.build_serendpt,12/1/2025 9:50,v25b.build_serendpt,12/1/2025 8:59,0,2,Part of hotel,21,ZACC,None,Closed (Good),,,,,,,,12.34290378,45.43437287
+58,e2863397-8ec3-44c6-b2b3-96225694e937,12/1/2025 9:51,v25b.build_serendpt,12/1/2025 9:51,v25b.build_serendpt,12/1/2025 9:00,1,2,Gov building ,54,ZACC,None,Open,,,,,,,,12.3428944,45.43439607
+59,d01768dc-b03b-4f18-b1d1-ea62fd671aef,12/1/2025 9:52,v25b.build_serendpt,12/1/2025 9:52,v25b.build_serendpt,12/1/2025 9:02,0,1,,26,ZACC,None,,,,,,,,,12.34302755,45.43459038
+60,f5974dec-445f-48eb-b87c-f4c343b2f3fb,12/1/2025 9:52,v25b.build_serendpt,12/1/2025 9:52,v25b.build_serendpt,12/1/2025 9:02,0,2,Part of church ,9,ZACC,None,None,,,,,,,,12.34312022,45.43464162
+61,fdb4e55a-655c-4301-8738-a0d5d5c34c46,12/1/2025 9:53,v25b.build_serendpt,12/1/2025 9:53,v25b.build_serendpt,12/1/2025 9:04,0,2,Maybe part of San zaccaria hotel,24,ZACC,None,None,,,,,,,,12.34302748,45.4346476
+62,6f4c7cd3-692b-41f0-97ef-f547fea158f6,12/1/2025 9:53,v25b.build_serendpt,12/1/2025 9:53,v25b.build_serendpt,12/1/2025 9:06,0,2,,38,ZACC,None,Open,,,,,,,,12.34306349,45.43473711
+63,8b2c06fb-4e2c-4b89-b487-638848952ded,12/1/2025 9:54,v25b.build_serendpt,12/1/2025 9:54,v25b.build_serendpt,12/1/2025 9:07,2,2,,36,ZACC,None,Open,,,,,,,,12.34280999,45.43492311
+64,43f641da-9926-461a-ac30-0aaaffdd4066,12/1/2025 9:54,v25b.build_serendpt,12/1/2025 9:54,v25b.build_serendpt,12/1/2025 9:09,0,2,,39,ZACC,None,Open,,,,,,,,12.34292839,45.43492036
+65,abb31ed8-c20d-4c3d-9520-e305744c5750,12/1/2025 9:55,v25b.build_serendpt,12/1/2025 9:55,v25b.build_serendpt,12/1/2025 9:10,8,5,,63,ZACC,None,Closed (Good),Open,Closed (Good),Closed (Good),,,,,12.34256605,45.43505765
+66,d23a48c5-fccc-4668-9081-8b9a3ba0dad9,12/1/2025 9:55,v25b.build_serendpt,12/1/2025 9:55,v25b.build_serendpt,12/1/2025 9:13,5,4,,65,ZACC,None,Open,Open,Open,,,,,,12.34267492,45.43541755
+67,82ade145-6208-46b5-857a-e73a0f42ce0c,12/1/2025 9:56,v25b.build_serendpt,12/1/2025 9:56,v25b.build_serendpt,12/1/2025 9:14,0,2,,66,ZACC,None,Open,,,,,,,,12.34290784,45.43554023
+68,d6c62d5d-11ba-4713-b169-c82f28c8dec4,12/1/2025 9:56,v25b.build_serendpt,12/1/2025 9:56,v25b.build_serendpt,12/1/2025 9:15,4,3,LT,45,ZACC,None,Open,Closed (Good),,,,,,,12.34279678,45.43537427
+69,34ac3a65-7bb0-4745-9b9e-8691c07f57b2,12/1/2025 9:56,v25b.build_serendpt,12/1/2025 9:56,v25b.build_serendpt,12/1/2025 9:17,5,3,,49,ZACC,None,Open,Open,,,,,,,12.34313087,45.43554192
+70,82aade7d-bf73-4729-b604-464b8d825498,12/1/2025 9:57,v25b.build_serendpt,12/1/2025 9:57,v25b.build_serendpt,12/1/2025 9:18,1,4,1 bell for hotel + restaurant ,67,ZACC,None,Open,Open,Open,,,,,,12.34337406,45.43557924
+71,81d35d24-1e79-4871-aa6f-2e3fccdebb62,12/1/2025 9:58,v25b.build_serendpt,12/1/2025 9:58,v25b.build_serendpt,12/1/2025 9:20,0,1,,69,ZACC,None,,,,,,,,,12.34385915,45.43571192
+72,2cfa1c18-be5a-4d49-ab22-3df37a7c9679,12/1/2025 9:58,v25b.build_serendpt,12/1/2025 9:58,v25b.build_serendpt,12/1/2025 9:25,0,2,"1st floor only, no ground floor",35,ZACC,None,Open,,,,,,,,12.34263286,45.43495444
+73,f1f55bd0-d7ff-43db-8e2a-b7f7d6e1be30,12/1/2025 9:58,v25b.build_serendpt,12/1/2025 9:58,v25b.build_serendpt,12/1/2025 9:26,0,2,,34,ZACC,None,Open,,,,,,,,12.34275939,45.43487166
+74,e0dc5823-e64d-4e3e-bf22-38d49cd4698b,12/1/2025 9:59,v25b.build_serendpt,12/1/2025 9:59,v25b.build_serendpt,12/1/2025 9:27,0,3,,37,ZACC,None,Open,Closed (Good),,,,,,,12.34261882,45.43475807
+75,a02d02b2-6826-49fa-abf4-8a93127099b6,12/1/2025 9:59,v25b.build_serendpt,12/1/2025 9:59,v25b.build_serendpt,12/1/2025 9:29,2,3,,28,ZACC,None,Open,Closed (Good),,,,,,,12.34274204,45.43469105
+76,f57623ee-5227-47b5-a882-2ce186036bab,12/1/2025 10:00,v25b.build_serendpt,12/1/2025 10:00,v25b.build_serendpt,12/1/2025 9:31,1,3,1 bell for hotel,17,ZACC,None,Open,Open,,,,,,,12.34252391,45.43444136
+77,4294f144-9e38-4a44-b860-9ca7d325815b,12/1/2025 10:00,v25b.build_serendpt,12/1/2025 10:00,v25b.build_serendpt,12/1/2025 9:33,2,3,LT,31,ZACC,None,Closed (Good),Open,,,,,,,12.34248854,45.43446927
+78,5b3b53d5-a3ac-4d4a-a0f6-de7e94446aba,12/1/2025 10:01,v25b.build_serendpt,12/1/2025 10:01,v25b.build_serendpt,12/1/2025 9:35,6,3,"LT
+",59,ZACC,None,Closed (Bad),Closed (Bad),,,,,,,12.34220743,45.43458912
+79,e8a6b98d-66c3-492b-85f7-4f68ea199474,12/1/2025 10:01,v25b.build_serendpt,12/1/2025 10:01,v25b.build_serendpt,12/1/2025 9:40,1,4,,16,ZACC,None,Open,Open,Open,,,,,,12.34252696,45.43420054
+80,95c1847f-743e-4092-91f7-4fa2acbb3c93,12/1/2025 10:02,v25b.build_serendpt,12/1/2025 10:02,v25b.build_serendpt,12/1/2025 9:44,,,,56,ZACC,,,,,,,,,,12.34231432,45.43386932
+81,3379b62f-77af-45fb-b130-197857a98a43,12/1/2025 11:11,v25b.build_serendpt,12/1/2025 11:11,v25b.build_serendpt,12/1/2025 8:54,0,4,construction,15,ZACC,None,None,None,None,,,,,,12.3429034,45.43396361
+82,cbd3ad2c-8f60-4480-a64a-d70a90e3e08a,12/1/2025 11:11,v25b.build_serendpt,12/1/2025 11:11,v25b.build_serendpt,12/1/2025 8:56,0,6,"hotel
+construction",55,ZACC,None,Open,Open,Open,Open,Open,,,,12.34269986,45.43392379
+83,08acb790-4493-43ef-bf9f-847ad8e065cd,12/1/2025 11:11,v25b.build_serendpt,12/1/2025 11:11,v25b.build_serendpt,12/1/2025 8:59,4,4,,19,ZACC,None,None,None,Open,,,,,,12.34282678,45.43435774
+84,ce6a7bda-dc00-408f-8687-808a1e5799c6,12/1/2025 11:11,v25b.build_serendpt,12/1/2025 11:11,v25b.build_serendpt,12/1/2025 9:00,1,4,,22,ZACC,None,Open,Closed (Mid),Open,,,,,,12.34288457,45.43445624
+85,c6ccec9f-e27c-4546-b2ac-eae69ca9c73d,12/1/2025 11:11,v25b.build_serendpt,12/1/2025 11:11,v25b.build_serendpt,12/1/2025 9:01,1,4,hotel,23,ZACC,None,Closed (Good),Closed (Good),Closed (Good),,,,,,12.34308522,45.43455295
+86,b73f5e3c-ce0f-422a-8c7a-3ba69367f09c,12/1/2025 11:11,v25b.build_serendpt,12/1/2025 11:11,v25b.build_serendpt,12/1/2025 9:02,0,1,church,8,ZACC,None,,,,,,,,,12.34311133,45.43462819
+87,e7b842e5-ca3b-43ce-8160-3844f1654437,12/1/2025 11:12,v25b.build_serendpt,12/1/2025 11:12,v25b.build_serendpt,12/1/2025 9:03,2,3,,27,ZACC,None,Closed (Good),Closed (Good),,,,,,,12.34307481,45.43465235
+88,288206a0-f620-4317-8b0b-16519e5393b5,12/1/2025 11:12,v25b.build_serendpt,12/1/2025 11:12,v25b.build_serendpt,12/1/2025 9:04,0,2,maybe part of hotel zaccaria ,25,ZACC,None,None,,,,,,,,12.34305603,45.43462161
+89,b9f2aec4-9bce-485e-8e6e-d249e66da2dc,12/1/2025 11:12,v25b.build_serendpt,12/1/2025 11:12,v25b.build_serendpt,12/1/2025 9:06,5,3,,55,ZACC,None,Closed (Mid),Closed (Mid),,,,,,,12.3430814,45.43473062
+90,876cfc5a-f312-4226-8cad-319afa4bc26a,12/1/2025 11:12,v25b.build_serendpt,12/1/2025 11:12,v25b.build_serendpt,12/1/2025 9:08,3,3,,41,ZACC,None,Open,Open,,,,,,,12.34266932,45.43495423
+91,ba1aa6f8-7154-4694-bde9-b126d237573f,12/1/2025 11:12,v25b.build_serendpt,12/1/2025 11:12,v25b.build_serendpt,12/1/2025 9:09,1,4,hotel,42,ZACC,,,,,,,,,,12.34252482,45.4350152
+92,ff6df0ec-7cde-4128-816b-d507ed6c762f,12/1/2025 11:12,v25b.build_serendpt,12/1/2025 11:12,v25b.build_serendpt,12/1/2025 9:10,3,4,,43,ZACC,None,Open,Open,Open,,,,,,12.34249398,45.43514317
+93,5d586f4c-977d-411f-9081-035c45b88166,12/1/2025 11:12,v25b.build_serendpt,12/1/2025 11:12,v25b.build_serendpt,12/1/2025 9:10,2,4,school/institute,44,ZACC,None,None,None,None,,,,,,12.34248437,45.43516092
+94,f0a0e45b-d310-4662-916e-66b62af729fb,12/1/2025 11:12,v25b.build_serendpt,12/1/2025 11:12,v25b.build_serendpt,12/1/2025 9:12,12,5,3x LT,64,ZACC,None,Closed (Good),Closed (Good),Closed (Good),Open,,,,,12.34258565,45.43519755
+95,a4d881d1-7dd6-47d0-9dd5-7776e66db05f,12/1/2025 11:12,v25b.build_serendpt,12/1/2025 11:12,v25b.build_serendpt,12/1/2025 9:16,5,3,,47,ZACC,None,Open,Closed (Good),,,,,,,12.34276654,45.43538091
+96,7f2be953-ae2a-4aa6-8a27-a5b4547fd1ed,12/1/2025 11:12,v25b.build_serendpt,12/1/2025 11:12,v25b.build_serendpt,12/1/2025 9:16,4,5,,48,ZACC,None,Open,Closed (Good),Open,Open,,,,,12.34293438,45.43552716
+97,582c2eac-72b7-491a-80b0-19da98c20db1,12/1/2025 11:12,v25b.build_serendpt,12/1/2025 11:12,v25b.build_serendpt,12/1/2025 9:18,9,4,school,50,ZACC,None,Closed (Good),Closed (Good),None,,,,,,12.34326014,45.43561521
+98,d7c91e03-eb05-4cd4-a5e2-141cd2ebd1eb,12/1/2025 11:12,v25b.build_serendpt,12/1/2025 11:12,v25b.build_serendpt,12/1/2025 9:19,7,3,"hotel, 2x LT",68,ZACC,None,Open,Open,,,,,,,12.34368941,45.43572615
+99,8058d9eb-1893-4d45-851b-d6e847760cd0,12/1/2025 11:12,v25b.build_serendpt,12/1/2025 11:12,v25b.build_serendpt,12/1/2025 9:20,8,1,2x LT,1,ZACC,None,,,,,,,,,12.34387171,45.43576104
+100,037c2e49-f9f9-4bb7-a906-273add74cb42,12/1/2025 11:12,v25b.build_serendpt,12/1/2025 11:12,v25b.build_serendpt,12/1/2025 9:25,3,3,,62,ZACC,None,None,None,,,,,,,12.34258277,45.43496166
+101,665b8a68-3c98-4367-b816-02ad472c02e7,12/1/2025 11:12,v25b.build_serendpt,12/1/2025 11:12,v25b.build_serendpt,12/1/2025 9:26,1,4,,33,ZACC,None,Open,Open,Open,,,,,,12.34263365,45.43478422
+102,4e6dca6d-a779-46fe-9b70-50eb3bbe3d58,12/1/2025 11:12,v25b.build_serendpt,12/1/2025 11:12,v25b.build_serendpt,12/1/2025 9:27,0,3,,32,ZACC,None,Closed (Good),Closed (Good),,,,,,,12.34266002,45.43471595
+103,03a1d10e-53d3-41e2-a0f5-ac370a670522,12/1/2025 11:12,v25b.build_serendpt,12/1/2025 11:12,v25b.build_serendpt,12/1/2025 9:29,0,4,,29,ZACC,None,Closed (Good),Closed (Good),Closed (Mid),,,,,,12.34267825,45.43459946
+104,cc421a61-8f3a-449e-bac2-daeabfba0dd5,12/1/2025 11:12,v25b.build_serendpt,12/1/2025 11:12,v25b.build_serendpt,12/1/2025 9:31,7,5,1x LT,30,ZACC,None,Closed (Good),Closed (Good),Closed (Good),Closed (Good),,,,,12.34270414,45.43446088
+105,45bec95b-afd0-4e02-b029-4f5613025ffe,12/1/2025 11:12,v25b.build_serendpt,12/1/2025 11:12,v25b.build_serendpt,12/1/2025 9:32,2,3,,57,ZACC,None,Open,Open,,,,,,,12.34252914,45.43440946
+106,03722d78-6e96-40dc-bb05-638daa1f9315,12/1/2025 11:12,v25b.build_serendpt,12/1/2025 11:12,v25b.build_serendpt,12/1/2025 9:34,3,2,appartamenti vacazione,58,ZACC,None,Closed (Good),,,,,,,,12.34246169,45.43444164
+107,13f01c9c-f120-46d7-95ce-4dba316c8b80,12/1/2025 11:12,v25b.build_serendpt,12/1/2025 11:12,v25b.build_serendpt,12/1/2025 9:35,1,4,hotel,60,ZACC,,,,,,,,,,12.34210272,45.43467151
+108,d1bd18a1-5f05-4cc9-8b4c-880ec87d177d,12/1/2025 11:12,v25b.build_serendpt,12/1/2025 11:12,v25b.build_serendpt,12/1/2025 9:36,3,4,,61,ZACC,None,Open,Closed (Mid),Open,,,,,,12.3421017,45.43479768
