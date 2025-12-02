@@ -16,6 +16,7 @@ class Address:
 
 @dataclass
 class Building:
+
     id: int
     centroid: Point
     geometry: shape
@@ -25,12 +26,27 @@ class Building:
     short_alias: Optional[str] = None
     alias_segment: Optional[int] = None
 
+    qu_terra: Optional[float] = None
+    qu_gronda: Optional[float] = None
+
     height: Optional[float] = None
+    superficie: Optional[float] = None
+    normalized_height: Optional[float] = None
+    normalized_superficie: Optional[float] = None
+    livable_space: Optional[float] = None
 
     floors_est: Optional[int] = None
     units_est_meters: Optional[int] = None
     units_est_volume: Optional[int] = None
+    units_est_merged: Optional[int] = None
     pop_est: Optional[int] = None
+
+    full_nr: Optional[bool] = None
+    units_nr: Optional[int] = None
+    units_empty: Optional[int] = None
+
+    measured: Optional[bool] = None
+    surveyed: Optional[bool] = None
 
 @dataclass
 class Tract:
@@ -41,6 +57,7 @@ class Tract:
     alias_segment: Optional[str] = None
 
     pop21: Optional[int] = None
+    abi21: Optional[int] = None
 
 @dataclass
 class Island:

@@ -2,10 +2,9 @@ import sys
 from pathlib import Path
 sys.path.append(str(Path(__file__).parent.parent))
 
-from dataset import Dataset
-from constants import RAW_GEOJSON, FILTERED_CSV, BUILDING_FIELD
+from constants import RAW_GEOJSON, FILTERED_CSV, BUILDING_FIELD, ISLAND_FIELD
+import json
 import pandas as pd
-from copy import deepcopy
 
 KEEP_FIELDS = [
     "Qu_Terra",
@@ -13,67 +12,38 @@ KEEP_FIELDS = [
     "Qu_Gronda",
     "SEZ21",
     "POP21",
+    "ABI21",
     "TP_CLS_ED",
     "Superficie",
-    BUILDING_FIELD,
+    BUILDING_FIELD,   # building alias
+    ISLAND_FIELD      # Codice
 ]
-
-def filter_fields(dataset: Dataset, keep_fields: list) -> Dataset:
-    """
-    Return a new Dataset containing only properties in keep_fields.
-    """
-    filtered_features = []
-
-    for feature in dataset.features:
-        props = feature.get("properties", {})
-
-        # Keep ONLY the listed fields (except geometry)
-        new_props = {
-            k: props.get(k, None)
-            for k in keep_fields
-            if k in props or k == BUILDING_FIELD
-        }
-
-        filtered_feature = {
-            "type": feature.get("type", "Feature"),
-            "properties": new_props,
-            "geometry": feature.get("geometry"),
-        }
-
-        filtered_features.append(filtered_feature)
-
-    filtered_dataset = deepcopy(dataset)
-    filtered_dataset.features = filtered_features
-    return filtered_dataset
 
 def main():
     print("📂 Loading raw GeoJSON...")
-    dataset = Dataset(RAW_GEOJSON)
-
-    print("🧹 Filtering fields...")
-    filtered_dataset = filter_fields(dataset, KEEP_FIELDS)
-
-    # -------------------------
-    # CSV OUTPUT ONLY
-    # -------------------------
-    print("💾 Saving CSV with BUILDING_FIELD first...")
+    with open(RAW_GEOJSON, "r", encoding="utf-8") as f:
+        data = json.load(f)
 
     rows = []
-    for f in filtered_dataset.features:
-        props = f.get("properties", {}).copy()
-        props["geometry"] = f.get("geometry")     # keep geometry in CSV if helpful
-        rows.append(props)
 
+    print("🧹 Filtering features...")
+    for feature in data["features"]:
+        props = feature.get("properties", {})
+        new_props = {k: props.get(k, None) for k in KEEP_FIELDS}
+        new_props["geometry"] = feature.get("geometry")  # optional
+        rows.append(new_props)
+
+    print("💾 Converting to DataFrame...")
     df = pd.DataFrame(rows)
 
-    # Force BUILDING_FIELD to be first column
+    # Put BUILDING_FIELD first
     columns = [BUILDING_FIELD] + [c for c in df.columns if c != BUILDING_FIELD]
     df = df[columns]
 
+    print(f"💾 Saving CSV → {FILTERED_CSV}")
     df.to_csv(FILTERED_CSV, index=False)
-    print(f"📄 CSV saved to: {FILTERED_CSV}")
 
-    print("✅ Filtering complete (CSV only). No GeoJSON written.")
+    print("✅ Done — CSV created with filtered fields only.")
 
 if __name__ == "__main__":
     main()

@@ -37,6 +37,7 @@ TOTAL_FIELDWORK_CSV = FIELDWORK_DIR / "!TOTAL-F.csv"
 SURVEY_CSV = DATA_DIR / "V25B_Survey_Data.csv"
 FILTERED_SURVEY_CSV = DATA_DIR / "V25B_Survey_Data_Filtered.csv"
 
+UNIT_INFO_CSV = DATA_DIR / "VPC_Unit_Info.csv"
 LIN_REG_CSV = DATA_DIR / "LinReg_Models.csv"
 
 BUILDING_FIELD = "TARGET_FID_12_13"         # unique buidling identifier
