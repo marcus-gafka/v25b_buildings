@@ -17,7 +17,7 @@ def main():
     ).fillna(0).astype(int)
 
     print("📂 Loading estimates CSV…")
-    est_path = ESTIMATES_DIR / "VPC_Estimates_V2.csv"
+    est_path = ESTIMATES_DIR / "VPC_Estimates_V3.csv"
     est_df = pd.read_csv(est_path)
 
     print("🔗 Merging datasets…")
@@ -43,7 +43,8 @@ def main():
         "units_est_meters",
         "units_error_meters",
         "units_est_volume",
-        "units_error_volume"
+        "units_error_volume",
+
     ]].to_csv(out_path, index=False)
     
     print(f"✅ Combined floor & units verification CSV saved to {out_path}")
@@ -111,7 +112,6 @@ def main():
     axes[1].set_title("Doorbells vs Units (Meters)")
     axes[1].set_xlabel("units_est_meters - Doorbells")
     axes[1].grid(axis='y', alpha=0.6)
-    axes[1].set_xlim(-10, 17)
 
 
     # Units (volume) vs Doorbells
