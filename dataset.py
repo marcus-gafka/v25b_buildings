@@ -51,8 +51,6 @@ class Dataset:
         return s
 
     def _build_hierarchy(self) -> Venice:
-        count = 0
-
         addr_df = pd.read_csv(FILTERED_ADDRESS_CSV)
         water_df = pd.read_csv(FILTERED_WATER_CSV)
         hotels_df = pd.read_csv(FILTERED_HOTEL_CSV)
@@ -83,7 +81,9 @@ class Dataset:
                 tract_key = f"{tract_id[0]}_{tract_id[1]}"
                 abi21_val = group["ABI21"].iloc[0]
                 pop21_val = group["POP21"].iloc[0]
-                tract_aggregates[tract_key] = {"ABI21": abi21_val, "POP21": pop21_val}
+                fam21_val = group["FAM21"].iloc[0]
+                edi21_val = group["EDI21"].iloc[0]
+                tract_aggregates[tract_key] = {"ABI21": abi21_val, "POP21": pop21_val, "FAM21": fam21_val, "EDI21": edi21_val}
 
         sestiere_map = {}
         building_map = {}
@@ -121,13 +121,13 @@ class Dataset:
             tract = next((t for t in island.tracts if t.id == tract_key), None)
             if tract is None:
                 tract = Tract(id=tract_key)
-                # attach tract-level ABI21 and POP21
                 census_values = tract_aggregates.get(tract_key, {})
                 tract.abi21 = census_values.get("ABI21", 0)
                 tract.pop21 = census_values.get("POP21", 0)
+                tract.fam21 = census_values.get("FAM21", 0)
+                tract.edi21 = census_values.get("EDI21", 0)
                 island.tracts.append(tract)
 
-            count+=1
             # --- Building ---
             b_row = building_data_map.get(b_id, {})
             building = Building(
@@ -140,15 +140,15 @@ class Dataset:
                 qu_terra=b_row.get("Qu_Terra"),
                 qu_gronda=b_row.get("Qu_Gronda"),
                 superficie=b_row.get("Superficie"),
+                tp_cls=b_row.get("TP_CLS_ED"),
+                spec_fun=b_row.get("SpecFun"),
+                tipo_fun=b_row.get("TipoFun"),
             )
-
-            if count % 100 == 0:
-                print("Building hierarchy... " + str(count) + " done")
 
             tract.buildings.append(building)
             building_map[b_id] = building
 
-        # --- Attach addresses ---
+        # --- Attach addresses with meters including componenti and 2024 consumption ---
         for _, row in addr_df.iterrows():
             b_id = row["TARGET_FID_12_13"]
             addr_code = row["Full_sesti"].strip().upper()
@@ -156,16 +156,33 @@ class Dataset:
             if building is None:
                 continue
 
+            # Build meters list with componenti and 2024 consumption
+            meters_list = []
+            for fid in meters_map.get(addr_code, []):
+                meter_row = water_df[water_df["FID"] == fid]
+                if not meter_row.empty:
+                    comp = meter_row["Componenti"].iloc[0]
+                    consumo = meter_row["Consumo_medio_2024"].iloc[0]
+                    meters_list.append(Meter(id=int(fid), componenti=int(comp) if pd.notna(comp) else 1,
+                                            consumo_2024=float(consumo) if pd.notna(consumo) else 0))
+                else:
+                    meters_list.append(Meter(id=int(fid), componenti=1, consumo_2024=0))
+
             address_obj = Address(
                 address=addr_code,
-                meters=[Meter(fid) for fid in meters_map.get(addr_code, [])],
+                meters=meters_list,
                 hotels=hotels_map.get(addr_code, []),
                 hotels_extras=hotels_extra_map.get(addr_code, []),
                 strs=strs_map.get(addr_code, [])
             )
             building.addresses.append(address_obj)
+            building.has_hotel = any(
+                addr.hotels or addr.hotels_extras
+                for addr in building.addresses
+            )
 
         # --- Debug print hierarchy ---
+        """
         print("\nHierarchy Build Complete:\nVenice")
         for s in sestiere_map.values():
             print(f" ├── {s.code} ({s.name})")
@@ -174,5 +191,42 @@ class Dataset:
                 for tr in isl.tracts:
                     print(f" │    │    ├── Tract {tr.id}  (Buildings: {len(tr.buildings)})")
         print("\n")
+        """
 
         return Venice(sestieri=list(sestiere_map.values()))
+    
+    def export_hierarchy_text(self, path: str):
+        """Export Venice hierarchy to a text file with full building, address, and meter info."""
+        lines = []
+
+        for s in self.venice.sestieri:
+            lines.append(f"\nSestiere: {s.code}")
+            for isl in s.islands:
+                lines.append(f"\n    Island: {isl.code}")
+                for tr in isl.tracts:
+                    lines.append(f"\n        Tract Code: {'-'.join(((tr.buildings[0].full_alias or tr.buildings[0].short_alias or '').split('-')[:3]))} Tract ID: {tr.id}  (Buildings: {len(tr.buildings)})")
+                    lines.append(f"         POP21: {tr.pop21}, ABI21: {tr.abi21}, FAM21: {tr.fam21}, EDI21: {tr.edi21}")
+                    for b in tr.buildings:
+                        lines.append(f"\n            Building Alias: {b.full_alias}, {b.short_alias}, ID: {b.id}")
+                        lines.append(f"                Type: {b.tp_cls}")
+                        lines.append(f"                Height: {b.height}, NormHeight: {b.normalized_height}, FloorsEst: {b.floors_est}")
+                        lines.append(f"                Superficie: {b.superficie}, NormSuperficie: {b.normalized_superficie}, LivableSpace: {b.livable_space}")
+                        lines.append(f"                UnitsMeters: {b.units_est_meters}, UnitsVolume: {b.units_est_volume}, UnitsMerged: {b.units_est_merged}, UnitsCalc: {b.units_calc}")
+                        lines.append(f"                Primary: {b.units_primary}, Secondary: {b.units_secondary}, ResidentialTotal: {b.units_res}")
+                        lines.append(f"                STRs: {b.units_str}, Empty: {b.units_empty}, PopEst: {b.pop_est}")
+                        lines.append(f"                Measured: {b.measured}, Surveyed: {b.surveyed}")
+
+                        for addr in b.addresses:
+                            lines.append(f"\n                Address: {addr.address}")
+                            lines.append(f"                    STRs: {addr.strs}, Hotels: {addr.hotels}, HotelsExtras: {addr.hotels_extras}")
+                            if addr.meters:
+                                for m in addr.meters:
+                                    lines.append(f"                    Meter: {m.id} (Comp: {m.componenti}, Consumo2024: {m.consumo_2024})")
+                            else:
+                                lines.append(f"                    Meters: []")
+
+        # Write to file
+        with open(path, "w", encoding="utf-8") as f:
+            f.write("\n".join(lines))
+
+        print(f"✅ Hierarchy exported to {path}")

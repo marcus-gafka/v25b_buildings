@@ -1,7 +1,7 @@
 import pandas as pd
 from constants import ESTIMATES_DIR
 
-def estimation_null(ds, islands=None):
+def estimation_null(ds, islands=None, debug=False):
 
     results = []
 

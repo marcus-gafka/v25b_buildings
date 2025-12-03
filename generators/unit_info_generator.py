@@ -29,7 +29,7 @@ address_meters_map = (
 # FID -> Consumo_medio_2024 map
 fid_consumption_map = dict(zip(water_df["FID"], water_df["Consumo_medio_2024"]))
 
-print("📊 Computing units_est for ALL buildings...")
+print("📊 Computing units_est + consumo for ALL buildings...")
 
 rows = []
 
@@ -41,6 +41,7 @@ for s in ds.venice.sestieri:
 
                 total_units = 0
                 zero_consumption_count = 0
+                building_consumptions = []   # <-- store meter consumption
 
                 for addr in b.addresses:
                     addr_units = 0
@@ -51,15 +52,20 @@ for s in ds.venice.sestieri:
                             addr_units += comp
                             new_meters.append(fid)
 
-                            # Count low-consumption meters
                             consumo = fid_consumption_map.get(fid, 0)
+                            building_consumptions.append(consumo)
+
                             if consumo < 0.5:
                                 zero_consumption_count += 1
 
                     addr.meters = new_meters
                     total_units += addr_units
 
-                b.units_est = total_units
+                # Compute building-level consumption
+                if building_consumptions:
+                    consumo_medio_2024 = sum(building_consumptions) / len(building_consumptions)
+                else:
+                    consumo_medio_2024 = 0
 
                 def join_list(x):
                     if isinstance(x, list):
@@ -67,6 +73,7 @@ for s in ds.venice.sestieri:
                     return ""
 
                 rows.append({
+                    "full_alias": b.full_alias,
                     "short_alias": b.short_alias,
                     "building_id": b.id,
 
@@ -77,6 +84,7 @@ for s in ds.venice.sestieri:
                     "meters": ";".join(join_list(a.meters) for a in b.addresses),
 
                     "num_zero_consumption_meters": zero_consumption_count,
+                    "Consumo_medio_2024": consumo_medio_2024,   # ✅ FIXED
 
                     "num_hotels": sum(len(a.hotels) for a in b.addresses),
                     "hotels": ";".join(join_list(a.hotels) for a in b.addresses),
@@ -99,4 +107,3 @@ out_df.to_csv(UNIT_INFO_CSV, index=False, encoding="utf-8-sig")
 
 print(f"✅ CSV written to: {UNIT_INFO_CSV}")
 print("🎉 Done!")
-

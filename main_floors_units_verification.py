@@ -17,7 +17,7 @@ def main():
     ).fillna(0).astype(int)
 
     print("📂 Loading estimates CSV…")
-    est_path = ESTIMATES_DIR / "VPC_Estimates_V3.csv"
+    est_path = ESTIMATES_DIR / "VPC_Estimates_V3_test.csv"
     est_df = pd.read_csv(est_path)
 
     print("🔗 Merging datasets…")
@@ -29,6 +29,7 @@ def main():
     merged["floor_error"] = merged["floors_est"] - merged["Number of Floors"]
     merged["units_error_meters"] = merged["units_est_meters"] - merged["Number of Doorbells"]
     merged["units_error_volume"] = merged["units_est_volume"] - merged["Number of Doorbells"]
+    merged["units_error_merged"] = merged["units_est_merged"] - merged["Number of Doorbells"]
 
     # ------------------------------------------
     # Save combined verification CSV
@@ -44,7 +45,8 @@ def main():
         "units_error_meters",
         "units_est_volume",
         "units_error_volume",
-
+        "units_est_merged",
+        "units_error_merged",
     ]].to_csv(out_path, index=False)
     
     print(f"✅ Combined floor & units verification CSV saved to {out_path}")
@@ -52,7 +54,7 @@ def main():
     # ------------------------------------------
     # Build error count distributions
     # ------------------------------------------
-    floor_errors  = merged["floor_error"].value_counts().sort_index()
+    merged_errors = merged["units_error_merged"].value_counts().sort_index()
     meters_errors = merged["units_error_meters"].value_counts().sort_index()
     volume_errors = merged["units_error_volume"].value_counts().sort_index()
 
@@ -85,11 +87,11 @@ def main():
         return (r, g, b)
 
     # Example: build color lists for each graph using its own max error
-    floor_max = max(abs(floor_errors.index).max(), 1)
+    merged_max = max(abs(merged_errors.index).max(), 1)
     meters_max = max(abs(meters_errors.index).max(), 1)
     volume_max = max(abs(volume_errors.index).max(), 1)
 
-    floor_colors  = [error_to_color(e, floor_max) for e in floor_errors.index]
+    merged_colors = [error_to_color(e, merged_max) for e in merged_errors.index]
     meters_colors = [error_to_color(e, meters_max) for e in meters_errors.index]
     volume_colors = [error_to_color(e, volume_max) for e in volume_errors.index]
 
@@ -99,10 +101,10 @@ def main():
     fig, axes = plt.subplots(1, 3, figsize=(18, 5), sharey=True)
 
     # Floors
-    axes[0].bar(floor_errors.index, floor_errors.values,
-                color=floor_colors, edgecolor='black')
-    axes[0].set_title("Floor Estimate Errors")
-    axes[0].set_xlabel("floors_est - observed floors")
+    axes[0].bar(merged_errors.index, merged_errors.values,
+                color=merged_colors, edgecolor='black')
+    axes[0].set_title("Doorbells vs Units (Merged)")
+    axes[0].set_xlabel("units_est_merged - Doorbells")
     axes[0].set_ylabel("Number of Buildings")
     axes[0].grid(axis='y', alpha=0.6)
 
@@ -121,15 +123,12 @@ def main():
     axes[2].set_xlabel("units_est_volume - Doorbells")
     axes[2].grid(axis='y', alpha=0.6)
 
-    plt.tight_layout()
-    plt.show()
-
     # ------------------------------------------
     # Compute & print summary statistics
     # ------------------------------------------
 
-    floor_mean  = merged["floor_error"].mean()
-    floor_sd    = merged["floor_error"].std()
+    merged_mean  = merged["units_error_merged"].mean()
+    merged_sd    = merged["units_error_merged"].std()
 
     meters_mean = merged["units_error_meters"].mean()
     meters_sd   = merged["units_error_meters"].std()
@@ -138,10 +137,13 @@ def main():
     volume_sd   = merged["units_error_volume"].std()
 
     print("\n================ Error Summary ================")
-    print(f"Floors Error:           mean = {floor_mean:.2f},  sd = {floor_sd:.2f}")
+    print(f"Units (merged) Error:   mean = {merged_mean:.2f}, sd = {merged_sd:.2f}")
     print(f"Units (meters) Error:   mean = {meters_mean:.2f}, sd = {meters_sd:.2f}")
     print(f"Units (volume) Error:   mean = {volume_mean:.2f}, sd = {volume_sd:.2f}")
     print("================================================\n")
+
+    plt.tight_layout()
+    plt.show()
 
     return merged
 

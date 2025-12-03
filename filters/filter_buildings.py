@@ -13,8 +13,12 @@ KEEP_FIELDS = [
     "SEZ21",
     "POP21",
     "ABI21",
+    "FAM21",
+    "EDI21",
     "TP_CLS_ED",
     "Superficie",
+    "TipoFun",
+    "SpecFun",
     BUILDING_FIELD,   # building alias
     ISLAND_FIELD      # Codice
 ]

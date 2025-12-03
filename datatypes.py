@@ -5,6 +5,8 @@ from typing import List, Optional
 @dataclass
 class Meter:
     id: int
+    componenti: Optional[int] = None
+    consumo_2024: Optional[float] = None
 
 @dataclass
 class Address:
@@ -21,6 +23,7 @@ class Building:
     centroid: Point
     geometry: shape
     addresses: List[Address] = field(default_factory=list)
+    has_hotel: Optional[bool] = None
 
     full_alias: Optional[str] = None
     short_alias: Optional[str] = None
@@ -28,6 +31,10 @@ class Building:
 
     qu_terra: Optional[float] = None
     qu_gronda: Optional[float] = None
+
+    tp_cls: Optional[str] = None
+    tipo_fun: Optional[str] = None
+    spec_fun: Optional[str] = None
 
     height: Optional[float] = None
     superficie: Optional[float] = None
@@ -42,8 +49,12 @@ class Building:
     pop_est: Optional[int] = None
 
     full_nr: Optional[bool] = None
-    units_nr: Optional[int] = None
+    units_str: Optional[int] = None
     units_empty: Optional[int] = None
+    units_primary: Optional[int] = None
+    units_secondary: Optional[int] = None
+    units_res: Optional[int] = None
+    units_calc: Optional[int] = None
 
     measured: Optional[bool] = None
     surveyed: Optional[bool] = None
@@ -58,6 +69,8 @@ class Tract:
 
     pop21: Optional[int] = None
     abi21: Optional[int] = None
+    fam21: Optional[int] = None
+    edi21: Optional[int] = None
 
 @dataclass
 class Island:
