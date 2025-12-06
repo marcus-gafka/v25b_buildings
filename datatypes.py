@@ -6,6 +6,7 @@ from typing import List, Optional
 class Meter:
     id: int
     componenti: Optional[int] = None
+    rate: Optional[int] = None
     consumo_2024: Optional[float] = None
 
 @dataclass
@@ -35,6 +36,7 @@ class Building:
     tp_cls: Optional[str] = None
     tipo_fun: Optional[str] = None
     spec_fun: Optional[str] = None
+    dest_pt_an: Optional[str] = None
 
     height: Optional[float] = None
     superficie: Optional[float] = None
@@ -48,13 +50,27 @@ class Building:
     units_est_merged: Optional[int] = None
     pop_est: Optional[int] = None
 
-    full_nr: Optional[bool] = None
-    units_str: Optional[int] = None
-    units_empty: Optional[int] = None
-    units_primary: Optional[int] = None
-    units_secondary: Optional[int] = None
+    full_nr: bool = False
+
     units_res: Optional[int] = None
-    units_calc: Optional[int] = None
+    units_res_empty: Optional[int] = None
+    units_res_primary: Optional[int] = None
+
+    units_nr: Optional[int] = None
+    units_nr_empty: Optional[int] = None
+    units_nr_secondary: Optional[int] = None
+    units_nr_secondary_str: Optional[int] = None
+    units_nr_secondary_students: Optional[int] = None
+
+    # Percentages
+    res_pct: Optional[float] = None
+    nr_pct: Optional[float] = None
+    empty_pct: Optional[float] = None
+
+    # Adjusted heights
+    res_adj_height: Optional[float] = None
+    nr_adj_height: Optional[float] = None
+    empty_adj_height: Optional[float] = None
 
     measured: Optional[bool] = None
     surveyed: Optional[bool] = None

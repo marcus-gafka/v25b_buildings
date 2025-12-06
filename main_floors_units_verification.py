@@ -3,6 +3,48 @@ from pathlib import Path
 from constants import FILTERED_SURVEY_CSV, ESTIMATES_DIR
 import matplotlib.pyplot as plt
 
+
+def error_to_color(error, max_range):
+    """
+    Map an error value to a color: green (0) → yellow → red (max magnitude).
+    """
+    if max_range == 0:
+        return (0.0, 0.7, 0.0)  # fallback green if no variation
+    mag = min(abs(error) / max_range, 1)
+
+    if mag < 0.5:
+        # green → yellow
+        ratio = mag / 0.5
+        r = ratio
+        g = 1.0
+        b = 0.0
+    else:
+        # yellow → red
+        ratio = (mag - 0.5) / 0.5
+        r = 1.0
+        g = 1.0 - ratio
+        b = 0.0
+
+    return (r, g, b)
+
+
+def plot_error_distribution(errors, title, xlabel):
+    """
+    Plot a single error distribution with color mapping.
+    """
+    max_val = max(abs(errors.index).max(), 1)
+    colors = [error_to_color(e, max_val) for e in errors.index]
+
+    plt.figure(figsize=(8, 5))
+    plt.bar(errors.index, errors.values, color=colors, edgecolor='black')
+    plt.title(title)
+    plt.xlabel(xlabel)
+    plt.ylabel("Number of Buildings")
+    plt.grid(axis='y', alpha=0.6)
+    plt.tight_layout()
+    plt.show()
+
+
 def main():
     print("📂 Loading survey CSV…")
     survey_df = pd.read_csv(FILTERED_SURVEY_CSV)
@@ -17,7 +59,7 @@ def main():
     ).fillna(0).astype(int)
 
     print("📂 Loading estimates CSV…")
-    est_path = ESTIMATES_DIR / "VPC_Estimates_V3_test.csv"
+    est_path = ESTIMATES_DIR / "VPC_Estimates_V4.csv"
     est_df = pd.read_csv(est_path)
 
     print("🔗 Merging datasets…")
@@ -57,95 +99,44 @@ def main():
     merged_errors = merged["units_error_merged"].value_counts().sort_index()
     meters_errors = merged["units_error_meters"].value_counts().sort_index()
     volume_errors = merged["units_error_volume"].value_counts().sort_index()
-
-    # ------------------------------------------
-    # Color function (0 = green, farther = red)
-    # ------------------------------------------
-    import matplotlib.pyplot as plt
-
-    def error_to_color(error, max_range):
-        """
-        Map an error value to a color: green (0) → yellow → red (max magnitude).
-        """
-        if max_range == 0:
-            return (0.0, 0.7, 0.0)  # fallback green if no variation
-        mag = min(abs(error) / max_range, 1)
-
-        if mag < 0.5:
-            # green → yellow
-            ratio = mag / 0.5
-            r = ratio
-            g = 1.0
-            b = 0.0
-        else:
-            # yellow → red
-            ratio = (mag - 0.5) / 0.5
-            r = 1.0
-            g = 1.0 - ratio
-            b = 0.0
-
-        return (r, g, b)
-
-    # Example: build color lists for each graph using its own max error
-    merged_max = max(abs(merged_errors.index).max(), 1)
-    meters_max = max(abs(meters_errors.index).max(), 1)
-    volume_max = max(abs(volume_errors.index).max(), 1)
-
-    merged_colors = [error_to_color(e, merged_max) for e in merged_errors.index]
-    meters_colors = [error_to_color(e, meters_max) for e in meters_errors.index]
-    volume_colors = [error_to_color(e, volume_max) for e in volume_errors.index]
-
-    # ------------------------------------------
-    # Plot: 3 side-by-side bar charts
-    # ------------------------------------------
-    fig, axes = plt.subplots(1, 3, figsize=(18, 5), sharey=True)
-
-    # Floors
-    axes[0].bar(merged_errors.index, merged_errors.values,
-                color=merged_colors, edgecolor='black')
-    axes[0].set_title("Doorbells vs Units (Merged)")
-    axes[0].set_xlabel("units_est_merged - Doorbells")
-    axes[0].set_ylabel("Number of Buildings")
-    axes[0].grid(axis='y', alpha=0.6)
-
-    # Units (meters) vs Doorbells
-    axes[1].bar(meters_errors.index, meters_errors.values,
-                color=meters_colors, edgecolor='black')
-    axes[1].set_title("Doorbells vs Units (Meters)")
-    axes[1].set_xlabel("units_est_meters - Doorbells")
-    axes[1].grid(axis='y', alpha=0.6)
-
-
-    # Units (volume) vs Doorbells
-    axes[2].bar(volume_errors.index, volume_errors.values,
-                color=volume_colors, edgecolor='black')
-    axes[2].set_title("Doorbells vs Units (Volume)")
-    axes[2].set_xlabel("units_est_volume - Doorbells")
-    axes[2].grid(axis='y', alpha=0.6)
+    floor_errors = merged["floor_error"].value_counts().sort_index()
 
     # ------------------------------------------
     # Compute & print summary statistics
     # ------------------------------------------
-
-    merged_mean  = merged["units_error_merged"].mean()
-    merged_sd    = merged["units_error_merged"].std()
-
-    meters_mean = merged["units_error_meters"].mean()
-    meters_sd   = merged["units_error_meters"].std()
-
-    volume_mean = merged["units_error_volume"].mean()
-    volume_sd   = merged["units_error_volume"].std()
-
     print("\n================ Error Summary ================")
-    print(f"Units (merged) Error:   mean = {merged_mean:.2f}, sd = {merged_sd:.2f}")
-    print(f"Units (meters) Error:   mean = {meters_mean:.2f}, sd = {meters_sd:.2f}")
-    print(f"Units (volume) Error:   mean = {volume_mean:.2f}, sd = {volume_sd:.2f}")
+    for name, series in [
+        ("Units (merged)", merged["units_error_merged"]),
+        ("Units (meters)", merged["units_error_meters"]),
+        ("Units (volume)", merged["units_error_volume"]),
+        ("Floors", merged["floor_error"]),
+    ]:
+        mean_val = series.mean()
+        sd_val = series.std()
+        print(f"{name} Error: mean = {mean_val:.2f}, sd = {sd_val:.2f}")
     print("================================================\n")
 
-    plt.tight_layout()
-    plt.show()
+    # ------------------------------------------
+    # Plot 4 separate graphs
+    # ------------------------------------------
+    plot_error_distribution(floor_errors,
+                            title="Floors: Estimated - Actual",
+                            xlabel="floors_est - Number of Floors")
+
+    plot_error_distribution(meters_errors,
+                            title="Doorbells vs Units (Meters)",
+                            xlabel="units_est_meters - Doorbells")
+
+    plot_error_distribution(volume_errors,
+                            title="Doorbells vs Units (Volume)",
+                            xlabel="units_est_volume - Doorbells")
+
+    plot_error_distribution(merged_errors,
+                            title="Doorbells vs Units (Merged)",
+                            xlabel="units_est_merged - Doorbells")
 
     return merged
+
 
 if __name__ == "__main__":
     df = main()

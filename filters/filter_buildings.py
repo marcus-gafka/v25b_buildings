@@ -19,6 +19,7 @@ KEEP_FIELDS = [
     "Superficie",
     "TipoFun",
     "SpecFun",
+    "Dest_Pt_An",
     BUILDING_FIELD,   # building alias
     ISLAND_FIELD      # Codice
 ]

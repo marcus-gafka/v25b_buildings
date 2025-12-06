@@ -11,7 +11,7 @@ EMOJI_ISLAND = "🏝️"
 EMOJI_BUILDING = "🏠"
 EMOJI_TYPE = "🏷️"
 
-MASTER_OUTPUT_FILE = SUMMARY_DIR / "buildings_summary.txt"
+MASTER_OUTPUT_FILE = SUMMARY_DIR / "Venice_Summary.txt"
 
 # Venice districts to include
 SESTIERI = [

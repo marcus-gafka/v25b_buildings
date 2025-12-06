@@ -143,6 +143,7 @@ class Dataset:
                 tp_cls=b_row.get("TP_CLS_ED"),
                 spec_fun=b_row.get("SpecFun"),
                 tipo_fun=b_row.get("TipoFun"),
+                dest_pt_an=b_row.get("Dest_Pt_An"),
             )
 
             tract.buildings.append(building)
@@ -163,8 +164,16 @@ class Dataset:
                 if not meter_row.empty:
                     comp = meter_row["Componenti"].iloc[0]
                     consumo = meter_row["Consumo_medio_2024"].iloc[0]
-                    meters_list.append(Meter(id=int(fid), componenti=int(comp) if pd.notna(comp) else 1,
-                                            consumo_2024=float(consumo) if pd.notna(consumo) else 0))
+                    rate = meter_row["Cat_Tariffa"].iloc[0] 
+
+                    meters_list.append(
+                        Meter(
+                            id=int(fid),
+                            componenti=int(comp) if pd.notna(comp) else 1,
+                            consumo_2024=float(consumo) if pd.notna(consumo) else 0,
+                            rate=rate if pd.notna(rate) else None
+                        )
+                    )
                 else:
                     meters_list.append(Meter(id=int(fid), componenti=1, consumo_2024=0))
 
@@ -182,7 +191,6 @@ class Dataset:
             )
 
         # --- Debug print hierarchy ---
-        """
         print("\nHierarchy Build Complete:\nVenice")
         for s in sestiere_map.values():
             print(f" ├── {s.code} ({s.name})")
@@ -191,12 +199,11 @@ class Dataset:
                 for tr in isl.tracts:
                     print(f" │    │    ├── Tract {tr.id}  (Buildings: {len(tr.buildings)})")
         print("\n")
-        """
 
         return Venice(sestieri=list(sestiere_map.values()))
     
     def export_hierarchy_text(self, path: str):
-        """Export Venice hierarchy to a text file with full building, address, and meter info."""
+        """Export Venice hierarchy to a text file with full building, address, and meter info (updated V4 fields)."""
         lines = []
 
         for s in self.venice.sestieri:
@@ -204,24 +211,57 @@ class Dataset:
             for isl in s.islands:
                 lines.append(f"\n    Island: {isl.code}")
                 for tr in isl.tracts:
-                    lines.append(f"\n        Tract Code: {'-'.join(((tr.buildings[0].full_alias or tr.buildings[0].short_alias or '').split('-')[:3]))} Tract ID: {tr.id}  (Buildings: {len(tr.buildings)})")
+                    tr_alias = tr.buildings[0].full_alias or tr.buildings[0].short_alias or ''
+                    lines.append(f"\n        Tract Code: {'-'.join(tr_alias.split('-')[:3])} Tract ID: {tr.id}  (Buildings: {len(tr.buildings)})")
                     lines.append(f"         POP21: {tr.pop21}, ABI21: {tr.abi21}, FAM21: {tr.fam21}, EDI21: {tr.edi21}")
+                    
                     for b in tr.buildings:
+                        # Safe defaults for percentages and adjusted heights
+                        res_pct = getattr(b, "res_pct", 0.0) or 0.0
+                        nr_pct = getattr(b, "nr_pct", 0.0) or 0.0
+                        empty_pct = getattr(b, "empty_pct", 0.0) or 0.0
+
+                        res_adj_height = getattr(b, "res_adj_height", 0.0) or 0.0
+                        nr_adj_height = getattr(b, "nr_adj_height", 0.0) or 0.0
+                        empty_adj_height = getattr(b, "empty_adj_height", 0.0) or 0.0
+
                         lines.append(f"\n            Building Alias: {b.full_alias}, {b.short_alias}, ID: {b.id}")
-                        lines.append(f"                Type: {b.tp_cls}")
+                        lines.append(f"                Type: {b.tp_cls}, Dest_Pt_An: {b.dest_pt_an}, Full_NR?: {b.full_nr}")
                         lines.append(f"                Height: {b.height}, NormHeight: {b.normalized_height}, FloorsEst: {b.floors_est}")
                         lines.append(f"                Superficie: {b.superficie}, NormSuperficie: {b.normalized_superficie}, LivableSpace: {b.livable_space}")
-                        lines.append(f"                UnitsMeters: {b.units_est_meters}, UnitsVolume: {b.units_est_volume}, UnitsMerged: {b.units_est_merged}, UnitsCalc: {b.units_calc}")
-                        lines.append(f"                Primary: {b.units_primary}, Secondary: {b.units_secondary}, ResidentialTotal: {b.units_res}")
-                        lines.append(f"                STRs: {b.units_str}, Empty: {b.units_empty}, PopEst: {b.pop_est}")
-                        lines.append(f"                Measured: {b.measured}, Surveyed: {b.surveyed}")
+                        lines.append(
+                            f"                UnitsMeters: {b.units_est_meters}, UnitsVolume: {b.units_est_volume}, UnitsMerged: {b.units_est_merged}"
+                        )
+                        lines.append(
+                            f"                Res_Primary: {b.units_res_primary}, "
+                            f"Res_Empty: {b.units_res_empty}, "
+                            f"Res_Total: {b.units_res}, "
+                            f"Res_Pct: {res_pct:.2f}, "
+                            f"Res_AdjHeight: {res_adj_height:.2f}"
+                        )
+                        lines.append(
+                            f"                NR_Secondary: {b.units_nr_secondary}, "
+                            f"NR_Empty: {b.units_nr_empty}, "
+                            f"NR_STR: {b.units_nr_secondary_str}, "
+                            f"NR_Students: {b.units_nr_secondary_students}, "
+                            f"NR_Total: {b.units_nr}, "
+                            f"NR_Pct: {nr_pct:.2f}, "
+                            f"NR_AdjHeight: {nr_adj_height:.2f}"
+                        )
+                        lines.append(
+                            f"                Empty_Pct: {empty_pct:.2f}, Empty_AdjHeight: {empty_adj_height:.2f}, "
+                            f"PopEst: {b.pop_est}"
+                        )
+                        lines.append(f"                Measured: {getattr(b, 'measured', False)}, Surveyed: {getattr(b, 'surveyed', False)}")
 
                         for addr in b.addresses:
                             lines.append(f"\n                Address: {addr.address}")
                             lines.append(f"                    STRs: {addr.strs}, Hotels: {addr.hotels}, HotelsExtras: {addr.hotels_extras}")
                             if addr.meters:
                                 for m in addr.meters:
-                                    lines.append(f"                    Meter: {m.id} (Comp: {m.componenti}, Consumo2024: {m.consumo_2024})")
+                                    lines.append(
+                                        f"                    Meter: {m.id} (Comp: {m.componenti}, Consumo2024: {m.consumo_2024}, Rate: {m.rate})"
+                                    )
                             else:
                                 lines.append(f"                    Meters: []")
 
