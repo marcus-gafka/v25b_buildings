@@ -6,23 +6,24 @@ import matplotlib.pyplot as plt
 
 def error_to_color(error, max_range):
     """
-    Map an error value to a color: green (0) → yellow → red (max magnitude).
+    Map an error value to a muted color: green (0) → yellow → red (max magnitude).
     """
     if max_range == 0:
-        return (0.0, 0.7, 0.0)  # fallback green if no variation
-    mag = min(abs(error) / max_range, 1)
+        return (0.0, 0.5, 0.0)  # muted green fallback
+
+    mag = min(abs(error) / max_range, 1.0)
 
     if mag < 0.5:
         # green → yellow
         ratio = mag / 0.5
-        r = ratio
-        g = 1.0
+        r = 0.5 * ratio      # start darker red component
+        g = 0.7              # muted green
         b = 0.0
     else:
         # yellow → red
         ratio = (mag - 0.5) / 0.5
-        r = 1.0
-        g = 1.0 - ratio
+        r = 0.7              # muted red
+        g = 0.7 * (1 - ratio)  # green fades
         b = 0.0
 
     return (r, g, b)

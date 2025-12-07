@@ -361,6 +361,11 @@ def estimation_v4(ds, islands=None, debug=False):
     for idx, b in enumerate(all_buildings, 1):
 
         merged = getattr(b, "_merged", 0)
+
+        if getattr(b, "full_nr", False) or getattr(b, "has_hotel", False):
+            b.nr_pct = 1.0
+            print(f"NR pct overridden to 1.0 because full_nr or has_hotel is True ({b.short_alias})")
+
         if merged == 0:
             continue
 
@@ -436,8 +441,17 @@ def estimation_v4(ds, islands=None, debug=False):
 
         b.total_units = (b.units_res or 0) + (b.units_nr or 0)
 
+        # Calculate residential pct
         b.res_pct = ((b.units_res or 0) / b.total_units) if b.total_units else 0.0
+        # Calculate NR pct
         b.nr_pct = ((b.units_nr or 0) / b.total_units) if b.total_units else 0.0
+        print(f"Calculated nr_pct before override: {b.nr_pct:.2f}, has_hotel: {b.has_hotel}, short_alias: {b.short_alias}")
+
+        if str(b.has_hotel).lower() in ("1", "true", "yes"):
+            b.nr_pct = 1.0
+            print(f"NR pct overridden to 1.0 because has_hotel is True")
+
+        # Calculate empty pct
         b.empty_pct = ((b.units_res_empty or 0) + (b.units_nr_empty or 0)) / b.total_units if b.total_units else 0.0
 
         # Adjusted heights
@@ -466,7 +480,7 @@ def estimation_v4(ds, islands=None, debug=False):
         audit_rows.append({
             "short_alias": val_zero(b.short_alias, is_number=False),
             "building_id": val_zero(b.id),
-            "type": val_zero(b.tp_cls, is_number=False),
+            "type": (b.tp_cls.strip() if isinstance(b.tp_cls, str) and b.tp_cls.strip() else "none"),
             "height": val_zero(b.height),
             "norm_height": val_zero(b.normalized_height),
             "superficie": val_zero(b.superficie),
@@ -476,7 +490,9 @@ def estimation_v4(ds, islands=None, debug=False):
             "units_est_volume": val_zero(b.units_est_volume),
             "units_est_merged": val_zero(b.units_est_merged),
             "pop_est": val_zero(b.pop_est),
-            "full_nr?": val_zero(b.full_nr),
+            "full_nr?": int(getattr(b, "full_nr", 0)),
+            "measured": int(getattr(b, "measured", 0)),
+            "surveyed": int(getattr(b, "surveyed", 0)),
 
             # Residential units
             "units_res_primary": val_zero(getattr(b, "units_res_primary", 0)),
@@ -500,8 +516,6 @@ def estimation_v4(ds, islands=None, debug=False):
             "nr_adj_height": val_zero(getattr(b, "nr_adj_height", 0)),
             "empty_adj_height": val_zero(getattr(b, "empty_adj_height", 0)),
 
-            "measured": val_zero(getattr(b, "measured", False), is_number=False),
-            "surveyed": val_zero(getattr(b, "surveyed", False), is_number=False),
             "geometry": val_zero(getattr(b, "geometry", None), is_number=False)
         })
 

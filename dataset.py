@@ -157,7 +157,7 @@ class Dataset:
             if building is None:
                 continue
 
-            # Build meters list with componenti and 2024 consumption
+            # Build meters list
             meters_list = []
             for fid in meters_map.get(addr_code, []):
                 meter_row = water_df[water_df["FID"] == fid]
@@ -185,20 +185,24 @@ class Dataset:
                 strs=strs_map.get(addr_code, [])
             )
             building.addresses.append(address_obj)
+
+        for building in building_map.values():
             building.has_hotel = any(
-                addr.hotels or addr.hotels_extras
+                bool(addr.hotels) or bool(addr.hotels_extras)
                 for addr in building.addresses
             )
+            if building.has_hotel:
+                print(f"{building.id} has hotel: {[addr.hotels for addr in building.addresses]}")
 
         # --- Debug print hierarchy ---
-        print("\nHierarchy Build Complete:\nVenice")
+        """ print("\nHierarchy Build Complete:\nVenice")
         for s in sestiere_map.values():
             print(f" ├── {s.code} ({s.name})")
             for isl in s.islands:
                 print(f" │    ├── Island {isl.code}")
                 for tr in isl.tracts:
                     print(f" │    │    ├── Tract {tr.id}  (Buildings: {len(tr.buildings)})")
-        print("\n")
+        print("\n")"""
 
         return Venice(sestieri=list(sestiere_map.values()))
     
@@ -246,7 +250,8 @@ class Dataset:
                             f"NR_Students: {b.units_nr_secondary_students}, "
                             f"NR_Total: {b.units_nr}, "
                             f"NR_Pct: {nr_pct:.2f}, "
-                            f"NR_AdjHeight: {nr_adj_height:.2f}"
+                            f"NR_AdjHeight: {nr_adj_height:.2f}, "
+                            f"Has_Hotel?: {(b.has_hotel or 0):.2f}"
                         )
                         lines.append(
                             f"                Empty_Pct: {empty_pct:.2f}, Empty_AdjHeight: {empty_adj_height:.2f}, "

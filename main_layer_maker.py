@@ -18,9 +18,9 @@ from file_utils import csv_to_geojson
 def main():
 
     ds = Dataset(str(ALIAS_GEOJSON))
-    #estimation_v4(ds,{"PALA"},False)
+    #estimation_v4(ds,{"GERE"},False)
     estimation_v4(ds,{})
-    ds.export_hieraliasesy_text(ESTIMATES_DIR / "Venice_hieraliasesy.txt")
+    ds.export_hierarchy_text(ESTIMATES_DIR / "Venice_hierarchy.txt")
     csv_to_geojson(ESTIMATES_DIR / "VPC_Estimates_V4.csv")
 
 def add_og_fields():
@@ -192,4 +192,5 @@ def add_og_fields():
     print("✅ Done! CSV + GeoJSON created.")
 
 if __name__ == "__main__":
-    add_og_fields()
+    main()
+    #add_og_fields()
