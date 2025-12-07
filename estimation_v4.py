@@ -170,6 +170,11 @@ def attach_nr_info(ds):
             if b.full_nr and (b.short_alias or "").upper().startswith("MELO"):
                 print(f"[NR] {b.full_alias} → {', '.join(nr_reasons)}")
 
+def val_zero(x, is_number=True):
+        if x is None:
+            return 0 if is_number else ""
+        return x
+
 # ------------------------------------------------------------
 # ESTIMATION V4
 # ------------------------------------------------------------
@@ -456,50 +461,52 @@ def estimation_v4(ds, islands=None, debug=False):
     # ---------------------- Build audit CSV ----------------------
     print("[STEP] Building audit rows and saving CSV")
     audit_rows = []
+
     for idx, b in enumerate(all_buildings, 1):
         audit_rows.append({
-            "short_alias": b.short_alias,
-            "building_id": b.id,
-            "type": b.tp_cls,
-            "height": b.height,
-            "norm_height": b.normalized_height,
-            "superficie": b.superficie,
-            "norm_superficie": b.normalized_superficie,
-            "floors_est": b.floors_est,
-            "units_est_meters": b.units_est_meters,
-            "units_est_volume": b.units_est_volume,
-            "units_est_merged": b.units_est_merged,
-            "pop_est": b.pop_est,
-            "full_nr?": b.full_nr,
+            "short_alias": val_zero(b.short_alias, is_number=False),
+            "building_id": val_zero(b.id),
+            "type": val_zero(b.tp_cls, is_number=False),
+            "height": val_zero(b.height),
+            "norm_height": val_zero(b.normalized_height),
+            "superficie": val_zero(b.superficie),
+            "norm_superficie": val_zero(b.normalized_superficie),
+            "floors_est": val_zero(b.floors_est),
+            "units_est_meters": val_zero(b.units_est_meters),
+            "units_est_volume": val_zero(b.units_est_volume),
+            "units_est_merged": val_zero(b.units_est_merged),
+            "pop_est": val_zero(b.pop_est),
+            "full_nr?": val_zero(b.full_nr),
 
             # Residential units
-            "units_res_primary": getattr(b, "units_res_primary", 0),
-            "units_res_empty": getattr(b, "units_res_empty", 0),
-            "units_res": getattr(b, "units_res", 0),
+            "units_res_primary": val_zero(getattr(b, "units_res_primary", 0)),
+            "units_res_empty": val_zero(getattr(b, "units_res_empty", 0)),
+            "units_res": val_zero(getattr(b, "units_res", 0)),
 
             # Non-residential units
-            "units_nr_secondary": getattr(b, "units_nr_secondary", 0),
-            "units_nr_empty": getattr(b, "units_nr_empty", 0),
-            "units_nr_secondary_str": getattr(b, "units_nr_secondary_str", 0),
-            "units_nr_secondary_students": getattr(b, "units_nr_secondary_students", 0),
-            "units_nr": getattr(b, "units_nr", 0),
+            "units_nr_secondary": val_zero(getattr(b, "units_nr_secondary", 0)),
+            "units_nr_empty": val_zero(getattr(b, "units_nr_empty", 0)),
+            "units_nr_secondary_str": val_zero(getattr(b, "units_nr_secondary_str", 0)),
+            "units_nr_secondary_students": val_zero(getattr(b, "units_nr_secondary_students", 0)),
+            "units_nr": val_zero(getattr(b, "units_nr", 0)),
 
             # Percentages
-            "res_pct": getattr(b, "res_pct", 0),
-            "nr_pct": getattr(b, "nr_pct", 0),
-            "empty_pct": getattr(b, "empty_pct", 0),
+            "res_pct": val_zero(getattr(b, "res_pct", 0)),
+            "nr_pct": val_zero(getattr(b, "nr_pct", 0)),
+            "empty_pct": val_zero(getattr(b, "empty_pct", 0)),
 
             # Adjusted heights
-            "res_adj_height": getattr(b, "res_adj_height", 0),
-            "nr_adj_height": getattr(b, "nr_adj_height", 0),
-            "empty_adj_height": getattr(b, "empty_adj_height", 0),
+            "res_adj_height": val_zero(getattr(b, "res_adj_height", 0)),
+            "nr_adj_height": val_zero(getattr(b, "nr_adj_height", 0)),
+            "empty_adj_height": val_zero(getattr(b, "empty_adj_height", 0)),
 
-            "measured": getattr(b, "measured", False),
-            "surveyed": getattr(b, "surveyed", False),
-            "geometry": getattr(b, "geometry", None)
+            "measured": val_zero(getattr(b, "measured", False), is_number=False),
+            "surveyed": val_zero(getattr(b, "surveyed", False), is_number=False),
+            "geometry": val_zero(getattr(b, "geometry", None), is_number=False)
         })
-        if idx % 100 == 0 or idx == len(all_buildings):
-            print(f"[PROGRESS] Added {idx}/{len(all_buildings)} buildings to audit rows")
+
+    if idx % 100 == 0 or idx == len(all_buildings):
+        print(f"[PROGRESS] Added {idx}/{len(all_buildings)} buildings to audit rows")
 
     audit_df = pd.DataFrame(audit_rows).sort_values("short_alias")
     output_path = os.path.join(ESTIMATES_DIR, "VPC_Estimates_V4.csv")
