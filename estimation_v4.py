@@ -362,9 +362,10 @@ def estimation_v4(ds, islands=None, debug=False):
 
         merged = getattr(b, "_merged", 0)
 
-        if getattr(b, "full_nr", False) or getattr(b, "has_hotel", False):
+        if getattr(b, "has_hotel", False):
             b.nr_pct = 1.0
             print(f"NR pct overridden to 1.0 because full_nr or has_hotel is True ({b.short_alias})")
+            continue
 
         if merged == 0:
             continue
