@@ -1,6 +1,6 @@
 import pandas as pd
 from pathlib import Path
-from constants import FILTERED_SURVEY_CSV, ESTIMATES_DIR
+from constants import FILTERED_SURVEY_CSV, ESTIMATES_DIR, TOTAL_FIELDWORK_CSV
 import matplotlib.pyplot as plt
 
 
@@ -63,13 +63,27 @@ def main():
     est_path = ESTIMATES_DIR / "VPC_Estimates_V4.csv"
     est_df = pd.read_csv(est_path)
 
+    print("📂 Loading observed floors CSV…")
+    observed_df = pd.read_csv(TOTAL_FIELDWORK_CSV)
+    observed_df["short_alias"] = observed_df["short_alias"].astype(str).str.strip().str.upper()
+    observed_df["Floors"] = pd.to_numeric(observed_df["Floors"], errors="coerce").fillna(0).astype(int)
+
     print("🔗 Merging datasets…")
     merged = survey_df.merge(est_df, on="short_alias", how="left")
 
-    # ------------------------------------------
-    # Compute all errors
-    # ------------------------------------------
-    merged["floor_error"] = merged["floors_est"] - merged["Number of Floors"]
+    # Merge observed floors
+    merged = merged.merge(
+        observed_df[["short_alias", "Floors"]],
+        on="short_alias",
+        how="left"
+    )
+
+    # Only use observed floors if available, otherwise fall back to survey floors
+    merged["floor_observed_final"] = merged["Floors"].where(merged["Floors"].notna(), merged["Number of Floors"])
+
+    # Compute error
+    merged["floor_error_observed"] = merged["floors_est"] - merged["floor_observed_final"]
+
     merged["units_error_meters"] = merged["units_est_meters"] - merged["Number of Doorbells"]
     merged["units_error_volume"] = merged["units_est_volume"] - merged["Number of Doorbells"]
     merged["units_error_merged"] = merged["units_est_merged"] - merged["Number of Doorbells"]
@@ -81,8 +95,10 @@ def main():
     merged[[
         "short_alias",
         "Number of Floors",
+        "Floors",
         "floors_est",
         "floor_error",
+        "floor_error_observed",
         "Number of Doorbells",
         "units_est_meters",
         "units_error_meters",
@@ -100,7 +116,7 @@ def main():
     merged_errors = merged["units_error_merged"].value_counts().sort_index()
     meters_errors = merged["units_error_meters"].value_counts().sort_index()
     volume_errors = merged["units_error_volume"].value_counts().sort_index()
-    floor_errors = merged["floor_error"].value_counts().sort_index()
+    floor_errors = merged["floor_error_observed"].value_counts().sort_index()
 
     # ------------------------------------------
     # Compute & print summary statistics
@@ -110,7 +126,7 @@ def main():
         ("Units (merged)", merged["units_error_merged"]),
         ("Units (meters)", merged["units_error_meters"]),
         ("Units (volume)", merged["units_error_volume"]),
-        ("Floors", merged["floor_error"]),
+        ("Floors", merged["floor_error_observed"]),
     ]:
         mean_val = series.mean()
         sd_val = series.std()
@@ -121,8 +137,8 @@ def main():
     # Plot 4 separate graphs
     # ------------------------------------------
     plot_error_distribution(floor_errors,
-                            title="Floors: Estimated - Actual",
-                            xlabel="floors_est - Number of Floors")
+                            title="Floors: Estimated - Observed Floors",
+                            xlabel="floors_est - Observed Floors")
 
     plot_error_distribution(meters_errors,
                             title="Doorbells vs Units (Meters)",

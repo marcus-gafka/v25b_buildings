@@ -364,6 +364,7 @@ def estimation_v4(ds, islands=None, debug=False):
 
         if getattr(b, "has_hotel", False):
             b.nr_pct = 1.0
+            b.nr_adj_height = b.nr_pct * b.normalized_height
             print(f"NR pct overridden to 1.0 because full_nr or has_hotel is True ({b.short_alias})")
             continue
 
