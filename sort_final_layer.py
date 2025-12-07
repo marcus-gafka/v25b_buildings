@@ -3,9 +3,9 @@ from pathlib import Path
 
 # Input and output paths
 INPUT_GEOJSON = "estimates/VPC_Estimates_V4.geojson"
-OUTPUT_RES = "final/output_residential.geojson"
-OUTPUT_NR = "final/output_nonresidential.geojson"
-OUTPUT_EMPTY = "final/output_empty.geojson"
+OUTPUT_RES = "final/V25B_Residential.geojson"
+OUTPUT_NR = "final/V25B_NonResidential.geojson"
+OUTPUT_EMPTY = "final/V25B_Vacant.geojson"
 
 # Fields to filter
 FIELDS = {
