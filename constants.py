@@ -7,7 +7,8 @@ CHECKLISTS_DIR = ROOT_DIR / "checklists"
 FIELDWORK_DIR = ROOT_DIR / "fieldwork"
 SUMMARY_DIR = ROOT_DIR / "summaries"
 ESTIMATES_DIR = ROOT_DIR / "estimates"
-ESTIMATES_CSV = ESTIMATES_DIR / "VPC_Estimates_V4.csv"
+
+ESTIMATES_CSV = ESTIMATES_DIR / "VPC_Estimates_V4-new.csv"
 
 #Input
 RAW_GEOJSON = DATA_DIR / "VPC_Buildings_Total_1.geojson"

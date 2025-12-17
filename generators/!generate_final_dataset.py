@@ -1,6 +1,7 @@
 import sys
 from pathlib import Path
 sys.path.append(str(Path(__file__).parent.parent))
+
 from constants import ESTIMATES_CSV, ALIAS_CSV
 
 import pandas as pd
@@ -11,6 +12,9 @@ import os
 OUTPUT_CSV = "final/V25B_Estimates_Final.csv"
 OUTPUT_GEOJSON = "final/V25B_Estimates_Final.geojson"
 
+# ------------------------------
+# RENAME MAP
+# ------------------------------
 RENAME_COLUMNS = {
     "TARGET_FID_12_13": "VPC_Building_ID",
     "full_alias": "V25B_Full_Alias",
@@ -33,8 +37,11 @@ RENAME_COLUMNS = {
     "ABI21": "VPC_Census_Units",
     "EDI21": "VPC_Census_Buildings",
     "Nome_Isola": "VPC_Island_Name",
-    "TP_CLS_ED": "VPC_Arch_Type",
+    #"TP_CLS_ED": "VPC_Arch_Type",
+    "tp_cls": "VPC_Arch_Type",
     "DESC_TIPO": "VPC_Arch_Type_Desc",
+
+    # V25B fields
     "height": "V25B_Height",
     "norm_height": "V25B_Normalized_Height",
     "norm_superficie": "V25B_Normalized_Footprint",
@@ -43,29 +50,39 @@ RENAME_COLUMNS = {
     "units_est_volume": "V25B_Units_Est_byVolume",
     "units_est_merged": "V25B_Est_Units_Merged",
     "pop_est": "V25B_Est_Population",
-    "full_nr": "V25B_Est_Non_Res",
+
+    "full_nr": "V25B_Full_NR?",
     "units_res_primary": "V25B_Est_Res_Primary",
     "units_res_empty": "V25B_Est_Res_Vacant",
     "units_res": "V25B_Est_Res_Units",
-    "units_nr_secondary": "V25B_Est_Non_Res_Secondary",
-    "units_nr_empty": "V25B_Est_Non_Res_Vacant",
+    "units_nr_secondary": "V25B_Est_NR_Secondary",
+    "units_nr_empty": "V25B_Est_NR_Vacant",
     "units_nr_secondary_str": "V25B_STR",
     "units_nr_secondary_students": "V25B_Students",
-    "units_nr": "V25B_Est_Non_Res_Units",
+    "units_nr": "V25B_Est_NR_Units",
+
     "res_pct": "V25B_Est_Pct_Res",
-    "nr_pct": "V25B_Est_Pct_Non_Res",
+    "nr_pct": "V25B_Est_Pct_NR",
     "empty_pct": "V25B_Est_Pct_Vacant",
+
     "res_adj_height": "V25B_Est_Res_Height",
-    "nr_adj_height": "V25B_Est_Non_Res_Height",
+    "nr_adj_height": "V25B_Est_NR_Height",
     "empty_adj_height": "V25B_Est_Vacant_Height",
+
+    "upperonly_res_adj_height": "V25B_Est_Res_UpperOnly_Height",
+    "upperonly_nr_adj_height": "V25B_Est_NR_UpperOnly_Height",
+    "upperonly_empty_adj_height": "V25B_Est_Vacant_UpperOnly_Height",
+
+    "ground_floor_height": "V25B_Est_Ground_Floor_Height",
+    "upper_floors_height": "V25B_Est_Upper_Floors_Height",
+
     "measured": "V25B_Measured?",
     "surveyed": "V25B_Surveyed?",
     "geometry": "geometry",
 }
 
 # ------------------------------
-# COLUMN ORDER
-# Sensible order for analysis / export
+# OUTPUT ORDER
 # ------------------------------
 COLUMN_ORDER = [
     "VPC_Building_ID",
@@ -83,7 +100,6 @@ COLUMN_ORDER = [
     "VPC_Door_Height",
     "VPC_Gutter_Height",
     "VPC_Footprint",
-    "V25B_Footprint",
     "V25B_Height",
     "V25B_Normalized_Height",
     "V25B_Normalized_Footprint",
@@ -92,42 +108,47 @@ COLUMN_ORDER = [
     "VPC_Census_Families",
     "VPC_Census_Population",
     "VPC_Census_ID",
+    "V25B_Full_NR?",
     "V25B_Est_Floors",
-    "V25B_Units_Est_Meters",
-    "V25B_Units_Est_Volume",
-    "V25B_Est_Units",
+    "V25B_Est_Units_byMeters",
+    "V25B_Est_Units_byVolume",
+    "V25B_Est_Units_Merged",
     "V25B_Est_Population",
     "V25B_Est_Res_Primary",
     "V25B_Est_Res_Vacant",
     "V25B_Est_Res_Units",
-    "V25B_Est_Non_Res_Secondary",
-    "V25B_Est_Non_Res_Vacant",
-    "V25B_STR",
-    "V25B_Students",
-    "V25B_Est_Non_Res_Units",
-    "V25B_Est_Non_Res",
+    "V25B_Est_NR_Secondary",
+    "V25B_Est_NR_Vacant",
+    "V25B_Est_NR_STR",
+    "V25B_Est_NR_Students",
+    "V25B_Est_NR_Units",
     "V25B_Est_Pct_Res",
-    "V25B_Est_Pct_Non_Res",
+    "V25B_Est_Pct_NR",
     "V25B_Est_Pct_Vacant",
     "V25B_Est_Res_Height",
-    "V25B_Est_Non_Res_Height",
+    "V25B_Est_NR_Height",
     "V25B_Est_Vacant_Height",
+    "V25B_Est_Res_UpperOnly_Height",
+    "V25B_Est_NR_UpperOnly_Height",
+    "V25B_Est_Vacant_UpperOnly_Height",
+    "V25B_Est_Ground_Floor_Height",
+    "V25B_Est_Upper_Floors_Height",
     "V25B_Measured?",
     "V25B_Surveyed?",
     "geometry",
 ]
 
+
+# ------------------------------
+# MAIN PROCESS
+# ------------------------------
 def add_og_fields():
     print("📥 Loading CSVs...")
-    esti = pd.read_csv(ESTIMATES_CSV)   # this CSV has building_id
-    aliases = pd.read_csv(ALIAS_CSV)    # this CSV has TARGET_FID_12_13
+    esti = pd.read_csv(ESTIMATES_CSV)
+    aliases = pd.read_csv(ALIAS_CSV)
 
-    # clean weird spaces/BOM
     esti.columns = esti.columns.str.replace(r'[^0-9A-Za-z_]+', '', regex=True).str.strip()
     aliases.columns = aliases.columns.str.replace(r'[^0-9A-Za-z_]+', '', regex=True).str.strip()
-
-    print("\nARCH COLUMNS:\n", aliases.columns.tolist())
-    print("\nUNITS COLUMNS:\n", esti.columns.tolist())
 
     print("🔗 Merging on TARGET_FID_12_13 ↔ building_id...")
     merged = aliases.merge(
@@ -137,54 +158,38 @@ def add_og_fields():
         how="left"
     )
 
-    # ------------------------------
-    # OPTIONAL RENAME
-    # ------------------------------
-    if RENAME_COLUMNS:
-        print("✏️ Renaming columns...")
-        merged = merged.rename(columns=RENAME_COLUMNS)
+    # RENAME
+    print("✏️ Renaming columns...")
+    merged = merged.rename(columns=RENAME_COLUMNS)
 
-    # ------------------------------
-    # OPTIONAL REORDER
-    # ------------------------------
-    if COLUMN_ORDER:
-        print("📑 Reordering columns...")
-        final_cols = [c for c in COLUMN_ORDER if c in merged.columns]
-        extras = [c for c in merged.columns if c not in final_cols]
-        merged = merged[final_cols + extras]
+    # ENFORCE ORDER
+    print("📑 Reordering columns...")
+    final_cols = [c for c in COLUMN_ORDER if c in merged.columns]
+    merged = merged[final_cols]
 
-    # ------------------------------
     # SAVE CSV
-    # ------------------------------
-    merged = merged[[c for c in COLUMN_ORDER if c in merged.columns]]
     os.makedirs(os.path.dirname(OUTPUT_CSV), exist_ok=True)
     print("💾 Writing CSV output...")
     merged.to_csv(OUTPUT_CSV, index=False)
 
-    # ------------------------------
-    # GEOJSON EXPORT
-    # ------------------------------
+    # GEOJSON
     if "geometry" in merged.columns:
-        print("🌍 Converting geometry (WKT → GeoDataFrame)...")
-        # Safely convert non-empty geometry strings to shapely
-        merged["geometry"] = merged["geometry"].apply(lambda x: wkt.loads(x) if pd.notna(x) and x.strip() else None)
-
-        geo = gpd.GeoDataFrame(
-            merged,
-            geometry="geometry",
-            crs="EPSG:4326"
+        print("🌍 Converting geometry...")
+        merged["geometry"] = merged["geometry"].apply(
+            lambda x: wkt.loads(x) if isinstance(x, str) and x.strip() else None
         )
+        geo = gpd.GeoDataFrame(merged, geometry="geometry", crs="EPSG:4326")
 
         os.makedirs(os.path.dirname(OUTPUT_GEOJSON), exist_ok=True)
         print("💾 Writing GeoJSON...")
+
+        dupes = geo.columns[geo.columns.duplicated()].tolist()
+        print("DUPLICATE COLUMNS:", dupes)
+
         geo.to_file(OUTPUT_GEOJSON, driver="GeoJSON")
-    else:
-        print("⚠️ 'geometry' column not found — skipping GeoJSON export.")
 
     print("✅ Done! CSV + GeoJSON created.")
 
-# ------------------------------
-# RUN
-# ------------------------------
+
 if __name__ == "__main__":
     add_og_fields()

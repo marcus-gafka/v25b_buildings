@@ -229,19 +229,31 @@ class Dataset:
                         nr_adj_height = getattr(b, "nr_adj_height", 0.0) or 0.0
                         empty_adj_height = getattr(b, "empty_adj_height", 0.0) or 0.0
 
+                        upperonly_res_adj_height = getattr(b, "upperonly_res_adj_height", 0.0) or 0.0
+                        upperonly_nr_adj_height = getattr(b, "upperonly_nr_adj_height", 0.0) or 0.0
+                        upperonly_empty_adj_height = getattr(b, "upperonly_empty_adj_height", 0.0) or 0.0
+
+                        res_livable_space = getattr(b, "res_liveable_space", 0.0) or 0.0
+                        nr_livable_space = getattr(b, "nr_liveable_space", 0.0) or 0.0
+                        livable_space = getattr(b, "liveable_space", 0.0) or 0.0
+
+                        ground_floor_height = getattr(b, "ground_floor_height", 0.0) or 0.0
+                        upper_floors_height = getattr(b, "upper_floors_height", 0.0) or 0.0
+
                         lines.append(f"\n            Building Alias: {b.full_alias}, {b.short_alias}, ID: {b.id}")
                         lines.append(f"                Type: {b.tp_cls}, Dest_Pt_An: {b.dest_pt_an}, Full_NR?: {b.full_nr}")
                         lines.append(f"                Height: {b.height}, NormHeight: {b.normalized_height}, FloorsEst: {b.floors_est}")
-                        lines.append(f"                Superficie: {b.superficie}, NormSuperficie: {b.normalized_superficie}, LivableSpace: {b.livable_space}")
-                        lines.append(
-                            f"                UnitsMeters: {b.units_est_meters}, UnitsVolume: {b.units_est_volume}, UnitsMerged: {b.units_est_merged}"
-                        )
+                        lines.append(f"                Superficie: {b.superficie}, NormSuperficie: {b.normalized_superficie}, LiveableSpace: {livable_space}")
+                        lines.append(f"                GroundFloorHeight: {ground_floor_height}, UpperFloorsHeight: {upper_floors_height}")
+                        lines.append(f"                UnitsMeters: {b.units_est_meters}, UnitsVolume: {b.units_est_volume}, UnitsMerged: {b.units_est_merged}")
                         lines.append(
                             f"                Res_Primary: {b.units_res_primary}, "
                             f"Res_Empty: {b.units_res_empty}, "
                             f"Res_Total: {b.units_res}, "
                             f"Res_Pct: {res_pct:.2f}, "
-                            f"Res_AdjHeight: {res_adj_height:.2f}"
+                            f"Res_AdjHeight: {res_adj_height:.2f}, "
+                            f"UpperOnly_Res_AdjHeight: {upperonly_res_adj_height:.2f}, "
+                            f"Res_LivableSpace: {res_livable_space}"
                         )
                         lines.append(
                             f"                NR_Secondary: {b.units_nr_secondary}, "
@@ -251,10 +263,12 @@ class Dataset:
                             f"NR_Total: {b.units_nr}, "
                             f"NR_Pct: {nr_pct:.2f}, "
                             f"NR_AdjHeight: {nr_adj_height:.2f}, "
+                            f"UpperOnly_NR_AdjHeight: {upperonly_nr_adj_height:.2f}, "
+                            f"NR_LivableSpace: {nr_livable_space}, "
                             f"Has_Hotel?: {(b.has_hotel or 0):.2f}"
                         )
                         lines.append(
-                            f"                Empty_Pct: {empty_pct:.2f}, Empty_AdjHeight: {empty_adj_height:.2f}, "
+                            f"                Empty_Pct: {empty_pct:.2f}, Empty_AdjHeight: {empty_adj_height:.2f}, UpperOnly_Empty_AdjHeight: {upperonly_empty_adj_height:.2f}, "
                             f"PopEst: {b.pop_est}"
                         )
                         lines.append(f"                Measured: {getattr(b, 'measured', False)}, Surveyed: {getattr(b, 'surveyed', False)}")
@@ -275,3 +289,4 @@ class Dataset:
             f.write("\n".join(lines))
 
         print(f"✅ Hierarchy exported to {path}")
+

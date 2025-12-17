@@ -42,7 +42,6 @@ class Building:
     superficie: Optional[float] = None
     normalized_height: Optional[float] = None
     normalized_superficie: Optional[float] = None
-    livable_space: Optional[float] = None
 
     floors_est: Optional[int] = None
     units_est_meters: Optional[int] = None
@@ -51,6 +50,13 @@ class Building:
     pop_est: Optional[int] = None
 
     full_nr: bool = False
+
+    liveable_space: Optional[float] = None
+    res_liveable_space: Optional[float] = None
+    nr_liveable_space: Optional[float] = None
+
+    ground_floor_height: Optional[float] = None
+    upper_floors_height: Optional[float] = None
 
     units_res: Optional[int] = None
     units_res_empty: Optional[int] = None
@@ -71,6 +77,10 @@ class Building:
     res_adj_height: Optional[float] = None
     nr_adj_height: Optional[float] = None
     empty_adj_height: Optional[float] = None
+
+    upperonly_res_adj_height: Optional[float] = None
+    upperonly_nr_adj_height: Optional[float] = None
+    upperonly_empty_adj_height: Optional[float] = None
 
     measured: Optional[bool] = None
     surveyed: Optional[bool] = None

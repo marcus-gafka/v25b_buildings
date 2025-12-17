@@ -18,10 +18,10 @@ from file_utils import csv_to_geojson
 def main():
 
     ds = Dataset(str(ALIAS_GEOJSON))
-    #estimation_v4(ds,{"FILI"},False)
-    estimation_v4(ds,{})
-    ds.export_hierarchy_text(ESTIMATES_DIR / "Venice_hierarchy.txt")
-    csv_to_geojson(ESTIMATES_DIR / "VPC_Estimates_V4.csv")
+    estimation_v4(ds,{"FILI"},False)
+    #estimation_v4(ds,{})
+    ds.export_hierarchy_text(ESTIMATES_DIR / "Venice_hierarchy-new.txt")
+    csv_to_geojson(ESTIMATES_DIR / "VPC_Estimates_V4-new.csv")
 
 if __name__ == "__main__":
     main()

@@ -1,0 +1,51 @@
+from pathlib import Path
+
+#DIRS
+ROOT_DIR = Path(__file__).parent
+DATA_DIR = ROOT_DIR / "data"
+CHECKLISTS_DIR = ROOT_DIR / "checklists"
+FIELDWORK_DIR = ROOT_DIR / "fieldwork"
+SUMMARY_DIR = ROOT_DIR / "summaries"
+ESTIMATES_DIR = ROOT_DIR / "estimates"
+
+ESTIMATES_CSV = ESTIMATES_DIR / "VPC_Estimates_V4-new.csv"
+
+#Input
+RAW_GEOJSON = DATA_DIR / "VPC_Buildings_Total_1.geojson"
+FILTERED_GEOJSON = DATA_DIR / "VPC_Buildings_Filtered.geojson"
+FILTERED_CSV = DATA_DIR / "VPC_Buildings_Filtered.csv"
+
+ALIAS_GEOJSON = DATA_DIR / "VPC_Buildings_Total_With_Aliases.geojson"
+ALIAS_CSV = DATA_DIR / "VPC_Buildings_Total_With_Aliases.csv"
+
+WATER_CONSUMPTION_CSV = DATA_DIR / "VPC_Water_Consumption.csv"
+FILTERED_WATER_CSV = DATA_DIR / "VPC_Water_Consumption_Filtered.csv"
+
+ADDRESS_CSV = DATA_DIR / "VPC_Addresses_Total.csv"
+FILTERED_ADDRESS_CSV = DATA_DIR / "VPC_Addresses_Filtered.csv"
+
+TOTAL_HOTEL_CSV = DATA_DIR / "VPC_Hotels.csv"
+TOTAL_HOTELS_EXTRA_CSV = DATA_DIR / "VPC_Hotels_Extra.csv"
+TOTAL_STR_CSV = DATA_DIR / "VPC_STR.csv"
+
+FILTERED_HOTEL_CSV = DATA_DIR / "VPC_Hotels_Filtered.csv"
+FILTERED_HOTELS_EXTRA_CSV = DATA_DIR / "VPC_Hotels_Extra_Filtered.csv"
+FILTERED_STR_CSV = DATA_DIR / "VPC_STR_Filtered.csv"
+
+TOTAL_CHECKLIST_CSV = CHECKLISTS_DIR / "!TOTAL.csv"
+TOTAL_ADDRESS_CSV = CHECKLISTS_DIR / "!TOTAL-A.csv"
+TOTAL_FIELDWORK_CSV = FIELDWORK_DIR / "!TOTAL-F.csv"
+
+SURVEY_CSV = DATA_DIR / "V25B_Survey_Data.csv"
+FILTERED_SURVEY_CSV = DATA_DIR / "V25B_Survey_Data_Filtered.csv"
+
+INHABITED_CSV = DATA_DIR / "VPC_Buildings_Inhabited_V1.csv"
+UNINHABITED_CSV = DATA_DIR / "VPC_Buildings_Uninhabited_V1.csv"
+
+UNIT_INFO_CSV = DATA_DIR / "VPC_Unit_Info.csv"
+LIN_REG_CSV = DATA_DIR / "LinReg_Models.csv"
+
+BUILDING_FIELD = "TARGET_FID_12_13"         # unique buidling identifier
+TRACT_FIELD = "SEZ21"                       # unique tract identifier
+ISLAND_FIELD = "Codice"                     # unique island identifier
+SESTIERE_FIELD = "Codice_Ses"               # unique sestiere identifier
